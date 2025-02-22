@@ -1,4 +1,3 @@
-import React from 'react'
 import Header from './components/Header/Header'
 import Footer from './components/Footer/Footer'
 import Timeline from './components/Timeline/Timeline.jsx'
@@ -21,7 +20,7 @@ function Layout() {
     <Sponsors />
     <Prizes />
     <Faq />
-    <Footer />
+    {/* <Footer /> */}
     </>
   )
 }
