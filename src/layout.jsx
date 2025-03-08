@@ -13,7 +13,7 @@ function Layout() {
     <div
       className='min-h-screen'
       style={{
-        backgroundImage: "url('/background.svg')",
+        backgroundImage: "url('/background.png')",
         backgroundRepeat: 'repeat-y',
         backgroundSize: '100% auto',
         backgroundColor: '#fff4e4'
