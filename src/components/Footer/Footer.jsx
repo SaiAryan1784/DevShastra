@@ -1,8 +1,9 @@
 import { FaInstagram, FaLinkedin, FaDiscord } from "react-icons/fa";
+import { Link } from 'react-scroll';
 
 function Footer() {
   return (
-    <footer className="bg-black text-white py-12 px-6">
+    <footer className="bg-black text-white py-12 px-6" id="contactUs">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 p-4">
         {/* DevShastra */}
         <div className="col-span-1">
@@ -23,29 +24,34 @@ function Footer() {
           <h3 className="font-audiowide text-xl mb-4">QUICK LINKS</h3>
           <ul className="space-y-2 justify-items-start">
             <li>
-              <a href="#about" className="text-gray-400 hover:text-white">
+              <Link to="about" smooth={true} duration={500} className="text-gray-400 hover:text-white cursor-pointer">
                 About
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#timeline" className="text-gray-400 hover:text-white">
+              <Link to="timeline" smooth={true} duration={500} className="text-gray-400 hover:text-white cursor-pointer">
                 Timeline
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#faq" className="text-gray-400 hover:text-white">
-                FAQ
-              </a>
-            </li>
-            <li>
-              <a href="#tracks" className="text-gray-400 hover:text-white">
+              <Link to="tracks" smooth={true} duration={500} className="text-gray-400 hover:text-white cursor-pointer">
                 Tracks
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#prizes" className="text-gray-400 hover:text-white">
+              <Link to="sponsors" smooth={true} duration={500} className="text-gray-400 hover:text-white cursor-pointer">
+                Sponsors
+              </Link>
+            </li>
+            <li>
+              <Link to="prizes" smooth={true} duration={500} className="text-gray-400 hover:text-white cursor-pointer">
                 Prizes
-              </a>
+              </Link>
+            </li>
+            <li>
+              <Link to="faq" smooth={true} duration={500} className="text-gray-400 hover:text-white cursor-pointer">
+                FAQ
+              </Link>
             </li>
           </ul>
         </div>

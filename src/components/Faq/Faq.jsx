@@ -2,7 +2,7 @@ import React from 'react'
 
 function Faq() {
   return (
-    <div>Faq</div>
+    <div className='h-screen' id='faq'>Faq</div>
   )
 }
 

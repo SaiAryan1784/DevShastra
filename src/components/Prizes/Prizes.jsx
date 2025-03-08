@@ -2,7 +2,7 @@ import React from 'react'
 
 function Prizes() {
   return (
-    <div>Prizes</div>
+    <div id='prizes'>Prizes</div>
   )
 }
 
