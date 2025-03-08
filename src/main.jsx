@@ -1,7 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import App from './App.jsx'
 import { Route, RouterProvider, createBrowserRouter } from 'react-router-dom'
 import Layout from './layout.jsx'
 import Timeline from './components/Timeline/Timeline.jsx'
@@ -11,8 +10,7 @@ import Tracks from './components/Tracks/Tracks.jsx'
 import Sponsors from './components/Sponsors/Sponsors.jsx'
 import Faq from './components/Faq/Faq.jsx'
 import Prizes from './components/Prizes/Prizes.jsx'
-
-
+import Footer from './components/Footer/Footer.jsx'
 
 const router = createBrowserRouter([
   {
@@ -20,46 +18,43 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       {
-        path: '',
-        element: <Home />,
-
+        path: '/',
+        element: <Home id="home" />,
       },
       {
         path: '/about',
-        element: <About />,
+        element: <About id="about" />,
       },
       {
         path: '/tracks',
-        element: <Tracks />,
+        element: <Tracks id="tracks" />,
       },
       {
         path: '/timeline',
-        element: <Timeline />,
+        element: <Timeline id="timeline" />,
       },
       {
         path: '/sponsors',
-        element: <Sponsors />,
-
+        element: <Sponsors id="sponsors" />,
       },
       {
         path: '/prizes',
-        element: <Prizes />,
+        element: <Prizes id="prizes" />,
       },
       {
         path: '/faq',
-        element: <Faq />,
+        element: <Faq id="faq" />,
+      },
+      {
+        path: '/contactUs',
+        element: <Footer id="contactUs" />,
       }
-
     ]
   }
 ])
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    {/* <App /> */}
-    <RouterProvider router={router}>
-
-    </RouterProvider>
-
+    <RouterProvider router={router} />
   </StrictMode>,
 )

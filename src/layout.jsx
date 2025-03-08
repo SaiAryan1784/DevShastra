@@ -8,20 +8,27 @@ import Sponsors from './components/Sponsors/Sponsors.jsx'
 import Prizes from './components/Prizes/Prizes.jsx'
 import Faq from './components/Faq/Faq.jsx'
 
-
 function Layout() {
   return (
-    <>
-    <Header/>
-    <Timeline />
-    <Home />
-    <About />
-    <Tracks />
-    <Sponsors />
-    <Prizes />
-    <Faq />
-    {/* <Footer /> */}
-    </>
+    <div
+      className='min-h-screen'
+      style={{
+        backgroundImage: "url('/background.svg')",
+        backgroundRepeat: 'repeat-y',
+        backgroundSize: '100% auto',
+        backgroundColor: '#fff4e4'
+      }}
+    >
+      <Header />
+      <Home />
+      <About />
+      <Tracks />
+      <Timeline />
+      <Sponsors />
+      <Prizes />
+      <Faq />
+      <Footer />
+    </div>
   )
 }
 
