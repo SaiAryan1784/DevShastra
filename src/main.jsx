@@ -27,8 +27,8 @@ const router = createBrowserRouter([
         element: <About id="about" />,
       },
       {
-       path: '/themes',
-      element: <ThemeSection id="themes" />,
+       path: '/theme',
+      element: <ThemeSection id="theme" />,
       },
       {
         path: '/tracks',
