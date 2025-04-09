@@ -27,6 +27,10 @@ const router = createBrowserRouter([
         element: <About id="about" />,
       },
       {
+       path: '/themes',
+      element: <ThemeSection id="themes" />,
+      },
+      {
         path: '/tracks',
         element: <Tracks id="tracks" />,
       },
