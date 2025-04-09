@@ -7,6 +7,9 @@ import Tracks from './components/Tracks/Tracks.jsx'
 import Sponsors from './components/Sponsors/Sponsors.jsx'
 import Prizes from './components/Prizes/Prizes.jsx'
 import Faq from './components/Faq/Faq.jsx'
+import ThemeSection from 'src/components/Theme.jsx'
+
+
 import { useEffect, useState } from 'react'
 import { motion, useScroll, useSpring } from 'framer-motion'
 import BackgroundGrid from './components/BackgroundGrid/BackgroundGrid'
@@ -31,7 +34,10 @@ function layout() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+
+
   return (
+
     <>
       <div
         className='min-h-screen text-white relative overflow-hidden'
@@ -42,15 +48,16 @@ function layout() {
         <BackgroundGrid scrollPosition={scrollPosition} />
 
         <div className="relative z-10">
-          <Header />
-          <Home />
-          <About />
-          <Tracks />
-          <Timeline />
-          <Sponsors />
-          <Prizes />
-          <Faq />
-          <Footer />
+  <Header />
+      <Home />
+      <About />
+      <ThemeSection />
+      <Tracks />
+      <Timeline />
+      <Sponsors />
+      <Prizes />
+      <Faq />
+      <Footer />
         </div>
       </div>
     </>
@@ -58,3 +65,6 @@ function layout() {
 }
 
 export default layout
+
+ 
+
