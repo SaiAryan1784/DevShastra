@@ -11,6 +11,7 @@ import Sponsors from './components/Sponsors/Sponsors.jsx'
 import Faq from './components/Faq/Faq.jsx'
 import Prizes from './components/Prizes/Prizes.jsx'
 import Footer from './components/Footer/Footer.jsx'
+import ThemeSection from 'src/components/Theme.jsx'
 
 const router = createBrowserRouter([
   {
