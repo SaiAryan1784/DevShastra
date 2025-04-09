@@ -7,7 +7,7 @@ import Tracks from './components/Tracks/Tracks.jsx'
 import Sponsors from './components/Sponsors/Sponsors.jsx'
 import Prizes from './components/Prizes/Prizes.jsx'
 import Faq from './components/Faq/Faq.jsx'
-import Theme from 'src/components/Theme'
+import ThemeSection from 'src/components/Theme.jsx'
 
 function Layout() {
   return (
@@ -23,7 +23,7 @@ function Layout() {
       <Header />
       <Home />
       <About />
-      <Theme />
+      <ThemeSection />
       <Tracks />
       <Timeline />
       <Sponsors />
