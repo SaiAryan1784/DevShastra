@@ -1,23 +1,23 @@
-import Header from './components/Header/Header'
-import Footer from './components/Footer/Footer'
-import Timeline from './components/Timeline/Timeline.jsx'
-import Home from './components/Home/Home.jsx'
-import About from './components/About/About.jsx'
-import Tracks from './components/Tracks/Tracks.jsx'
-import Sponsors from './components/Sponsors/Sponsors.jsx'
-import Prizes from './components/Prizes/Prizes.jsx'
-import Faq from './components/Faq/Faq.jsx'
-import ThemeSection from 'src/components/Theme.jsx'
+import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
+import Timeline from "./components/Timeline/Timeline.jsx";
+import Home from "./components/Home/Home.jsx";
+import About from "./components/About/About.jsx";
+import Tracks from "./components/Tracks/Tracks.jsx";
+import Sponsors from "./components/Sponsors/Sponsors.jsx";
+import Prizes from "./components/Prizes/Prizes.jsx";
+import Faq from "./components/Faq/Faq.jsx";
+import ThemeSection from "./components/Theme.jsx";
 
 function Layout() {
   return (
     <div
-      className='min-h-screen'
+      className="min-h-screen"
       style={{
         backgroundImage: "url('/background.png')",
-        backgroundRepeat: 'repeat-y',
-        backgroundSize: '100% auto',
-        backgroundColor: '#fff4e4'
+        backgroundRepeat: "repeat-y",
+        backgroundSize: "100% auto",
+        backgroundColor: "#fff4e4",
       }}
     >
       <Header />
@@ -31,7 +31,7 @@ function Layout() {
       <Faq />
       <Footer />
     </div>
-  )
+  );
 }
 
-export default Layout
+export default Layout;
