@@ -17,7 +17,7 @@ const Header = () => {
   return (
     <div className={`fixed transition-all duration-500 z-50 ${isScrolled
       ? 'top-5 left-1/2 -translate-x-1/2 w-fit h-16 flex-row justify-center items-center bg-white/5'
-      : 'left-4 top-1/2 -translate-y-1/2 h-auto w-16 flex-col items-center bg-white/5'
+      : 'left-4 top-1/2 -translate-y-1/2 h-auto w-16 flex-col items-center bg-white/5 ml-8'
       } flex backdrop-blur-md border border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.1)] rounded-4xl py-6 
     hover:bg-white/10 hover:border-white/20 hover:shadow-[0_4px_40px_rgba(0,0,0,0.15)] transition-all duration-300`}>
 
@@ -40,7 +40,7 @@ const Header = () => {
         } flex items-center`}>
         <Link to="home" smooth={true} duration={500}
           className={`group transition-all duration-300 cursor-pointer ${isScrolled
-            ? 'flex items-center space-x-2 text-white/70 hover:text-white px-4 py-2 rounded-lg hover:bg-white/5'
+            ? 'flex items-center space-x-2 text-[#F5CC96] hover:text-white px-4 py-2 rounded-lg hover:bg-white/5'
             : 'w-10 h-10 rounded-lg hover:bg-white/10 flex items-center justify-center backdrop-blur-sm'
             }`}>
           {!isScrolled && (
@@ -53,7 +53,7 @@ const Header = () => {
 
         <Link to="about" smooth={true} duration={500}
           className={`group transition-all duration-300 cursor-pointer ${isScrolled
-            ? 'flex items-center space-x-2 text-white/70 hover:text-white px-4 py-2 rounded-lg hover:bg-white/5'
+            ? 'flex items-center space-x-2 text-[#F5CC96] hover:text-white px-4 py-2 rounded-lg hover:bg-white/5'
             : 'w-10 h-10 rounded-lg hover:bg-white/10 flex items-center justify-center backdrop-blur-sm'
             }`}>
           {!isScrolled && (
@@ -66,7 +66,7 @@ const Header = () => {
 
         <Link to="themes" smooth={true} duration={500}
           className={`group transition-all duration-300 cursor-pointer ${isScrolled
-            ? 'flex items-center space-x-2 text-white/70 hover:text-white px-4 py-2 rounded-lg hover:bg-white/5'
+            ? 'flex items-center space-x-2 text-[#F5CC96] hover:text-white px-4 py-2 rounded-lg hover:bg-white/5'
             : 'w-10 h-10 rounded-lg hover:bg-white/10 flex items-center justify-center backdrop-blur-sm'
             }`}>
           {!isScrolled && (
@@ -79,7 +79,7 @@ const Header = () => {
 
         <Link to="timeline" smooth={true} duration={500}
           className={`group transition-all duration-300 cursor-pointer ${isScrolled
-            ? 'flex items-center space-x-2 text-white/70 hover:text-white px-4 py-2 rounded-lg hover:bg-white/5'
+            ? 'flex items-center space-x-2 text-[#F5CC96] hover:text-white px-4 py-2 rounded-lg hover:bg-white/5'
             : 'w-10 h-10 rounded-lg hover:bg-white/10 flex items-center justify-center backdrop-blur-sm'
             }`}>
           {!isScrolled && (
@@ -92,7 +92,7 @@ const Header = () => {
 
         <Link to="faq" smooth={true} duration={500}
           className={`group transition-all duration-300 cursor-pointer ${isScrolled
-            ? 'flex items-center space-x-2 text-white/70 hover:text-white px-4 py-2 rounded-lg hover:bg-white/5'
+            ? 'flex items-center space-x-2 text-[#F5CC96] hover:text-white px-4 py-2 rounded-lg hover:bg-white/5'
             : 'w-10 h-10 rounded-lg hover:bg-white/10 flex items-center justify-center backdrop-blur-sm'
             }`}>
           {!isScrolled && (
