@@ -1,65 +1,65 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import { Route, RouterProvider, createBrowserRouter } from 'react-router-dom'
-import Layout from './layout.jsx'
-import Timeline from './components/Timeline/Timeline.jsx'
-import Home from './components/Home/Home.jsx'
-import About from './components/About/About.jsx'
-import Tracks from './components/Tracks/Tracks.jsx'
-import Sponsors from './components/Sponsors/Sponsors.jsx'
-import Faq from './components/Faq/Faq.jsx'
-import Prizes from './components/Prizes/Prizes.jsx'
-import Footer from './components/Footer/Footer.jsx'
-import ThemeSection from 'src/components/Theme.jsx'
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import "./index.css";
+import { Route, RouterProvider, createBrowserRouter } from "react-router-dom";
+import Layout from "./layout.jsx";
+import Timeline from "./components/Timeline/Timeline.jsx";
+import Home from "./components/Home/Home.jsx";
+import About from "./components/About/About.jsx";
+import Tracks from "./components/Tracks/Tracks.jsx";
+import Sponsors from "./components/Sponsors/Sponsors.jsx";
+import Faq from "./components/Faq/Faq.jsx";
+import Prizes from "./components/Prizes/Prizes.jsx";
+import Footer from "./components/Footer/Footer.jsx";
+import ThemeSection from "./components/Theme.jsx";
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <Layout />,
     children: [
       {
-        path: '/',
+        path: "/",
         element: <Home id="home" />,
       },
       {
-        path: '/about',
+        path: "/about",
         element: <About id="about" />,
       },
       {
-       path: '/theme.jsx',
-       element: <ThemeSection id="theme" />,
+        path: "/theme.jsx",
+        element: <ThemeSection id="theme" />,
       },
       {
-        path: '/tracks',
+        path: "/tracks",
         element: <Tracks id="tracks" />,
       },
       {
-        path: '/timeline',
+        path: "/timeline",
         element: <Timeline id="timeline" />,
       },
       {
-        path: '/sponsors',
+        path: "/sponsors",
         element: <Sponsors id="sponsors" />,
       },
       {
-        path: '/prizes',
+        path: "/prizes",
         element: <Prizes id="prizes" />,
       },
       {
-        path: '/faq',
+        path: "/faq",
         element: <Faq id="faq" />,
       },
       {
-        path: '/contactUs',
+        path: "/contactUs",
         element: <Footer id="contactUs" />,
-      }
-    ]
-  }
-])
+      },
+    ],
+  },
+]);
 
-createRoot(document.getElementById('root')).render(
+createRoot(document.getElementById("root")).render(
   <StrictMode>
     <RouterProvider router={router} />
-  </StrictMode>,
-)
+  </StrictMode>
+);
