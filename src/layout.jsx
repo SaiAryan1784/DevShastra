@@ -1,3 +1,4 @@
+
 import Header from './components/Header/Header'
 import Footer from './components/Footer/Footer'
 import Timeline from './components/Timeline/Timeline.jsx'
@@ -11,6 +12,7 @@ import ThemeSection from './components/Theme.jsx'
 import { motion, useScroll, useSpring } from 'framer-motion'
 import BackgroundGrid from './components/BackgroundGrid/BackgroundGrid'
 import './styles/layout.css'
+
 
 function Layout() {
   const { scrollYProgress } = useScroll();
@@ -49,6 +51,4 @@ function Layout() {
 }
 
 export default Layout
-
-
 

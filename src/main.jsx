@@ -1,3 +1,4 @@
+
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
@@ -15,51 +16,52 @@ import ThemeSection from './components/Theme.jsx'
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <Layout />,
     children: [
       {
-        path: '/',
+        path: "/",
         element: <Home id="home" />,
       },
       {
-        path: '/about',
+        path: "/about",
         element: <About id="about" />,
       },
       {
         path: '/theme.jsx',
+
         element: <ThemeSection id="theme" />,
       },
       {
-        path: '/tracks',
+        path: "/tracks",
         element: <Tracks id="tracks" />,
       },
       {
-        path: '/timeline',
+        path: "/timeline",
         element: <Timeline id="timeline" />,
       },
       {
-        path: '/sponsors',
+        path: "/sponsors",
         element: <Sponsors id="sponsors" />,
       },
       {
-        path: '/prizes',
+        path: "/prizes",
         element: <Prizes id="prizes" />,
       },
       {
-        path: '/faq',
+        path: "/faq",
         element: <Faq id="faq" />,
       },
       {
-        path: '/contactUs',
+        path: "/contactUs",
         element: <Footer id="contactUs" />,
-      }
-    ]
-  }
-])
+      },
+    ],
+  },
+]);
 
-createRoot(document.getElementById('root')).render(
+createRoot(document.getElementById("root")).render(
   <StrictMode>
     <RouterProvider router={router} />
-  </StrictMode>,
-)
+  </StrictMode>
+);
