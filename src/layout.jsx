@@ -7,17 +7,12 @@ import Tracks from './components/Tracks/Tracks.jsx'
 import Sponsors from './components/Sponsors/Sponsors.jsx'
 import Prizes from './components/Prizes/Prizes.jsx'
 import Faq from './components/Faq/Faq.jsx'
-import ThemeSection from 'src/components/Theme.jsx'
-
-
-import { useEffect, useState } from 'react'
+import ThemeSection from './components/Theme.jsx'
 import { motion, useScroll, useSpring } from 'framer-motion'
 import BackgroundGrid from './components/BackgroundGrid/BackgroundGrid'
 import './styles/layout.css'
 
-function layout() {
-  const [scrollPosition, setScrollPosition] = useState(0);
-  const [isLoading, setIsLoading] = useState(true);
+function Layout() {
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
@@ -25,19 +20,7 @@ function layout() {
     rest: 0.001
   });
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollPosition(window.scrollY);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-
-
   return (
-
     <>
       <div
         className='min-h-screen text-white relative overflow-hidden'
@@ -45,26 +28,27 @@ function layout() {
           background: 'linear-gradient(to bottom, #2e1f26, #1c1c2a, #1c1c2a, #0f1a15)'
         }}
       >
-        <BackgroundGrid scrollPosition={scrollPosition} />
-
+        <Home />
+        {/* <div className="relative"> */}
+        {/* <BackgroundGrid /> */}
         <div className="relative z-10">
-  <Header />
-      <Home />
-      <About />
-      <ThemeSection />
-      <Tracks />
-      <Timeline />
-      <Sponsors />
-      <Prizes />
-      <Faq />
-      <Footer />
+          <Header />
+          <About />
+          <ThemeSection />
+          <Tracks />
+          <Timeline />
+          <Sponsors />
+          <Prizes />
+          <Faq />
+          <Footer />
         </div>
+        {/* </div> */}
       </div>
     </>
   )
 }
 
-export default layout
+export default Layout
 
- 
+
 

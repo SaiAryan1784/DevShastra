@@ -9,7 +9,7 @@ function Footer() {
         {/* DevShastra */}
         <div className="col-span-1">
           <motion.h3
-            className="font-audiowide text-4xl mb-2 bg-gradient-to-r from-[#2e1f26] via-white to-[#0f1a15] bg-clip-text text-transparent font-bold tracking-wider"
+            className="font-audiowide text-4xl mb-2 bg-[#F5CC96] bg-clip-text text-transparent font-bold tracking-wider"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
