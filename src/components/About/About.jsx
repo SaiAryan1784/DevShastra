@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 
-const AboutUs = () => {
+const About = () => {
   const cards = [
     { icon: '🌟', title: 'Innovate', text: 'Explore the next frontier of innovation with us.' },
     { icon: '🛠️', title: 'Build', text: 'Turn ideas into impactful tech creations.' },
@@ -158,4 +158,4 @@ const styles = {
   },
 };
 
-export default AboutUs;
+export default About;
