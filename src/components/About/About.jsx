@@ -12,7 +12,7 @@ const About = () => {
   const containerRef = useRef(null);
 
   useEffect(() => {
-    const cards = containerRef.current.querySelectorAll('.floaty');
+    const cards = containerRef.current.querySelectorAll('.About-floaty');
     cards.forEach((card) => {
       card.animate(
         [
@@ -31,19 +31,86 @@ const About = () => {
   }, []);
 
   return (
-    <div style={styles.page} ref={containerRef}>
+    <div className="About-page" ref={containerRef}>
       <link
         href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap"
         rel="stylesheet"
       />
-      <style>{`
-        .glow-border {
-          border: 1px solid rgba(255,255,255,0.15);
-          box-shadow: 0 0 10px #AB7B43, 0 0 20px #89432A inset;
-          animation: pulse 3s infinite;
+      
+      {/* Scoped styles with About- prefix */}
+      <style jsx>{`
+        .About-page {
+          font-family: 'Cinzel Decorative', cursive;
+          background-color: #331316;
+          color: #fcebd5;
+          padding: 4rem 2rem;
+          text-align: center;
+          min-height: 100vh;
         }
 
-        @keyframes pulse {
+        .About-heading {
+          font-size: 3rem;
+          margin-bottom: 1.5rem;
+          color: #AB7B43;
+          text-shadow: 0 0 10px #89432A;
+        }
+
+        .About-description {
+          font-size: 1.2rem;
+          max-width: 800px;
+          margin: 0 auto 4rem;
+          line-height: 1.6;
+          color: #e4d3ba;
+        }
+
+        .About-cardContainer {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 2rem;
+        }
+
+        .About-card {
+          width: 250px;
+          height: 320px;
+          background: linear-gradient(to bottom right, rgba(137, 67, 42, 0.3), rgba(171, 123, 67, 0.1));
+          border-radius: 20px;
+          backdrop-filter: blur(15px);
+          -webkit-backdrop-filter: blur(15px);
+          padding: 2rem 1rem;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          transition: transform 0.4s ease;
+          position: relative;
+          color: #fff;
+        }
+
+        .About-icon {
+          font-size: 3rem;
+          margin-bottom: 1rem;
+          color: #AB7B43;
+        }
+
+        .About-title {
+          font-size: 1.5rem;
+          margin-bottom: 1rem;
+          color: #f9d8a1;
+        }
+
+        .About-text {
+          font-size: 1rem;
+          color: #f0e3ce;
+          text-align: center;
+        }
+
+        .About-glow-border {
+          border: 1px solid rgba(255,255,255,0.15);
+          box-shadow: 0 0 10px #AB7B43, 0 0 20px #89432A inset;
+          animation: About-pulse 3s infinite;
+        }
+
+        @keyframes About-pulse {
           0%, 100% {
             box-shadow: 0 0 10px #AB7B43, 0 0 20px #89432A inset;
           }
@@ -53,19 +120,18 @@ const About = () => {
         }
       `}</style>
 
-      <h1 style={styles.heading}>About Us</h1>
-      <p style={styles.description}>
+      <h1 className="About-heading">About Us</h1>
+      <p className="About-description">
         We are the Technical Society of ABES Engineering College, hosting the annual fest <strong>Genero</strong>.
         A celebration of code, creativity, and community, Genero brings together curious minds, bold ideas, and futuristic visions.
         Join us as we shape tomorrow—one line of code at a time.
       </p>
 
-      <div style={styles.cardContainer}>
+      <div className="About-cardContainer">
         {cards.map((card, index) => (
           <motion.div
             key={index}
-            className="floaty glow-border"
-            style={styles.card}
+            className="About-floaty About-glow-border About-card"
             whileHover={{
               rotateY: 15,
               rotateX: -15,
@@ -77,9 +143,9 @@ const About = () => {
             transition={{ delay: index * 0.2 }}
           >
             <motion.div
-              style={styles.icon}
+              className="About-icon"
               animate={{
-                rotate: [0, 360],
+                rotate: [0,0]
               }}
               transition={{
                 repeat: Infinity,
@@ -89,73 +155,13 @@ const About = () => {
             >
               {card.icon}
             </motion.div>
-            <div style={styles.title}>{card.title}</div>
-            <div style={styles.text}>{card.text}</div>
+            <div className="About-title">{card.title}</div>
+            <div className="About-text">{card.text}</div>
           </motion.div>
         ))}
       </div>
     </div>
   );
-};
-
-const styles = {
-  page: {
-    fontFamily: "'Cinzel Decorative', cursive",
-    backgroundColor: '#331316',
-    color: '#fcebd5',
-    padding: '4rem 2rem',
-    textAlign: 'center',
-    minHeight: '100vh',
-  },
-  heading: {
-    fontSize: '3rem',
-    marginBottom: '1.5rem',
-    color: '#AB7B43',
-    textShadow: '0 0 10px #89432A',
-  },
-  description: {
-    fontSize: '1.2rem',
-    maxWidth: '800px',
-    margin: '0 auto 4rem',
-    lineHeight: '1.6',
-    color: '#e4d3ba',
-  },
-  cardContainer: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-    gap: '2rem',
-  },
-  card: {
-    width: '250px',
-    height: '320px',
-    background: 'linear-gradient(to bottom right, rgba(137, 67, 42, 0.3), rgba(171, 123, 67, 0.1))',
-    borderRadius: '20px',
-    backdropFilter: 'blur(15px)',
-    WebkitBackdropFilter: 'blur(15px)',
-    padding: '2rem 1rem',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    transition: 'transform 0.4s ease',
-    position: 'relative',
-    color: '#fff',
-  },
-  icon: {
-    fontSize: '3rem',
-    marginBottom: '1rem',
-    color: '#AB7B43',
-  },
-  title: {
-    fontSize: '1.5rem',
-    marginBottom: '1rem',
-    color: '#f9d8a1',
-  },
-  text: {
-    fontSize: '1rem',
-    color: '#f0e3ce',
-    textAlign: 'center',
-  },
 };
 
 export default About;
