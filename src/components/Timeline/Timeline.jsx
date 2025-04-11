@@ -5,20 +5,20 @@
 //   const [activeEvent, setActiveEvent] = useState(null);
 //   const [isVisible, setIsVisible] = useState(false);
 //   const [animatedEvents, setAnimatedEvents] = useState([]);
-  
+
 //   // Update current time every minute
 //   useEffect(() => {
 //     const timer = setInterval(() => {
 //       setCurrentTime(new Date());
 //     }, 60000);
-    
+
 //     return () => clearInterval(timer);
 //   }, []);
-  
+
 //   // Animation on component mount
 //   useEffect(() => {
 //     setIsVisible(true);
-    
+
 //     // Staggered animation for events
 //     const eventIds = events.map(event => event.id);
 //     const animationTimer = setInterval(() => {
@@ -30,10 +30,10 @@
 //         return [...prev, eventIds[prev.length]];
 //       });
 //     }, 200);
-    
+
 //     return () => clearInterval(animationTimer);
 //   }, []);
-  
+
 //   // Sample hackathon events
 //   const events = [
 //     {
@@ -113,13 +113,13 @@
 //   // Determine if event is in the past, current, or future
 //   const getEventStatus = (eventDate) => {
 //     if (eventDate < currentTime) return "past";
-    
+
 //     // Find next event
 //     const upcomingEvents = events.filter(e => e.date > currentTime);
 //     if (upcomingEvents.length > 0 && eventDate.getTime() === upcomingEvents[0].date.getTime()) {
 //       return "current";
 //     }
-    
+
 //     return "future";
 //   };
 
@@ -133,7 +133,7 @@
 //       >
 //         Hackathon Timeline
 //       </h2>
-      
+
 //       {/* Current time indicator */}
 //       <div 
 //         className={`mb-10 text-center p-3 rounded-lg transition-all duration-700 delay-300 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}
@@ -141,7 +141,7 @@
 //       >
 //         <p className="font-medium">Current Time: {formatDate(currentTime)}</p>
 //       </div>
-      
+
 //       {/* Timeline container */}
 //       <div className="relative flex justify-center">
 //         <div className="w-full max-w-3xl relative">
@@ -150,7 +150,7 @@
 //             className={`absolute left-1/2 top-0 bottom-0 w-1 bg-gray-300 transition-all duration-1500 origin-top ${isVisible ? 'scale-y-100' : 'scale-y-0'}`}
 //             style={{ backgroundColor: "#D1D5DB" }}
 //           ></div>
-          
+
 //           {/* Events */}
 //           <div className="space-y-16">
 //             {events.map((event) => {
@@ -158,10 +158,10 @@
 //               const isActive = activeEvent === event.id;
 //               const isAnimated = animatedEvents.includes(event.id);
 //               const isLeft = event.position === "left";
-              
+
 //               // Define colors based on status
 //               let dotColor, bgColor, textColor, borderColor, statusText;
-              
+
 //               switch(status) {
 //                 case "past":
 //                   dotColor = "#331316";
@@ -185,10 +185,10 @@
 //                   statusText = "Upcoming";
 //                   break;
 //               }
-              
+
 //               // Animation properties based on position
 //               const animationDirection = isLeft ? '-translate-x-10' : 'translate-x-10';
-              
+
 //               return (
 //                 <div 
 //                   key={event.id} 
@@ -223,11 +223,11 @@
 //                             {event.title}
 //                           </h3>
 //                         </div>
-                        
+
 //                         <div className="text-sm font-medium mb-2" style={{ color: textColor }}>
 //                           {shortFormatDate(event.date)}
 //                         </div>
-                        
+
 //                         <div className="text-sm" style={{ color: status === "past" ? "#6B7280" : textColor }}>
 //                           {statusText}
 //                         </div>
@@ -262,18 +262,18 @@
 //                             {event.title}
 //                           </h3>
 //                         </div>
-                        
+
 //                         <div className="text-sm font-medium mb-2" style={{ color: textColor }}>
 //                           {shortFormatDate(event.date)}
 //                         </div>
-                        
+
 //                         <div className="text-sm" style={{ color: status === "past" ? "#6B7280" : textColor }}>
 //                           {statusText}
 //                         </div>
 //                       </div>
 //                     </div>
 //                   )}
-                  
+
 //                   {/* Timeline dot */}
 //                   <div 
 //                     className="absolute left-1/2 transform -translate-x-1/2"
@@ -293,7 +293,7 @@
 //           </div>
 //         </div>
 //       </div>
-      
+
 //       {/* Mobile view indicator */}
 //       <div 
 //         className={`mt-12 text-center p-2 rounded-lg bg-gray-100 transition-all duration-700 delay-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}
@@ -315,20 +315,20 @@ export default function Timeline() {
   const [activeEvent, setActiveEvent] = useState(null);
   const [isVisible, setIsVisible] = useState(false);
   const [animatedEvents, setAnimatedEvents] = useState([]);
-  
+
   // Update current time every minute
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentTime(new Date());
     }, 60000);
-    
+
     return () => clearInterval(timer);
   }, []);
-  
+
   // Animation on component mount
   useEffect(() => {
     setIsVisible(true);
-    
+
     // Staggered animation for events
     const eventIds = events.map(event => event.id);
     const animationTimer = setInterval(() => {
@@ -340,10 +340,10 @@ export default function Timeline() {
         return [...prev, eventIds[prev.length]];
       });
     }, 200);
-    
+
     return () => clearInterval(animationTimer);
   }, []);
-  
+
   // Sample hackathon events
   const events = [
     {
@@ -423,18 +423,18 @@ export default function Timeline() {
   // Determine if event is in the past, current, or future
   const getEventStatus = (eventDate) => {
     if (eventDate < currentTime) return "past";
-    
+
     // Find next event
     const upcomingEvents = events.filter(e => e.date > currentTime);
     if (upcomingEvents.length > 0 && eventDate.getTime() === upcomingEvents[0].date.getTime()) {
       return "current";
     }
-    
+
     return "future";
   };
 
   return (
-    <div 
+    <div
       className={`max-w-4xl mx-auto p-6 rounded-lg shadow-lg transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
       style={{
         background: 'rgba(255, 255, 255, 0.2)',
@@ -442,17 +442,17 @@ export default function Timeline() {
         border: '2px solid rgb(255, 255, 255)'
       }}
     >
-      <h2 
+      <h2
         className={`text-2xl font-bold mb-8 text-center transition-all duration-1000 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}
         style={{ color: "#331316" }}
       >
         Hackathon Timeline
       </h2>
-      
+
       {/* Current time indicator */}
-      <div 
+      <div
         className={`mb-10 text-center p-3 rounded-lg transition-all duration-700 delay-300 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}
-        style={{ 
+        style={{
           backgroundColor: "rgba(171, 123, 67, 0.3)", // Glass effect with AB7B43
           color: "white",
           backdropFilter: 'blur(5px)' // Add a subtle blur to the background
@@ -460,16 +460,16 @@ export default function Timeline() {
       >
         <p className="font-medium">Current Time: {formatDate(currentTime)}</p>
       </div>
-      
+
       {/* Timeline container */}
       <div className="relative flex justify-center">
         <div className="w-full max-w-3xl relative">
           {/* Vertical line with animation */}
-          <div 
+          <div
             className={`absolute left-1/2 top-0 bottom-0 w-1 bg-gray-300 transition-all duration-1500 origin-top ${isVisible ? 'scale-y-100' : 'scale-y-0'}`}
             style={{ backgroundColor: "#D1D5DB" }}
           ></div>
-          
+
           {/* Events */}
           <div className="space-y-16">
             {events.map((event) => {
@@ -477,10 +477,10 @@ export default function Timeline() {
               const isActive = activeEvent === event.id;
               const isAnimated = animatedEvents.includes(event.id);
               const isLeft = event.position === "left";
-              
+
               // Define colors based on status
               let dotColor, bgColor, textColor, borderColor, statusText;
-              
+
               switch(status) {
                 case "past":
                   dotColor = "#331316";
@@ -504,21 +504,21 @@ export default function Timeline() {
                   statusText = "Upcoming";
                   break;
               }
-              
+
               // Animation properties based on position
               const animationDirection = isLeft ? '-translate-x-10' : 'translate-x-10';
-              
+
               return (
-                <div 
-                  key={event.id} 
+                <div
+                  key={event.id}
                   className={`relative flex transition-all duration-500 ${isAnimated ? 'opacity-100 translate-x-0' : `opacity-0 ${animationDirection}`}`}
                 >
                   {isLeft ? (
                     // Left side event
                     <div className="w-1/2 flex justify-end pr-8">
-                      <div 
+                      <div
                         className={`max-w-md p-5 rounded-lg transition-all duration-300 ${isActive ? 'scale-105' : 'scale-100'}`}
-                        style={{ 
+                        style={{
                           backgroundColor: bgColor,
                           borderRight: `4px solid ${borderColor}`,
                           borderTopRightRadius: '0',
@@ -530,24 +530,24 @@ export default function Timeline() {
                         onMouseLeave={() => setActiveEvent(null)}
                       >
                         <div className="flex items-center mb-2">
-                          <span 
+                          <span
                             className={`text-2xl mr-3 transition-transform duration-300 ${isActive ? 'scale-125 rotate-12' : ''}`}
                             style={{ color: textColor }}
                           >
                             {event.icon}
                           </span>
-                          <h3 
+                          <h3
                             className="font-bold text-xl"
                             style={{ color: textColor }}
                           >
                             {event.title}
                           </h3>
                         </div>
-                        
+
                         <div className="text-sm font-medium mb-2" style={{ color: textColor }}>
                           {shortFormatDate(event.date)}
                         </div>
-                        
+
                         <div className="text-sm" style={{ color: status === "past" ? "#6B7280" : textColor }}>
                           {statusText}
                         </div>
@@ -556,9 +556,9 @@ export default function Timeline() {
                   ) : (
                     // Right side event
                     <div className="w-1/2 flex justify-start pl-8 ml-auto">
-                      <div 
+                      <div
                         className={`max-w-md p-5 rounded-lg transition-all duration-300 ${isActive ? 'scale-105' : 'scale-100'}`}
-                        style={{ 
+                        style={{
                           backgroundColor: bgColor,
                           borderLeft: `4px solid ${borderColor}`,
                           borderTopLeftRadius: '0',
@@ -570,39 +570,39 @@ export default function Timeline() {
                         onMouseLeave={() => setActiveEvent(null)}
                       >
                         <div className="flex items-center mb-2">
-                          <span 
+                          <span
                             className={`text-2xl mr-3 transition-transform duration-300 ${isActive ? 'scale-125 rotate-12' : ''}`}
                             style={{ color: textColor }}
                           >
                             {event.icon}
                           </span>
-                          <h3 
+                          <h3
                             className="font-bold text-xl"
                             style={{ color: textColor }}
                           >
                             {event.title}
                           </h3>
                         </div>
-                        
+
                         <div className="text-sm font-medium mb-2" style={{ color: textColor }}>
                           {shortFormatDate(event.date)}
                         </div>
-                        
+
                         <div className="text-sm" style={{ color: status === "past" ? "#6B7280" : textColor }}>
                           {statusText}
                         </div>
                       </div>
                     </div>
                   )}
-                  
+
                   {/* Timeline dot */}
-                  <div 
+                  <div
                     className="absolute left-1/2 transform -translate-x-1/2"
                     style={{ top: '20px' }}
                   >
-                    <div 
+                    <div
                       className={`w-4 h-4 rounded-full transition-all duration-300 ${status === "current" ? "animate-pulse" : ""} ${isActive ? "scale-150" : "scale-100"}`}
-                      style={{ 
+                      style={{
                         backgroundColor: dotColor,
                         border: `2px solid ${dotColor}`
                       }}
@@ -614,9 +614,9 @@ export default function Timeline() {
           </div>
         </div>
       </div>
-      
+
       {/* Mobile view indicator */}
-      <div 
+      <div
         className={`mt-12 text-center p-2 rounded-lg bg-gray-100 transition-all duration-700 delay-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}
       >
         <p className="text-sm text-gray-600">
