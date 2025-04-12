@@ -10,11 +10,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fontsource/cinzel": "^5.2.5",
     "@react-three/drei": "^10.0.6",
     "@react-three/fiber": "^9.1.2",
     "@tailwindcss/vite": "^4.0.8",
     "animejs": "^4.0.1",
-    "framer-motion": "^12.6.3",
+    "framer-motion": "^12.6.5",
     "postprocessing": "^6.37.2",
     "react": "^19.0.0",
     "react-countup": "^6.5.3",
