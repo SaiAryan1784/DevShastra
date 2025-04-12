@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 function Footer() {
   return (
-    <footer className="bg-black/80 backdrop-blur-md text-white py-6 px-6 rounded-t-3xl border-t border-white/10 shadow-lg" id="contactUs">
+    <footer className="bg-black/40 backdrop-blur-md text-white py-6 px-6 rounded-t-3xl border-t border-white/10 shadow-lg" id="contactUs">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-6 p-2">
         {/* DevShastra */}
         <div className="col-span-1">

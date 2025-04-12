@@ -13,20 +13,40 @@ function Home() {
   const [hoveredLetter, setHoveredLetter] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [showScroll, setShowScroll] = useState(true);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   const floatControls = useAnimation();
   const bgControls = useAnimation();
   const { scrollY } = useScroll();
+  const [isHomePage, setIsHomePage] = useState(true);
+
+  // Remove the scroll-based transforms for the logo
   const logoY = useTransform(scrollY, [0, 500], ['0%', '-35%']);
-  const logoX = useTransform(scrollY, [0, 500], ['0%', '-82%']);
-  const logoScale = useTransform(scrollY, [0, 500], [1, 0.32]);
+  const logoX = useTransform(scrollY, [0, 500], ['0%', '-85%']);
+  const logoScale = useTransform(scrollY, [0, 300], [1, 0.25]);
   const contentOpacity = useTransform(scrollY, [0, 200], [1, 0]);
+  const mobileLogoOpacity = useTransform(scrollY, [0, 150], [1, 0]);
+
+  // Add window width state
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
       const windowHeight = window.innerHeight;
       setShowScroll(scrollPosition < windowHeight * 0.5);
+
+      // Check if we're still on the home section
+      setIsHomePage(scrollPosition < windowHeight);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -232,9 +252,11 @@ function Home() {
         alt="DevShastra Logo"
         className="main-logo"
         style={{
-          y: logoY,
-          x: logoX,
-          scale: logoScale,
+          y: isMobile ? 0 : logoY,
+          x: isMobile ? 0 : logoX,
+          scale: isMobile ? 1 : logoScale,
+          opacity: isMobile ? mobileLogoOpacity : 1,
+          display: isMobile && scrollY.get() > 150 ? 'none' : 'block'
         }}
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -263,7 +285,7 @@ function Home() {
 
       <motion.div
         className="content-wrapper"
-        style={{ opacity: contentOpacity }}
+        style={{ opacity: isMobile ? 1 : contentOpacity }}
       >
         {/* Event Date */}
         <motion.div
@@ -310,34 +332,39 @@ function Home() {
             delay: 1.8,
             ease: "easeOut"
           }}
+          style={{
+            position: 'relative',
+            zIndex: 10,
+            marginTop: '2rem'
+          }}
         >
           <motion.div
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ duration: 0.5, delay: 2.0 }}
           >
-            <TimeBox value={timeLeft.days} label="Days" color="purple" />
+            <TimeBox value={timeLeft.days} label="Days" color="purple" isHovered={hoveredLetter === 'days'} />
           </motion.div>
           <motion.div
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ duration: 0.5, delay: 2.2 }}
           >
-            <TimeBox value={timeLeft.hours} label="Hours" color="blue" />
+            <TimeBox value={timeLeft.hours} label="Hours" color="blue" isHovered={hoveredLetter === 'hours'} />
           </motion.div>
           <motion.div
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ duration: 0.5, delay: 2.4 }}
           >
-            <TimeBox value={timeLeft.minutes} label="Minutes" color="orange" />
+            <TimeBox value={timeLeft.minutes} label="Minutes" color="orange" isHovered={hoveredLetter === 'minutes'} />
           </motion.div>
           <motion.div
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ duration: 0.5, delay: 2.6 }}
           >
-            <TimeBox value={timeLeft.seconds} label="Seconds" color="green" />
+            <TimeBox value={timeLeft.seconds} label="Seconds" color="green" isHovered={hoveredLetter === 'seconds'} />
           </motion.div>
         </motion.div>
 
@@ -406,35 +433,19 @@ function Home() {
   );
 }
 
-const TimeBox = ({ value, label, color }) => {
-  const [isHovered, setIsHovered] = useState(false);
-  const [prevValue, setPrevValue] = useState(value);
-  const [isFlipping, setIsFlipping] = useState(false);
-
-  useEffect(() => {
-    if (prevValue !== value) {
-      setIsFlipping(true);
-      const timer = setTimeout(() => setIsFlipping(false), 600);
-      setPrevValue(value);
-      return () => clearTimeout(timer);
-    }
-  }, [value, prevValue]);
-
+const TimeBox = ({ value, label, color, isHovered }) => {
   return (
     <motion.div
       className={`countdown-box ${color}`}
-      whileHover={{
-        scale: 1.05,
-        boxShadow: `0 0 25px rgba(124, 58, 237, 0.4)`,
-        transition: { duration: 0.2 }
-      }}
-      onHoverStart={() => setIsHovered(true)}
-      onHoverEnd={() => setIsHovered(false)}
+      whileHover={{ scale: 1.05 }}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
     >
       <motion.span
         className="countdown-number"
         animate={
-          isFlipping
+          value % 10 === 0 && value > 0
             ? {
               scale: [1, 0.8, 1],
               rotateX: [0, -180, 0],
@@ -442,7 +453,7 @@ const TimeBox = ({ value, label, color }) => {
             }
             : isHovered
               ? {
-                scale: [1, 1.2, 1],
+                scale: [1, 1.1, 1],
                 color: ["#FFFFFF",
                   color === "purple" ? "#C4B5FD" :
                     color === "blue" ? "#93C5FD" :

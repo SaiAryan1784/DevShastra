@@ -5,16 +5,76 @@ import { motion, AnimatePresence } from 'framer-motion';
 // --- Data (Hackathon Events and Themes) ---
 // (Keep the hackathonEvents and themeVariants arrays/objects as they were in your original code)
 const hackathonEvents = [
-  { id: 1, title: "The Herald's Announcement", description: "The forest whispers with excitement as the Hackathon is proclaimed. Coding druids from all corners of the realm assemble.", timestamp: "First Bell - The Awakening Day", icon: "🌳" },
-  { id: 2, title: "Ancient Knowledge Sharing", description: "Elders share forbidden knowledge of backend architecture and frontend enchantments with eager apprentices.", timestamp: "High Sun - The Awakening Day", icon: "📚" },
-  { id: 3, title: "Forest Feast of Collaboration", description: "Break bread with potential allies under the sacred trees. Form your fellowship for the trials ahead.", timestamp: "Sunset Hour - The Awakening Day", icon: "🍇" },
-  { id: 4, title: "Twilight Debugging Ritual", description: "The most challenging spells are cast when the moon is high. Debug your incantations with fellow mages.", timestamp: "Midnight - Between Days", icon: "🌙" },
-  { id: 5, title: "Unveiling of Creations", description: "Present your magical innovations to the Council of Wise Ones. The most ingenious solutions shall be immortalized.", timestamp: "Golden Hour - The Fulfillment Day", icon: "✨" },
-  { id: 6, title: "The Crystal Cave Challenge", description: "Venture deep into the crystal caves where your coding prowess will be tested. Solve algorithmic puzzles to unlock ancient wisdom.", timestamp: "Dawn - The Challenge Day", icon: "💎" },
-  { id: 7, title: "Ethereal Networking Circle", description: "Join hands in a mystical circle where industry wizards and apprentices connect. Exchange runes of contact for future collaborations.", timestamp: "Midday - The Challenge Day", icon: "🔮" },
-  { id: 8, title: "Celestial Demo Showcase", description: "Under the watchful gaze of the stars, present your magical creations to fellow enchanters and receive celestial feedback.", timestamp: "Twilight - The Challenge Day", icon: "⭐" },
-  { id: 9, title: "Grand Awards Ceremony", description: "The most powerful spells and enchantments are honored by the Ancient Council. Champions receive magical artifacts of great renown.", timestamp: "Evening Bell - The Final Day", icon: "🏆" },
-  { id: 10, title: "Moonlit Farewell Celebration", description: "As the moon rises high, celebrate your magical journey with dancing, feasting, and promises to reunite at the next gathering of coders.", timestamp: "Midnight - The Final Day", icon: "🌕" }
+  {
+    id: 1,
+    title: "The Grand Opening 🎭",
+    description: "Roll out of bed and into the most epic hackathon kickoff! Time to meet your fellow code warriors and grab that essential morning coffee elixir.",
+    timestamp: "Day 1 - Early Bird Hours",
+    icon: "🌟"
+  },
+  {
+    id: 2,
+    title: "Brain Fuel Session 🧠",
+    description: "Tech talks that won't put you to sleep! Our wizards of wisdom share their secrets while you munch on brain food (aka snacks).",
+    timestamp: "Day 1 - Morning Magic",
+    icon: "📚"
+  },
+  {
+    id: 3,
+    title: "Squad Assembly Time 🤝",
+    description: "Find your coding soulmates! Whether you're a CSS wizard or a backend ninja, your dream team awaits. No awkward icebreakers, we promise!",
+    timestamp: "Day 1 - When The Sun's High",
+    icon: "🤝"
+  },
+  {
+    id: 4,
+    title: "The Great Code-Off Begins! ⚡",
+    description: "Fingers on keyboards, energy drinks at the ready! Time to turn those wild ideas into working wonders. May the bugs be ever in your favor!",
+    timestamp: "Day 1 - Post-Lunch Power Hour",
+    icon: "💻"
+  },
+  {
+    id: 5,
+    title: "Midnight Madness 🌙",
+    description: "When the clock strikes twelve, the real magic happens! Pizza-powered coding sessions and debugging adventures await the brave.",
+    timestamp: "Day 1 - When The Moon Rules",
+    icon: "🌙"
+  },
+  {
+    id: 6,
+    title: "Dawn of Innovation ☀️",
+    description: "Sunrise, coffee refills, and that moment when your code finally works! Keep pushing through - you're halfway to glory!",
+    timestamp: "Day 2 - First Light",
+    icon: "☀️"
+  },
+  {
+    id: 7,
+    title: "The Final Countdown ⏰",
+    description: "Panic mode: Activated! Time to squash those bugs, polish that UI, and prepare for the grand finale. No pressure, just excitement!",
+    timestamp: "Day 2 - High Noon",
+    icon: "⚡"
+  },
+  {
+    id: 8,
+    title: "Show & Tell Spectacular 🎪",
+    description: "Your moment to shine! Dazzle the judges with your creation. Pro tip: Pretend the demo gods are watching and triple-check everything!",
+    timestamp: "Day 2 - Tea Time",
+    icon: "🎭"
+  },
+  {
+    id: 9,
+    title: "The Victory Lap 🏆",
+    description: "Drum roll, please! Time to crown the champions and celebrate everyone's amazing achievements. Yes, even that project that 'almost' worked!",
+    timestamp: "Day 2 - Golden Hour",
+    icon: "🏆"
+  },
+  {
+    id: 10,
+    title: "The After-Party 🎉",
+    description: "You did it! Time to celebrate with your fellow survivors - er, participants! Share war stories, exchange contacts, and plan world domination.",
+    timestamp: "Day 2 - When Stars Appear",
+    icon: "🎉"
+  }
 ];
 
 const themeVariants = {
@@ -104,7 +164,7 @@ const MagicalParticles = ({ color = "#AB7B43" }) => {
       {/* Trailing particles */}
       <AnimatePresence>
         {particles.map(particle => {
-           const progress = Math.min(1, (Date.now() - particle.createdAt) / particle.lifetime); // Ensure progress doesn't exceed 1
+          const progress = Math.min(1, (Date.now() - particle.createdAt) / particle.lifetime); // Ensure progress doesn't exceed 1
           return (
             <motion.div
               key={particle.id}
@@ -167,22 +227,22 @@ const TimelineEventItem = React.memo(({ event, index, theme, isActive, isHovered
       <div className={`w-full ${isAlternatingLayout ? (isEven ? 'md:w-5/12 md:pr-8' : 'md:w-5/12 md:pl-8') : 'mb-4 pl-12 pr-4'}`}> {/* Adjusted padding for mobile */}
         <motion.div
           className={`relative ${colors.card} backdrop-blur-sm border transition-all duration-300 rounded-lg md:rounded-xl p-4 md:p-5 shadow-lg ${isActive || isHovered ? `border-[${colors.primary}]/70` : `border-[${colors.primary}]/30`}`} // Using actual color variable
-           style={{
+          style={{
             '--glow-color': colors.primary, // CSS variable for boxShadow
             borderColor: isActive || isHovered ? `${colors.primary}99` : `${colors.primary}4D`, // Dynamic border color
-           }}
-           whileHover={isAlternatingLayout ? { // Only apply hover scale on larger screens if desired
-             scale: 1.03,
-             boxShadow: `0 0 20px 5px var(--glow-color)33` // Use CSS var, softer glow
-           } : {}}
+          }}
+          whileHover={isAlternatingLayout ? { // Only apply hover scale on larger screens if desired
+            scale: 1.03,
+            boxShadow: `0 0 20px 5px var(--glow-color)33` // Use CSS var, softer glow
+          } : {}}
           onClick={() => setActiveEvent(isActive ? null : event.id)}
           onMouseEnter={() => setHoveredEvent(event.id)}
           onMouseLeave={() => setHoveredEvent(null)}
         >
           {/* Icon and title */}
           <div className="flex items-center gap-3 mb-2 md:mb-3">
-             <div className={`w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full text-xl md:text-2xl transition-all duration-300 ${isActive || isHovered ? `bg-[${colors.primary}]/40` : `bg-[${colors.secondary}]/30`}`}
-                  style={{ backgroundColor: isActive || isHovered ? `${colors.primary}66` : `${colors.secondary}4D` }}>
+            <div className={`w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full text-xl md:text-2xl transition-all duration-300 ${isActive || isHovered ? `bg-[${colors.primary}]/40` : `bg-[${colors.secondary}]/30`}`}
+              style={{ backgroundColor: isActive || isHovered ? `${colors.primary}66` : `${colors.secondary}4D` }}>
               {event.icon}
             </div>
             <h3 className={`text-lg md:text-2xl font-bold ${colors.text}`}>{event.title}</h3>
@@ -197,10 +257,10 @@ const TimelineEventItem = React.memo(({ event, index, theme, isActive, isHovered
           </div>
 
           {/* Decorative elements (subtle border) */}
-           <div className={`absolute top-1 left-1 right-1 bottom-1 border border-[${colors.primary}]/10 rounded-md md:rounded-lg pointer-events-none`}
-                 style={{ borderColor: `${colors.primary}1A` }}/>
+          <div className={`absolute top-1 left-1 right-1 bottom-1 border border-[${colors.primary}]/10 rounded-md md:rounded-lg pointer-events-none`}
+            style={{ borderColor: `${colors.primary}1A` }} />
 
-           {/* Shimmer effect */}
+          {/* Shimmer effect */}
           {(isActive || isHovered) && (
             <motion.div
               className="absolute inset-0 rounded-lg md:rounded-xl overflow-hidden pointer-events-none" // Added pointer-events-none
@@ -208,7 +268,7 @@ const TimelineEventItem = React.memo(({ event, index, theme, isActive, isHovered
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-amber-700/10 to-transparent opacity-50" style={{ // Generic color, consider making dynamic
+              <div className="absolute inset-0  opacity-50" style={{ // Generic color, consider making dynamic
                 backgroundSize: "200% 100%",
                 animation: "shimmerEffect 2.5s infinite linear"
               }} />
@@ -217,35 +277,35 @@ const TimelineEventItem = React.memo(({ event, index, theme, isActive, isHovered
         </motion.div>
       </div>
 
-       {/* --- Center Node & Connecting Line --- */}
-       {/* Positioned absolutely on mobile, relatively on desktop */}
+      {/* --- Center Node & Connecting Line --- */}
+      {/* Positioned absolutely on mobile, relatively on desktop */}
       <div className={`flex justify-center ${isAlternatingLayout ? 'w-2/12 relative' : 'absolute left-4 top-2 h-full w-10'}`}> {/* Positioning changes */}
         <motion.div
           className={`w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center z-10 cursor-pointer transition-all duration-300 ${isActive || isHovered ? `bg-[${colors.primary}]` : `bg-[${colors.secondary}]`}`}
-           style={{ backgroundColor: isActive || isHovered ? colors.primary : colors.secondary }}
+          style={{ backgroundColor: isActive || isHovered ? colors.primary : colors.secondary }}
           whileHover={{ scale: 1.1 }}
           onClick={() => setActiveEvent(isActive ? null : event.id)}
           onMouseEnter={() => setHoveredEvent(event.id)}
           onMouseLeave={() => setHoveredEvent(null)}
         >
-           <span className={`text-sm md:text-lg font-bold ${isActive || isHovered ? 'text-black/80' : colors.text.replace('text-', 'text-opacity-') + '90'}`}> {/* Contrast for active */}
+          <span className={`text-sm md:text-lg font-bold ${isActive || isHovered ? 'text-black/80' : colors.text.replace('text-', 'text-opacity-') + '90'}`}> {/* Contrast for active */}
             {index + 1}
           </span>
         </motion.div>
 
-         {/* Connection line to center (Desktop) */}
-         {isAlternatingLayout && (
-            <div
-                className={`absolute top-1/2 ${isEven ? 'left-0 right-1/2' : 'left-1/2 right-0'} h-0.5 bg-[${colors.primary}]/50 transform -translate-y-1/2`}
-                style={{ backgroundColor: `${colors.primary}80` }}
-            />
+        {/* Connection line to center (Desktop) */}
+        {isAlternatingLayout && (
+          <div
+            className={`absolute top-1/2 ${isEven ? 'left-0 right-1/2' : 'left-1/2 right-0'} h-0.5 bg-[${colors.primary}]/50 transform -translate-y-1/2`}
+            style={{ backgroundColor: `${colors.primary}80` }}
+          />
         )}
-         {/* Connection line to card (Mobile) */}
-         {!isAlternatingLayout && (
-            <div
-                className={`absolute top-5 left-1/2 w-6 h-0.5 bg-[${colors.primary}]/50 transform -translate-x-1/2`} // Horizontal line from node to card area
-                style={{ backgroundColor: `${colors.primary}80` }}
-            />
+        {/* Connection line to card (Mobile) */}
+        {!isAlternatingLayout && (
+          <div
+            className={`absolute top-5 left-1/2 w-6 h-0.5 bg-[${colors.primary}]/50 transform -translate-x-1/2`} // Horizontal line from node to card area
+            style={{ backgroundColor: `${colors.primary}80` }}
+          />
         )}
       </div>
 
@@ -287,225 +347,225 @@ const Timeline = () => {
 
 
   // Setup Three.js Scene
-  useEffect(() => {
-    if (!canvasRef.current) return;
+  // useEffect(() => {
+  //   if (!canvasRef.current) return;
 
-    // Initialize scene, camera, renderer if they don't exist
-    if (!sceneRef.current) {
-        sceneRef.current = new THREE.Scene();
-        cameraRef.current = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        cameraRef.current.position.set(0, 5, 18); // Adjusted initial camera position
-        rendererRef.current = new THREE.WebGLRenderer({ canvas: canvasRef.current, alpha: true, antialias: true }); // Added antialias
-        rendererRef.current.setSize(window.innerWidth, window.innerHeight);
-        rendererRef.current.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // Pixel ratio optimization
+  //   // Initialize scene, camera, renderer if they don't exist
+  //   if (!sceneRef.current) {
+  //       sceneRef.current = new THREE.Scene();
+  //       cameraRef.current = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+  //       cameraRef.current.position.set(0, 5, 18); // Adjusted initial camera position
+  //       rendererRef.current = new THREE.WebGLRenderer({ canvas: canvasRef.current, alpha: true, antialias: true }); // Added antialias
+  //       rendererRef.current.setSize(window.innerWidth, window.innerHeight);
+  //       rendererRef.current.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // Pixel ratio optimization
 
-        // Lights (create only once)
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.2); // Base ambient light
-        sceneRef.current.add(ambientLight);
-        sceneRef.current.ambientLight = ambientLight; // Store reference
+  //       // Lights (create only once)
+  //       const ambientLight = new THREE.AmbientLight(0xffffff, 0.2); // Base ambient light
+  //       sceneRef.current.add(ambientLight);
+  //       sceneRef.current.ambientLight = ambientLight; // Store reference
 
-        const directionalLight = new THREE.DirectionalLight(0xffffff, 0.6); // Base directional light
-        directionalLight.position.set(5, 15, 10);
-        sceneRef.current.add(directionalLight);
-        sceneRef.current.directionalLight = directionalLight; // Store reference
-    }
+  //       const directionalLight = new THREE.DirectionalLight(0xffffff, 0.6); // Base directional light
+  //       directionalLight.position.set(5, 15, 10);
+  //       sceneRef.current.add(directionalLight);
+  //       sceneRef.current.directionalLight = directionalLight; // Store reference
+  //   }
 
-    const scene = sceneRef.current;
-    const camera = cameraRef.current;
-    const renderer = rendererRef.current;
-
-
-    // --- Theme-dependent updates ---
-    scene.fog = new THREE.FogExp2(theme.fogColor, 0.02); // Adjusted fog density
-
-    // Update light colors based on theme
-    scene.ambientLight.color.setHex(theme.fogColor); // Ambient light matches fog base
-    scene.ambientLight.intensity = 0.4;
-    scene.directionalLight.color.setHex(theme.particleColor); // Directional light matches particle highlights
-    scene.directionalLight.intensity = 0.8;
-
-     // --- Ground ---
-     if (!scene.ground) {
-        const groundGeometry = new THREE.PlaneGeometry(200, 200); // Larger ground
-        const groundMaterial = new THREE.MeshStandardMaterial({ color: theme.fogColor, roughness: 0.9 });
-        const ground = new THREE.Mesh(groundGeometry, groundMaterial);
-        ground.rotation.x = -Math.PI / 2;
-        ground.position.y = -2.5;
-        scene.add(ground);
-        scene.ground = ground;
-     } else {
-         scene.ground.material.color.setHex(theme.fogColor); // Update ground color
-         scene.ground.material.needsUpdate = true;
-     }
-
-    // --- Trees ---
-    if (treeGroupRef.current) {
-      scene.remove(treeGroupRef.current); // Remove old trees before adding new ones
-    }
-    treeGroupRef.current = new THREE.Group();
-    scene.add(treeGroupRef.current);
-
-    // Cached geometries and materials for trees
-    const trunkGeometry = new THREE.CylinderGeometry(0.4, 0.6, 5, 6); // Simplified geometry
-    const foliageGeometry = new THREE.ConeGeometry(1.8, 3.5, 6); // Simplified geometry
-    const trunkMaterial = new THREE.MeshStandardMaterial({ color: theme.trunkColor });
-    const foliageMaterial = new THREE.MeshStandardMaterial({ color: theme.treeColor, flatShading: true });
-
-    const createTree = (x, z) => {
-      const trunk = new THREE.Mesh(trunkGeometry, trunkMaterial);
-      trunk.position.set(x, 0, z); // Y position adjusted later by ground level
-
-      const foliage1 = new THREE.Mesh(foliageGeometry, foliageMaterial);
-      foliage1.position.y = 3;
-      trunk.add(foliage1);
-
-      const foliage2 = new THREE.Mesh(foliageGeometry, foliageMaterial);
-      foliage2.position.y = 4.8; // Adjusted position
-      foliage2.scale.set(0.7, 0.7, 0.7); // Adjusted scale
-      trunk.add(foliage2);
-
-      trunk.position.y = -2.5; // Place base on ground level
-      return trunk;
-    };
-
-     // Dynamic tree count based on screen size (example)
-     const isMobile = window.innerWidth < 768;
-     const treeCount = isMobile ? 60 : 120; // Reduced count significantly
-     const maxRadius = isMobile ? 30 : 45;
-
-     // Create trees in rings + random scatter
-     for (let i = 0; i < treeCount; i++) {
-        const angle = Math.random() * Math.PI * 2;
-        const radius = 8 + Math.random() * (maxRadius - 8); // Spread from center outwards
-        const x = Math.cos(angle) * radius;
-        const z = Math.sin(angle) * radius - 10; // Move forest slightly back
-
-        const tree = createTree(x, z);
-        tree.scale.set(
-          0.6 + Math.random() * 1.0,
-          0.8 + Math.random() * 0.8,
-          0.6 + Math.random() * 1.0
-        );
-        tree.rotation.y = Math.random() * Math.PI * 2;
-        treeGroupRef.current.add(tree);
-     }
-
-     // --- Particles ---
-     if (particleSystemRef.current) {
-        scene.remove(particleSystemRef.current); // Remove old particles
-        particleSystemRef.current.geometry.dispose();
-        particleSystemRef.current.material.dispose();
-     }
-
-     const particleCount = isMobile ? 300 : 600; // Reduced particle count
-     const particleGeometry = new THREE.BufferGeometry();
-     const positions = new Float32Array(particleCount * 3);
-     const particleMaxRadius = isMobile ? 35 : 50;
-
-     for (let i = 0; i < particleCount; i++) {
-        const i3 = i * 3;
-        const radius = 5 + Math.random() * particleMaxRadius;
-        const angle = Math.random() * Math.PI * 2;
-        positions[i3] = Math.cos(angle) * radius;
-        positions[i3 + 1] = Math.random() * 12 - 1; // Height range
-        positions[i3 + 2] = Math.sin(angle) * radius - 15; // Z offset
-     }
-     particleGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-
-     const particleMaterial = new THREE.PointsMaterial({
-        color: theme.particleColor,
-        size: isMobile ? 0.3 : 0.4, // Smaller particles on mobile
-        sizeAttenuation: true,
-        transparent: true,
-        opacity: 0.7,
-        blending: THREE.AdditiveBlending,
-        depthWrite: false // Important for blending
-     });
-
-     particleSystemRef.current = new THREE.Points(particleGeometry, particleMaterial);
-     scene.add(particleSystemRef.current);
+  //   const scene = sceneRef.current;
+  //   const camera = cameraRef.current;
+  //   const renderer = rendererRef.current;
 
 
-     // --- Animation Loop ---
-     let animationFrameId;
-     const animate = () => {
-       animationFrameId = requestAnimationFrame(animate);
-       const elapsedTime = Date.now() * 0.0001; // Slower base speed
+  //   // --- Theme-dependent updates ---
+  //   scene.fog = new THREE.FogExp2(theme.fogColor, 0.02); // Adjusted fog density
 
-       // Tree sway
-       treeGroupRef.current?.children.forEach((tree, i) => {
-         tree.rotation.x = Math.sin(elapsedTime * 3 + i * 0.5) * 0.015;
-         tree.rotation.z = Math.cos(elapsedTime * 5 + i * 0.3) * 0.015;
-       });
+  //   // Update light colors based on theme
+  //   scene.ambientLight.color.setHex(theme.fogColor); // Ambient light matches fog base
+  //   scene.ambientLight.intensity = 0.4;
+  //   scene.directionalLight.color.setHex(theme.particleColor); // Directional light matches particle highlights
+  //   scene.directionalLight.intensity = 0.8;
 
-       // Particle movement
-       if (particleSystemRef.current) {
-         const posAttribute = particleSystemRef.current.geometry.attributes.position;
-         for (let i = 0; i < particleCount; i++) {
-           const i3 = i * 3;
-           // Gentle floating based on index and time
-           posAttribute.array[i3 + 1] += Math.sin(elapsedTime * 5 + i) * 0.005; // Y movement
-           // Keep particles within a vertical range
-           if (posAttribute.array[i3+1] > 12) posAttribute.array[i3+1] = -1;
-           if (posAttribute.array[i3+1] < -1) posAttribute.array[i3+1] = 12;
-         }
-         posAttribute.needsUpdate = true;
-       }
+  //    // --- Ground ---
+  //    if (!scene.ground) {
+  //       const groundGeometry = new THREE.PlaneGeometry(200, 200); // Larger ground
+  //       const groundMaterial = new THREE.MeshStandardMaterial({ color: theme.fogColor, roughness: 0.9 });
+  //       const ground = new THREE.Mesh(groundGeometry, groundMaterial);
+  //       ground.rotation.x = -Math.PI / 2;
+  //       ground.position.y = -2.5;
+  //       scene.add(ground);
+  //       scene.ground = ground;
+  //    } else {
+  //        scene.ground.material.color.setHex(theme.fogColor); // Update ground color
+  //        scene.ground.material.needsUpdate = true;
+  //    }
 
-        // Smooth camera movement towards center (optional)
-        // camera.position.x += (-camera.position.x) * 0.01;
-        // camera.lookAt(scene.position);
+  //   // --- Trees ---
+  //   if (treeGroupRef.current) {
+  //     scene.remove(treeGroupRef.current); // Remove old trees before adding new ones
+  //   }
+  //   treeGroupRef.current = new THREE.Group();
+  //   scene.add(treeGroupRef.current);
 
-       renderer.render(scene, camera);
-     };
-     animate();
+  //   // Cached geometries and materials for trees
+  //   const trunkGeometry = new THREE.CylinderGeometry(0.4, 0.6, 5, 6); // Simplified geometry
+  //   const foliageGeometry = new THREE.ConeGeometry(1.8, 3.5, 6); // Simplified geometry
+  //   const trunkMaterial = new THREE.MeshStandardMaterial({ color: theme.trunkColor });
+  //   const foliageMaterial = new THREE.MeshStandardMaterial({ color: theme.treeColor, flatShading: true });
 
-     // --- Resize Handling ---
-     const handleResize = () => {
-        if (camera && renderer) {
-           camera.aspect = window.innerWidth / window.innerHeight;
-           camera.updateProjectionMatrix();
-           renderer.setSize(window.innerWidth, window.innerHeight);
-           renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // Update pixel ratio on resize
+  //   const createTree = (x, z) => {
+  //     const trunk = new THREE.Mesh(trunkGeometry, trunkMaterial);
+  //     trunk.position.set(x, 0, z); // Y position adjusted later by ground level
 
-           // Adjustments for mobile aspect ratio (optional)
-           if (window.innerWidth / window.innerHeight < 1) { // Portrait
-               camera.fov = 85; // Wider FOV
-               // camera.position.z = 20; // Move slightly further back
-           } else { // Landscape
-               camera.fov = 75;
-               // camera.position.z = 18;
-           }
-           camera.updateProjectionMatrix(); // Apply FOV changes
-        }
-     };
+  //     const foliage1 = new THREE.Mesh(foliageGeometry, foliageMaterial);
+  //     foliage1.position.y = 3;
+  //     trunk.add(foliage1);
 
-     const debouncedResize = debounce(handleResize, 100); // Debounce resize events
-     window.addEventListener('resize', debouncedResize);
-     handleResize(); // Initial call
+  //     const foliage2 = new THREE.Mesh(foliageGeometry, foliageMaterial);
+  //     foliage2.position.y = 4.8; // Adjusted position
+  //     foliage2.scale.set(0.7, 0.7, 0.7); // Adjusted scale
+  //     trunk.add(foliage2);
+
+  //     trunk.position.y = -2.5; // Place base on ground level
+  //     return trunk;
+  //   };
+
+  //    // Dynamic tree count based on screen size (example)
+  //    const isMobile = window.innerWidth < 768;
+  //    const treeCount = isMobile ? 60 : 120; // Reduced count significantly
+  //    const maxRadius = isMobile ? 30 : 45;
+
+  //    // Create trees in rings + random scatter
+  //    for (let i = 0; i < treeCount; i++) {
+  //       const angle = Math.random() * Math.PI * 2;
+  //       const radius = 8 + Math.random() * (maxRadius - 8); // Spread from center outwards
+  //       const x = Math.cos(angle) * radius;
+  //       const z = Math.sin(angle) * radius - 10; // Move forest slightly back
+
+  //       const tree = createTree(x, z);
+  //       tree.scale.set(
+  //         0.6 + Math.random() * 1.0,
+  //         0.8 + Math.random() * 0.8,
+  //         0.6 + Math.random() * 1.0
+  //       );
+  //       tree.rotation.y = Math.random() * Math.PI * 2;
+  //       treeGroupRef.current.add(tree);
+  //    }
+
+  //    // --- Particles ---
+  //    if (particleSystemRef.current) {
+  //       scene.remove(particleSystemRef.current); // Remove old particles
+  //       particleSystemRef.current.geometry.dispose();
+  //       particleSystemRef.current.material.dispose();
+  //    }
+
+  //    const particleCount = isMobile ? 300 : 600; // Reduced particle count
+  //    const particleGeometry = new THREE.BufferGeometry();
+  //    const positions = new Float32Array(particleCount * 3);
+  //    const particleMaxRadius = isMobile ? 35 : 50;
+
+  //    for (let i = 0; i < particleCount; i++) {
+  //       const i3 = i * 3;
+  //       const radius = 5 + Math.random() * particleMaxRadius;
+  //       const angle = Math.random() * Math.PI * 2;
+  //       positions[i3] = Math.cos(angle) * radius;
+  //       positions[i3 + 1] = Math.random() * 12 - 1; // Height range
+  //       positions[i3 + 2] = Math.sin(angle) * radius - 15; // Z offset
+  //    }
+  //    particleGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+  //    const particleMaterial = new THREE.PointsMaterial({
+  //       color: theme.particleColor,
+  //       size: isMobile ? 0.3 : 0.4, // Smaller particles on mobile
+  //       sizeAttenuation: true,
+  //       transparent: true,
+  //       opacity: 0.7,
+  //       blending: THREE.AdditiveBlending,
+  //       depthWrite: false // Important for blending
+  //    });
+
+  //    particleSystemRef.current = new THREE.Points(particleGeometry, particleMaterial);
+  //    scene.add(particleSystemRef.current);
 
 
-     // --- Cleanup ---
-     return () => {
-       window.removeEventListener('resize', debouncedResize);
-       cancelAnimationFrame(animationFrameId);
-        // Consider disposing geometries/materials if component unmounts frequently,
-        // but for a main page component, it might not be necessary.
-        // If needed: scene.traverse(obj => { /* dispose logic */ });
-     };
-  }, [currentTheme, theme]); // Rerun effect when theme changes
+  //    // --- Animation Loop ---
+  //    let animationFrameId;
+  //    const animate = () => {
+  //      animationFrameId = requestAnimationFrame(animate);
+  //      const elapsedTime = Date.now() * 0.0001; // Slower base speed
+
+  //      // Tree sway
+  //      treeGroupRef.current?.children.forEach((tree, i) => {
+  //        tree.rotation.x = Math.sin(elapsedTime * 3 + i * 0.5) * 0.015;
+  //        tree.rotation.z = Math.cos(elapsedTime * 5 + i * 0.3) * 0.015;
+  //      });
+
+  //      // Particle movement
+  //      if (particleSystemRef.current) {
+  //        const posAttribute = particleSystemRef.current.geometry.attributes.position;
+  //        for (let i = 0; i < particleCount; i++) {
+  //          const i3 = i * 3;
+  //          // Gentle floating based on index and time
+  //          posAttribute.array[i3 + 1] += Math.sin(elapsedTime * 5 + i) * 0.005; // Y movement
+  //          // Keep particles within a vertical range
+  //          if (posAttribute.array[i3+1] > 12) posAttribute.array[i3+1] = -1;
+  //          if (posAttribute.array[i3+1] < -1) posAttribute.array[i3+1] = 12;
+  //        }
+  //        posAttribute.needsUpdate = true;
+  //      }
+
+  //       // Smooth camera movement towards center (optional)
+  //       // camera.position.x += (-camera.position.x) * 0.01;
+  //       // camera.lookAt(scene.position);
+
+  //      renderer.render(scene, camera);
+  //    };
+  //    animate();
+
+  //    // --- Resize Handling ---
+  //    const handleResize = () => {
+  //       if (camera && renderer) {
+  //          camera.aspect = window.innerWidth / window.innerHeight;
+  //          camera.updateProjectionMatrix();
+  //          renderer.setSize(window.innerWidth, window.innerHeight);
+  //          renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // Update pixel ratio on resize
+
+  //          // Adjustments for mobile aspect ratio (optional)
+  //          if (window.innerWidth / window.innerHeight < 1) { // Portrait
+  //              camera.fov = 85; // Wider FOV
+  //              // camera.position.z = 20; // Move slightly further back
+  //          } else { // Landscape
+  //              camera.fov = 75;
+  //              // camera.position.z = 18;
+  //          }
+  //          camera.updateProjectionMatrix(); // Apply FOV changes
+  //       }
+  //    };
+
+  //    const debouncedResize = debounce(handleResize, 100); // Debounce resize events
+  //    window.addEventListener('resize', debouncedResize);
+  //    handleResize(); // Initial call
+
+
+  //    // --- Cleanup ---
+  //    return () => {
+  //      window.removeEventListener('resize', debouncedResize);
+  //      cancelAnimationFrame(animationFrameId);
+  //       // Consider disposing geometries/materials if component unmounts frequently,
+  //       // but for a main page component, it might not be necessary.
+  //       // If needed: scene.traverse(obj => { /* dispose logic */ });
+  //    };
+  // }, [currentTheme, theme]); // Rerun effect when theme changes
 
   return (
-    <div className={`relative min-h-screen bg-gradient-to-b ${theme.colors.background} font-serif overflow-hidden`}>
-      {/* Theme Selector */}
+    <div id="timeline" className={`relative min-h-screen font-serif overflow-hidden`}>
+      {/* Theme Selector
       <div className="absolute top-4 right-4 z-20">
         <select
           className="bg-black/40 text-white text-sm border border-white/20 rounded px-2 py-1 backdrop-blur-sm appearance-none cursor-pointer" // Style adjustments
           value={currentTheme}
           onChange={(e) => {
-              setCurrentTheme(e.target.value);
-              setActiveEvent(null); // Reset active event on theme change
-              setHoveredEvent(null);
+            setCurrentTheme(e.target.value);
+            setActiveEvent(null); // Reset active event on theme change
+            setHoveredEvent(null);
           }}
         >
           {Object.entries(themeVariants).map(([key, themeMeta]) => ( // Use Object.entries for key and value
@@ -514,13 +574,13 @@ const Timeline = () => {
             </option>
           ))}
         </select>
-      </div>
+      </div> */}
 
       {/* Three.js Background Canvas */}
-      <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
+      {/* <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" /> */}
 
-       {/* Gradient Overlay for Depth (Optional) */}
-      <div className="absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-black/30 to-transparent z-5 pointer-events-none"></div>
+      {/* Gradient Overlay for Depth (Optional) */}
+      {/* <div className="absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-black/30 to-transparent z-5 pointer-events-none"></div> */}
 
 
       {/* Content Container */}
@@ -537,42 +597,42 @@ const Timeline = () => {
         </motion.h1>
 
         {/* Timeline Area */}
-         {/* Use max-w-md for mobile, max-w-5xl for desktop */}
+        {/* Use max-w-md for mobile, max-w-5xl for desktop */}
         <div className="max-w-md md:max-w-5xl mx-auto">
           {/* Central path - adjusted for responsiveness */}
           <div className="relative">
-              {/* Vertical line: positioned left on mobile, center on desktop */}
-             <div className={`absolute top-0 bottom-0 w-1 ${theme.colors.timeline} rounded-full left-4 md:left-1/2 md:-translate-x-1/2`} />
+            {/* Vertical line: positioned left on mobile, center on desktop */}
+            <div className={`absolute top-0 bottom-0 w-1 ${theme.colors.timeline} rounded-full left-4 md:left-1/2 md:-translate-x-1/2`} />
 
-             {/* Background glows - positioned relative to the container */}
-             {/* Use relative positioning for glows so they adapt to the container's width */}
+            {/* Background glows - positioned relative to the container */}
+            {/* Use relative positioning for glows so they adapt to the container's width */}
             <div className="absolute w-full h-full top-0 left-0 pointer-events-none">
-                 {/* Example positioning - adjust top/left percentages */}
-                <div className="absolute left-1/4 top-1/4 -translate-x-1/2 -translate-y-1/2 md:left-1/2">
-                    <MagicalGlow size={12} color={theme.colors.secondary} delay={0.5} />
-                </div>
-                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-                    <MagicalGlow size={18} color={theme.colors.primary} delay={1.5} />
-                </div>
-                 <div className="absolute left-3/4 top-3/4 -translate-x-1/2 -translate-y-1/2 md:left-1/2">
-                    <MagicalGlow size={12} color={theme.colors.primary} delay={1} />
-                </div>
+              {/* Example positioning - adjust top/left percentages */}
+              <div className="absolute left-1/4 top-1/4 -translate-x-1/2 -translate-y-1/2 md:left-1/2">
+                <MagicalGlow size={12} color={theme.colors.secondary} delay={0.5} />
+              </div>
+              <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+                <MagicalGlow size={18} color={theme.colors.primary} delay={1.5} />
+              </div>
+              <div className="absolute left-3/4 top-3/4 -translate-x-1/2 -translate-y-1/2 md:left-1/2">
+                <MagicalGlow size={12} color={theme.colors.primary} delay={1} />
+              </div>
             </div>
 
             {/* Event items */}
             <div> {/* Added a container div for events */}
-                {hackathonEvents.map((event, index) => (
+              {hackathonEvents.map((event, index) => (
                 <TimelineEventItem
-                    key={event.id}
-                    event={event}
-                    index={index}
-                    theme={theme}
-                    isActive={activeEvent === event.id}
-                    isHovered={hoveredEvent === event.id}
-                    setActiveEvent={setActiveEvent}
-                    setHoveredEvent={setHoveredEvent}
+                  key={event.id}
+                  event={event}
+                  index={index}
+                  theme={theme}
+                  isActive={activeEvent === event.id}
+                  isHovered={hoveredEvent === event.id}
+                  setActiveEvent={setActiveEvent}
+                  setHoveredEvent={setHoveredEvent}
                 />
-                ))}
+              ))}
             </div>
           </div>
         </div>
@@ -592,16 +652,16 @@ const Timeline = () => {
             width: 8px;
         }
         ::-webkit-scrollbar-track {
-            background: #00000030; /* Dark transparent track */
+            
         }
         ::-webkit-scrollbar-thumb {
-            background-color: ${theme.colors.primary}80; /* Use primary color with alpha */
+            
             border-radius: 10px;
             border: 2px solid transparent;
             background-clip: content-box;
         }
          ::-webkit-scrollbar-thumb:hover {
-            background-color: ${theme.colors.primary}B3; /* Darken on hover */
+           
         }
 
         /* Fallback for Firefox */

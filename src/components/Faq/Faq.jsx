@@ -3,27 +3,37 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const faqs = [
   {
-    question: "When will I get hackathon event details?",
-    answer:
-      "You will receive an email with all details at least 5 days before the event.",
+    question: "When do I get the magical scroll of event details? 📜",
+    answer: "Your owl (okay, email) will arrive 5 days before the event with all the enchanted details. No Hogwarts acceptance letter, but just as exciting!"
   },
   {
-    question: "What if I don’t have a team?",
-    answer: "No worries! We’ll help match you with other solo participants.",
+    question: "Help! I'm a solo player in this multiplayer game! 🎮",
+    answer: "Fear not, lone wolf! Our matchmaking system (think tech-dating but for coding) will help you find your dream team. No swiping required!"
   },
   {
-    question: "Can I submit projects built before the hackathon?",
-    answer: "No. All projects must be built during the event hours only.",
+    question: "Can I bring my pre-built project from my secret laboratory? 🧪",
+    answer: "Nice try, but nope! All code must be fresh and created during the hackathon. Think of it as cooking a meal - no pre-cooked ingredients allowed!"
   },
   {
-    question: "Is there any registration fee?",
-    answer: "Nope! It's absolutely free to participate.",
+    question: "Is this quest going to cost me gold coins? 💰",
+    answer: "Not a single rupee! This adventure is completely free. Save your money for energy drinks and midnight snacks instead!"
   },
   {
-    question: "Do you allow offline and online combined groups?",
-    answer:
-      "Yes! We support hybrid teams with both offline and online members.",
+    question: "Can my team be half in the matrix, half in reality? 🌐",
+    answer: "Absolutely! We support hybrid teams. Some can be in-person while others code from their secret lairs. Just make sure you're all in the same time zone (or close enough)!"
   },
+  {
+    question: "What weapons (er, tools) should I bring to battle? 🛠️",
+    answer: "Your trusty laptop, charger (very important!), and your brain loaded with creativity. We'll provide the wifi, snacks, and good vibes!"
+  },
+  {
+    question: "Will there be wise mentors to guide our quest? 🧙‍♂️",
+    answer: "Indeed! Our council of tech wizards (industry experts) will be there to help when you're stuck or need direction. They don't have long beards, but they do have long experience!"
+  },
+  {
+    question: "What if my code decides to throw a tantrum? 😱",
+    answer: "Don't panic! Our technical support team (aka the bug busters) will be available 24/7 during the event. They've seen it all and fixed most of it!"
+  }
 ];
 
 import PropTypes from "prop-types";
@@ -73,11 +83,11 @@ function Faq() {
       id="faq"
       className="relative pt-20 pb-16 px-4 text-white"
       style={{
-        background: "linear-gradient(to bottom, #331316, #582422)",
+        // background: "linear-gradient(to bottom, #331316, #582422)",
       }}
     >
       <h2 className="text-center text-3xl md:text-4xl font-bold text-[#d69040] mb-12">
-        FAQ
+        Curious Coder's Guide 🤔
       </h2>
 
       <div className="max-w-3xl mx-auto backdrop-blur-md bg-white/5 border border-[#AB7B43]/30 rounded-xl p-6 md:p-10 shadow-xl">
@@ -89,20 +99,6 @@ function Faq() {
             onClick={() => toggleFAQ(index)}
           />
         ))}
-      </div>
-
-      {/* Bottom Wave SVG */}
-      <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none">
-        <svg
-          viewBox="0 0 1440 100"
-          preserveAspectRatio="none"
-          className="w-full h-[80px]"
-        >
-          <path
-            d="M0,0 C720,100 720,100 1440,0 L1440,100 L0,100 Z"
-            fill="#331316"
-          />
-        </svg>
       </div>
     </div>
   );
