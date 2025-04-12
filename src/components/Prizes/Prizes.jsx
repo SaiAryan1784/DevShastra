@@ -1,430 +1,220 @@
-// import { img } from 'framer-motion/client';
-// import { useEffect, useRef, useState } from 'react'
-// import CountUp from 'react-countup'
-// import React from 'react'
+import React from "react";
+import { motion } from "framer-motion";
+import { Trophy, Code, Brain, Users } from "lucide-react";
 
-// const Prizes = () => {
+const prizes = [
+  {
+    title: "First Prize",
+    amount: "₹50,000",
+    icon: <Trophy size={64} className="text-yellow-400" />
+  },
+  {
+    title: "Second Prize",
+    amount: "₹30,000",
+    icon: <Trophy size={64} className="text-gray-300" />
+  },
+  {
+    title: "Third Prize",
+    amount: "₹20,000",
+    icon: <Trophy size={64} className="text-amber-600" />
+  }
+];
 
-//   const [isVisible, setIsVisible] = useState(false)
-//   const sectionRef = useRef(null)
-//   const trackPrize = [
-//     { name: 'AI/ML', prize: 2000, img: './aiml.svg' },
-//     { name: 'WEB3', prize: 2000, img: './web3.svg' },
-//     { name: 'ALL GIRLS', prize: 2000, img: './allgirls.png' },
-//   ]
+const trackPrizes = [
+  {
+    title: "Web3 Track",
+    amount: "₹2,000",
+    icon: <Code size={48} className="text-blue-400" />
+  },
+  {
+    title: "AI/ML Track",
+    amount: "₹2,000",
+    icon: <Brain size={48} className="text-purple-400" />
+  },
+  {
+    title: "All Girls Track",
+    amount: "₹2,000",
+    icon: <Users size={48} className="text-pink-400" />
+  }
+];
 
-//   useEffect(() => {
-//     const observer = new IntersectionObserver(
-//       ([entry]) => {
-//         if (entry.isIntersecting) {
-//           setIsVisible(true)
-//           observer.disconnect()
-//         }
-//       },
-//       {
-//         threshold: 0.25,
-//         rootMargin: "0px 0px -50px 0px",
-//       },
-//     )
+const cardVariants = {
+  hidden: { opacity: 0, y: 50 },
+  visible: (i) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: i * 0.2,
+      duration: 0.6,
+      ease: "easeOut",
+      type: "spring",
+      stiffness: 70,
+    },
+  }),
+};
 
-//     if (sectionRef.current) {
-//       observer.observe(sectionRef.current)
-//     }
-
-//     return () => {
-//       if (sectionRef.current) {
-//         observer.disconnect()
-//       }
-//     }
-//   }, [])
-
-//   return (
-//     <div>
-//       <h1 className='font-bold text-3xl text-center'>Prizes</h1>
-//       <h2 className="font-bold text-2xl my-4 text-center">
-//         Prize Pool: ₹
-//         {isVisible ? (
-//           <CountUp start={0} end={100000} duration={2.5} separator="," suffix="+" useEasing={true} />
-//         ) : (
-//           "1,00,000+"
-//         )}
-//       </h2>
-//       <div ref={sectionRef}>
-//         <div className='flex items-center justify-center gap-4 flex-wrap'>
-//           <div className='flex flex-col items-center justify-center gap-3 mt-16 p-6 rounded-2xl border-[#c0c0c0] border-4 bg-[#B89C7B] w-64' style={{ height: '300px' }}>
-//             <div className='bg-white p-3 border-[#C0C0C0] border-4 rounded-full'>
-//               <h1 className='text-7xl py-3'>🥈</h1>
-//             </div>
-//             <h1 className='font-bold text-2xl'>1<sup>st</sup> Runner Up</h1>
-//             <h2 className="font-bold text-2xl text-[#c0c0c0]">
-//               ₹{isVisible ? <CountUp start={0} end={30000} duration={2} separator="," useEasing={true} /> : "30,000"}
-//             </h2>
-//           </div>
-//           <div className='flex flex-col items-center justify-center gap-3 mt-4 p-6 rounded-2xl border-[#FFD700] border-3 bg-[#B89C7B] w-64' style={{ height: '350px' }}>
-//             <div className='bg-white p-3 w-40 h-40 border-[#FFD700] border-4 rounded-full'>
-//               <img src="./first.png" alt="Winner" />
-//             </div>
-//             <h1 className='font-bold m-2 text-3xl'>Winner</h1>
-//             <h2 className="font-bold text-2xl text-[#FFD700]">
-//               ₹{isVisible ? <CountUp start={0} end={50000} duration={2.5} separator="," useEasing={true} /> : "50,000"}
-//             </h2>
-//           </div>
-//           <div className='flex flex-col items-center justify-center gap-3 mt-28 p-6 rounded-2xl border-[#CD7F32] border-3 bg-[#B89C7B] w-64' style={{ height: '250px' }}>
-//             <div className='bg-white p-3 border-[#CD7F32] border-4 rounded-full'>
-//               <h1 className='text-6xl py-3'>🥉</h1>
-//             </div>
-//             <h1 className='font-bold text-2xl'>2<sup>nd</sup> Runner Up</h1>
-//             <h2 className="font-bold text-2xl text-[#CD7F32]">
-//               ₹{isVisible ? <CountUp start={0} end={20000} duration={1.5} separator="," useEasing={true} /> : "20,000"}
-//             </h2>
-//           </div>
-//         </div>
-//       </div>
-
-//       {/* Track Prizes */}
-//       <h1 className='font-bold text-3xl text-center mt-10'>Track Prizes</h1>
-//       <div className='flex items-center justify-center gap-4 flex-wrap'>
-//         {trackPrize.map((track, index) => (
-//           <div key={index} className='flex flex-col items-center justify-center gap-3 mt-8 p-6 rounded-2xl border-[#773129] border-3 bg-[#B89C7B] w-64'>
-//             <div className=' border-[#773129] border-2 rounded-full'>
-//               <img src={track.img} alt={track.name} className="w-24 h-24" />
-//             </div>
-//             <h1 className='font-bold text-xl'>{track.name}</h1>
-//             <h2 className="font-bold text-2xl text-yellow-200">
-//               ₹
-//               {isVisible ? (
-//                 <CountUp
-//                   start={0}
-//                   end={track.prize}
-//                   duration={1.5}
-//                   separator=","
-//                   useEasing={true}
-//                   delay={0.5} 
-//                 />
-//               ) : (
-//                 track.prize.toLocaleString()
-//               )}
-//             </h2>
-//           </div>
-//         ))}
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default Prizes;
-
-
-
-import { motion } from "framer-motion"
-import { useEffect, useRef, useState } from "react"
-import CountUp from "react-countup"
-
-const Prizes = () => {
-  const [isVisible, setIsVisible] = useState(false)
-  const sectionRef = useRef(null)
-  const trackPrize = [
-    { name: "AI/ML", prize: 2000, img: "./aiml.svg" },
-    { name: "WEB3", prize: 2000, img: "./web3.svg" },
-    { name: "ALL GIRLS", prize: 2000, img: "./allgirls.png" },
-  ]
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true)
-          observer.disconnect()
-        }
-      },
-      {
-        threshold: 0.25,
-        rootMargin: "0px 0px -50px 0px",
-      },
-    )
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current)
+const trackCardVariants = {
+  hidden: { opacity: 0, scale: 0.8, y: 50 },
+  visible: (i) => ({
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    transition: {
+      delay: i * 0.2,
+      duration: 0.5,
+      type: "spring",
+      stiffness: 100,
+      damping: 12
+    },
+  }),
+  hover: {
+    y: -5,
+    scale: 1.02,
+    transition: {
+      duration: 0.2,
+      type: "tween",
+      ease: "easeOut"
     }
+  }
+};
 
-    return () => {
-      if (sectionRef.current) {
-        observer.disconnect()
-      }
+const iconVariants = {
+  hover: {
+    rotate: [0, -10, 10, -5, 5, 0],
+    transition: {
+      duration: 0.5,
+      ease: "easeInOut"
     }
-  }, [])
-
-  // Animation variants
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
   }
+};
 
-  const cardVariants = {
-    hidden: {
-      opacity: 0,
-      y: 20,
-      scale: 0.95,
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: {
-        duration: 0.6,
-        ease: "easeOut",
-      },
-    },
-  }
-
-  const borderVariants = {
-    hidden: {
-      borderColor: "rgba(0,0,0,0)",
-      boxShadow: "0 0 0 rgba(0,0,0,0)",
-    },
-    visible: {
-      borderColor: "rgba(192,192,192,1)",
-      boxShadow: "0 0 10px rgba(192,192,192,0.5)",
-      transition: {
-        duration: 1.5,
-        repeat: Number.POSITIVE_INFINITY,
-        repeatType: "reverse",
-        ease: "easeInOut",
-      },
-    },
-  }
-
-  const goldBorderVariants = {
-    hidden: {
-      borderColor: "rgba(0,0,0,0)",
-      boxShadow: "0 0 0 rgba(0,0,0,0)",
-    },
-    visible: {
-      borderColor: "rgba(255,215,0,1)",
-      boxShadow: "0 0 15px rgba(255,215,0,0.5)",
-      transition: {
-        duration: 1.5,
-        repeat: Number.POSITIVE_INFINITY,
-        repeatType: "reverse",
-        ease: "easeInOut",
-      },
-    },
-  }
-
-  const bronzeBorderVariants = {
-    hidden: {
-      borderColor: "rgba(0,0,0,0)",
-      boxShadow: "0 0 0 rgba(0,0,0,0)",
-    },
-    visible: {
-      borderColor: "rgba(205,127,50,1)",
-      boxShadow: "0 0 10px rgba(205,127,50,0.5)",
-      transition: {
-        duration: 1.5,
-        repeat: Number.POSITIVE_INFINITY,
-        repeatType: "reverse",
-        ease: "easeInOut",
-      },
-    },
-  }
-
-  const trackBorderVariants = {
-    hidden: {
-      borderColor: "rgba(0,0,0,0)",
-      boxShadow: "0 0 0 rgba(0,0,0,0)",
-    },
-    visible: {
-      borderColor: "rgba(119,49,41,1)",
-      boxShadow: "0 0 10px rgba(119,49,41,0.5)",
-      transition: {
-        duration: 1.5,
-        repeat: Number.POSITIVE_INFINITY,
-        repeatType: "reverse",
-        ease: "easeInOut",
-      },
-    },
-  }
-
-  const iconVariants = {
-    hidden: { scale: 0.8, opacity: 0 },
-    visible: {
-      scale: 1,
-      opacity: 1,
-      transition: {
-        duration: 0.5,
-        ease: "easeOut",
-      },
-    },
-  }
-
-  const textVariants = {
-    hidden: { opacity: 0, y: 10 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-        ease: "easeOut",
-      },
-    },
-  }
-
+function Prizes() {
   return (
-    <div className="flex flex-col items-center justify-center">
-      <motion.h1
-        className="font-bold text-3xl text-center"
-        initial={{ opacity: 0, y: -20 }}
-        animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
-        transition={{ duration: 0.6 }}
-      >
-        Prizes
-      </motion.h1>
-      
+    <div id="prizes" className="relative py-20 px-6 text-white overflow-hidden">
+      {/* Main Prizes Section */}
       <motion.h2
-        className="font-bold text-2xl my-4 p-2 w-80 rounded-4xl text-[#E5CF53] bg-[#773129] text-center"
-        initial={{ opacity: 0, y: -10 }}
-        animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: -10 }}
-        transition={{ duration: 0.6, delay: 0.2 }}
+        initial={{ opacity: 0, y: -40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+        className="text-center text-4xl font-bold mb-16 tracking-wider text-amber-200"
       >
-        Prize Pool: ₹
-        {isVisible ? (
-          <CountUp start={0} end={100000} duration={3} separator="," suffix="+" useEasing={true} />
-        ) : (
-          "1,00,000+"
-        )}
+        TREASURE TROVE
       </motion.h2>
-      <div ref={sectionRef}>
-        <motion.div
-          className="flex items-center justify-center gap-4 flex-wrap"
-          variants={containerVariants}
-          initial="hidden"
-          animate={isVisible ? "visible" : "hidden"}
-        >
-          <motion.div
-            className="flex flex-col items-center justify-center gap-3 mt-16 p-6 rounded-2xl border-[#c0c0c0] border-4 bg-[#B89C7B] w-64"
-            style={{ height: "300px" }}
-            variants={cardVariants}
-            whileHover={{ scale: 1.03, transition: { duration: 0.3 } }}
-          >
-            <motion.div
-              className="bg-white p-3 border-[#C0C0C0] border-4 rounded-full"
-              variants={borderVariants}
-              animate={isVisible ? "visible" : "hidden"}
-            >
-              <motion.h1 className="text-7xl py-3" variants={iconVariants}>
-                🥈
-              </motion.h1>
-            </motion.div>
-            <motion.h1 className="font-bold text-2xl" variants={textVariants}>
-              1<sup>st</sup> Runner Up
-            </motion.h1>
-            <motion.h2 className="font-bold text-2xl text-[#c0c0c0]" variants={textVariants}>
-              ₹{isVisible ? <CountUp start={0} end={30000} duration={2} separator="," useEasing={true} /> : "30,000"}
-            </motion.h2>
-          </motion.div>
 
-          <motion.div
-            className="flex flex-col items-center justify-center gap-3 mt-4 p-6 rounded-2xl border-[#FFD700] border-3 bg-[#B89C7B] w-64"
-            style={{ height: "350px" }}
-            variants={cardVariants}
-            whileHover={{ scale: 1.03, transition: { duration: 0.3 } }}
-          >
-            <motion.div
-              className="bg-white p-3 w-40 h-40 border-[#FFD700] border-4 rounded-full"
-              variants={goldBorderVariants}
-              animate={isVisible ? "visible" : "hidden"}
-            >
-              <motion.img
-                src="./first.png"
-                alt="Winner"
-                variants={iconVariants}
-                className="w-full h-full object-contain"
-              />
-            </motion.div>
-            <motion.h1 className="font-bold m-2 text-3xl" variants={textVariants}>
-              Winner
-            </motion.h1>
-            <motion.h2 className="font-bold text-2xl text-[#FFD700]" variants={textVariants}>
-              ₹{isVisible ? <CountUp start={0} end={50000} duration={2.5} separator="," useEasing={true} /> : "50,000"}
-            </motion.h2>
-          </motion.div>
-
-          <motion.div
-            className="flex flex-col items-center justify-center gap-3 mt-4 lg:mt-28 p-6 rounded-2xl border-[#CD7F32] border-3 bg-[#B89C7B] w-64"
-            style={{ height: "250px" }}
-            variants={cardVariants}
-            whileHover={{ scale: 1.03, transition: { duration: 0.3 } }}
-          >
-            <motion.div
-              className="bg-white p-3 border-[#CD7F32] border-4 rounded-full"
-              variants={bronzeBorderVariants}
-              animate={isVisible ? "visible" : "hidden"}
-            >
-              <motion.h1 className="text-6xl py-3" variants={iconVariants}>
-                🥉
-              </motion.h1>
-            </motion.div>
-            <motion.h1 className="font-bold text-2xl" variants={textVariants}>
-              2<sup>nd</sup> Runner Up
-            </motion.h1>
-            <motion.h2 className="font-bold text-2xl text-[#CD7F32]" variants={textVariants}>
-              ₹{isVisible ? <CountUp start={0} end={20000} duration={1.5} separator="," useEasing={true} /> : "20,000"}
-            </motion.h2>
-          </motion.div>
-        </motion.div>
-      </div>
-
-      {/* Track Prizes */}
-      <motion.h1
-        className="font-bold text-3xl text-center mt-10"
-        initial={{ opacity: 0, y: -20 }}
-        animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
-        transition={{ duration: 0.6, delay: 0.4 }}
-      >
-        Track Prizes
-      </motion.h1>
-      <motion.div
-        className="flex items-center justify-center gap-4 flex-wrap"
-        variants={containerVariants}
-        initial="hidden"
-        animate={isVisible ? "visible" : "hidden"}
-      >
-        {trackPrize.map((track, index) => (
+      <div className="flex justify-center items-end gap-8 flex-wrap z-10 relative mb-20">
+        {prizes.map((prize, index) => (
           <motion.div
             key={index}
-            className="flex flex-col items-center justify-center gap-3 mt-8 p-6 rounded-2xl border-[#773129] border-3 bg-[#B89C7B] w-64"
-            variants={cardVariants}
             custom={index}
-            whileHover={{ scale: 1.03, transition: { duration: 0.3 } }}
+            variants={cardVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            whileHover={{ y: -5 }}
+            transition={{ duration: 0.2 }}
+            className={`relative ${index === 0
+              ? "w-72 order-2"
+              : index === 1
+                ? "w-64 order-1"
+                : "w-64 order-3"
+              }`}
           >
-            <motion.div
-              className="border-[#773129] border-2 rounded-full"
-              variants={trackBorderVariants}
-              animate={isVisible ? "visible" : "hidden"}
-            >
-              <motion.img src={track.img} alt={track.name} className="w-24 h-24" variants={iconVariants} />
-            </motion.div>
-            <motion.h1 className="font-bold text-xl" variants={textVariants}>
-              {track.name}
-            </motion.h1>
-            <motion.h2 className="font-bold text-2xl text-yellow-200" variants={textVariants}>
-              ₹
-              {isVisible ? (
-                <CountUp start={0} end={track.prize} duration={1.5} separator="," useEasing={true} delay={0.5} />
-              ) : (
-                track.prize.toLocaleString()
-              )}
-            </motion.h2>
+            <div className={`relative bg-stone-800/70 backdrop-blur-sm rounded-xl p-8 border border-amber-700/30 shadow-lg transition-all duration-200 hover:border-amber-600/50 hover:shadow-amber-900/20 ${index === 0
+              ? "h-80"
+              : index === 1
+                ? "h-72"
+                : "h-64"
+              }`}>
+              <div className={`relative ${index === 0 ? "mb-8" : index === 1 ? "mb-7" : "mb-6"
+                } flex justify-center transition-transform duration-200 hover:scale-105`}>
+                {prize.icon}
+              </div>
+
+              <h3 className={`${index === 0 ? "text-3xl" : "text-2xl"
+                } font-bold text-center mb-4 text-amber-200`}>
+                {prize.title}
+              </h3>
+              <p className={`${index === 0 ? "text-4xl" : "text-3xl"
+                } font-bold text-center text-amber-200/90`}>
+                {prize.amount}
+              </p>
+
+              {/* Decorative border */}
+              <div className="absolute top-1 left-1 right-1 bottom-1 border border-amber-700/10 rounded-lg pointer-events-none"></div>
+            </div>
           </motion.div>
         ))}
-      </motion.div>
+      </div>
+
+      {/* Track Prizes Section */}
+      <motion.h3
+        initial={{ opacity: 0, y: -20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true }}
+        className="text-center text-3xl font-bold mb-12 tracking-wider text-amber-200"
+      >
+        TRACK PRIZES
+      </motion.h3>
+
+      <div className="flex justify-center gap-8 flex-wrap z-10 relative">
+        {trackPrizes.map((prize, index) => (
+          <motion.div
+            key={index}
+            custom={index}
+            variants={trackCardVariants}
+            initial="hidden"
+            whileInView="visible"
+            whileHover="hover"
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.2 }}
+            className="relative w-64"
+          >
+            <motion.div
+              className="relative bg-stone-800/70 backdrop-blur-sm rounded-xl p-8 border border-amber-700/30 shadow-lg transition-colors duration-200 hover:border-amber-600/50 hover:shadow-amber-900/20 h-64"
+              whileHover={{
+                boxShadow: "0 8px 30px rgba(251, 191, 36, 0.1)",
+                transition: { duration: 0.2 }
+              }}
+            >
+              <motion.div
+                className="relative mb-6 flex justify-center"
+                variants={iconVariants}
+              >
+                {prize.icon}
+              </motion.div>
+
+              <motion.h3
+                className="text-2xl font-bold text-center mb-4 text-amber-200"
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.2 }}
+              >
+                {prize.title}
+              </motion.h3>
+
+              <motion.p
+                className="text-2xl font-bold text-center text-amber-200/90"
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.2 }}
+              >
+                {prize.amount}
+              </motion.p>
+
+              {/* Decorative border */}
+              <motion.div
+                className="absolute top-1 left-1 right-1 bottom-1 border border-amber-700/10 rounded-lg pointer-events-none"
+                whileHover={{
+                  borderColor: "rgba(217, 119, 6, 0.2)",
+                  transition: { duration: 0.2 }
+                }}
+              />
+            </motion.div>
+          </motion.div>
+        ))}
+      </div>
     </div>
-  )
+  );
 }
 
-export default Prizes
+export default Prizes;

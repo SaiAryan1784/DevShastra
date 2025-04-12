@@ -12,7 +12,6 @@ import Sponsors from './components/Sponsors/Sponsors.jsx'
 import Faq from './components/Faq/Faq.jsx'
 import Prizes from './components/Prizes/Prizes.jsx'
 import Footer from './components/Footer/Footer.jsx'
-import ThemeSection from './components/Theme.jsx'
 
 const router = createBrowserRouter([
   {
@@ -26,11 +25,6 @@ const router = createBrowserRouter([
       {
         path: "/about",
         element: <About id="about" />,
-      },
-      {
-        path: '/theme.jsx',
-
-        element: <ThemeSection id="theme" />,
       },
       {
         path: "/tracks",

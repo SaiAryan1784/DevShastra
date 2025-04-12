@@ -31,3 +31,35 @@
     transform-origin: center;
     transition: opacity 0.3s ease, transform 0.3s ease;
 }
+
+/* Glowing Orbs Styles */
+.glowing-orbs {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.2;
+    pointer-events: none;
+    mix-blend-mode: screen;
+}
+
+@keyframes float-slow {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    50% {
+        transform: translate(50px, -30px) scale(1.1);
+    }
+
+    100% {
+        transform: translate(-30px, 50px) scale(0.9);
+    }
+}
