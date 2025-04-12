@@ -1,57 +1,50 @@
 import React from 'react';
-
+import { Code, Brain, Wallet, Heart, Lightbulb, BookOpen } from 'lucide-react';
 
 function ThemeSection() {
-
   const themeBoxes = [
-    { id: 1, offset: false },
-    { id: 2, offset: true },
-    { id: 3, offset: false },
-    { id: 4, offset: true }
+    { id: 1, name: "Web3", offset: false, icon: <Code size={80} /> },
+    { id: 2, name: "AI/ML", offset: true, icon: <Brain size={80} /> },
+    { id: 3, name: "Fintech", offset: false, icon: <Wallet size={80} /> },
+    { id: 4, name: "HealthCare", offset: true, icon: <Heart size={80} /> },
+    { id: 5, name: "Open Innovation", offset: false, icon: <Lightbulb size={80} /> },
+    { id: 6, name: "Edtech", offset: true, icon: <BookOpen size={80} /> }
   ];
-
+  
   return (
-    <div className="flex w-full h-screen">
-
-      <div className="w-3/4 flex justify-center items-center p-4">
-        <div className="flex justify-around items-center w-full max-w-6xl">
-
-          {themeBoxes.map((box) => (
-            <div
-              key={box.id}
-              className={`flex items-start ${box.offset ? 'mt-32' : ''}`}
-            >
-              <EmptyThemeBox />
-            </div>
-          ))}
-        </div>
-      </div>
-      {/* Navbar space (25% width) */}
-      <div className="w-1/4 h-full">
-        {/* Space for navbar */}
+    <div className="w-full h-screen flex justify-center items-center p-8">
+      <div className="flex flex-nowrap overflow-x-auto w-full max-w-7xl justify-around">
+        {themeBoxes.map((box) => (
+          <div
+            key={box.id}
+            className={`flex items-start ${box.offset ? 'mt-24' : ''} transition-transform duration-300 hover:scale-105`}
+          >
+            <ThemeBox name={box.name} icon={box.icon} />
+          </div>
+        ))}
       </div>
     </div>
   );
 }
 
-
-function EmptyThemeBox() {
+function ThemeBox({ name, icon }) {
   return (
     <div
-      className="rounded-xl w-48 h-48 flex flex-col items-center justify-center p-4 m-2 shadow-md"
+      className="rounded-xl w-56 h-56 flex flex-col items-center justify-center p-6 m-3 shadow-lg flex-shrink-0 transition-all duration-300 hover:shadow-xl"
       style={{
         backgroundColor: '#d4b996',
         borderColor: '#a68a64',
-        borderWidth: '2px',
+        borderWidth: '3px',
         borderStyle: 'solid'
       }}
     >
-
+      <div className="text-amber-800 w-32 h-32 mb-2 flex items-center justify-center">
+        {icon}
+      </div>
       <p
-        className="text-2xl font-bold"
-        style={{ color: '#e6c200' }}
+        className="text-xl font-bold text-amber-800"
       >
-        Theme
+        {name}
       </p>
     </div>
   );
