@@ -1,629 +1,623 @@
-// import { useState, useEffect } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
+import * as THREE from 'three';
+import { motion, AnimatePresence } from 'framer-motion';
 
-// export default function Timeline() {
-//   const [currentTime, setCurrentTime] = useState(new Date());
-//   const [activeEvent, setActiveEvent] = useState(null);
-//   const [isVisible, setIsVisible] = useState(false);
-//   const [animatedEvents, setAnimatedEvents] = useState([]);
+// --- Data (Hackathon Events and Themes) ---
+// (Keep the hackathonEvents and themeVariants arrays/objects as they were in your original code)
+const hackathonEvents = [
+  { id: 1, title: "The Herald's Announcement", description: "The forest whispers with excitement as the Hackathon is proclaimed. Coding druids from all corners of the realm assemble.", timestamp: "First Bell - The Awakening Day", icon: "🌳" },
+  { id: 2, title: "Ancient Knowledge Sharing", description: "Elders share forbidden knowledge of backend architecture and frontend enchantments with eager apprentices.", timestamp: "High Sun - The Awakening Day", icon: "📚" },
+  { id: 3, title: "Forest Feast of Collaboration", description: "Break bread with potential allies under the sacred trees. Form your fellowship for the trials ahead.", timestamp: "Sunset Hour - The Awakening Day", icon: "🍇" },
+  { id: 4, title: "Twilight Debugging Ritual", description: "The most challenging spells are cast when the moon is high. Debug your incantations with fellow mages.", timestamp: "Midnight - Between Days", icon: "🌙" },
+  { id: 5, title: "Unveiling of Creations", description: "Present your magical innovations to the Council of Wise Ones. The most ingenious solutions shall be immortalized.", timestamp: "Golden Hour - The Fulfillment Day", icon: "✨" },
+  { id: 6, title: "The Crystal Cave Challenge", description: "Venture deep into the crystal caves where your coding prowess will be tested. Solve algorithmic puzzles to unlock ancient wisdom.", timestamp: "Dawn - The Challenge Day", icon: "💎" },
+  { id: 7, title: "Ethereal Networking Circle", description: "Join hands in a mystical circle where industry wizards and apprentices connect. Exchange runes of contact for future collaborations.", timestamp: "Midday - The Challenge Day", icon: "🔮" },
+  { id: 8, title: "Celestial Demo Showcase", description: "Under the watchful gaze of the stars, present your magical creations to fellow enchanters and receive celestial feedback.", timestamp: "Twilight - The Challenge Day", icon: "⭐" },
+  { id: 9, title: "Grand Awards Ceremony", description: "The most powerful spells and enchantments are honored by the Ancient Council. Champions receive magical artifacts of great renown.", timestamp: "Evening Bell - The Final Day", icon: "🏆" },
+  { id: 10, title: "Moonlit Farewell Celebration", description: "As the moon rises high, celebrate your magical journey with dancing, feasting, and promises to reunite at the next gathering of coders.", timestamp: "Midnight - The Final Day", icon: "🌕" }
+];
 
-//   // Update current time every minute
-//   useEffect(() => {
-//     const timer = setInterval(() => {
-//       setCurrentTime(new Date());
-//     }, 60000);
+const themeVariants = {
+  customTheme: { name: "Ancient Forest", colors: { primary: "#AB7B43", secondary: "#89432A", background: "from-stone-950 to-stone-900", card: "bg-stone-800/70", text: "text-amber-200", timeline: "bg-gradient-to-b from-amber-700/30 via-amber-600/50 to-amber-700/30" }, fogColor: 0x331316, treeColor: 0x582422, trunkColor: 0x89432A, particleColor: 0xAB7B43 },
+  goldenSanctuary: { name: "Golden Sanctuary", colors: { primary: "#FCD34D", secondary: "#F59E0B", background: "from-amber-900 to-amber-950", card: "bg-amber-900/70", text: "text-amber-200", timeline: "bg-gradient-to-b from-amber-500/30 via-amber-400/50 to-amber-500/30" }, fogColor: 0x78350f, treeColor: 0xfcd34d, trunkColor: 0x92400e, particleColor: 0xfef3c7 }
+};
 
-//     return () => clearInterval(timer);
-//   }, []);
+// --- Helper Components ---
 
-//   // Animation on component mount
-//   useEffect(() => {
-//     setIsVisible(true);
+const MagicalGlow = ({ size = 20, color, delay = 0 }) => (
+  <motion.div
+    className="absolute rounded-full pointer-events-none" // Added pointer-events-none
+    style={{
+      background: `radial-gradient(circle, ${color}20 0%, ${color}00 70%)`,
+      width: `${size}rem`,
+      height: `${size}rem`,
+      filter: "blur(8px)",
+      // Center the glow regardless of parent positioning context
+      left: '50%',
+      top: '50%',
+      transform: "translate(-50%, -50%)"
+    }}
+    animate={{
+      scale: [1, 1.2, 1],
+      opacity: [0.4, 0.7, 0.4]
+    }}
+    transition={{
+      duration: 3,
+      repeat: Infinity,
+      delay
+    }}
+  />
+);
 
-//     // Staggered animation for events
-//     const eventIds = events.map(event => event.id);
-//     const animationTimer = setInterval(() => {
-//       setAnimatedEvents(prev => {
-//         if (prev.length >= eventIds.length) {
-//           clearInterval(animationTimer);
-//           return prev;
-//         }
-//         return [...prev, eventIds[prev.length]];
-//       });
-//     }, 200);
+const MagicalParticles = ({ color = "#AB7B43" }) => {
+  const [mousePos, setMousePos] = useState({ x: -100, y: -100 }); // Start off-screen
+  const [particles, setParticles] = useState([]);
+  const particleColor = color || "#AB7B43"; // Ensure color has a default
 
-//     return () => clearInterval(animationTimer);
-//   }, []);
-
-//   // Sample hackathon events
-//   const events = [
-//     {
-//       id: 1,
-//       title: "Registration Opens",
-//       date: new Date("2025-04-26T09:00:00"),
-//       icon: "📝",
-//       position: "left"
-//     },
-//     {
-//       id: 2,
-//       title: "Opening Ceremony",
-//       date: new Date("2025-04-26T10:00:00"),
-//       icon: "🎬",
-//       position: "right"
-//     },
-//     {
-//       id: 3,
-//       title: "Hacking Begins",
-//       date: new Date("2025-04-26T11:00:00"),
-//       icon: "💻",
-//       position: "left"
-//     },
-//     {
-//       id: 4,
-//       title: "Midpoint Check-in",
-//       date: new Date("2025-04-27T14:00:00"),
-//       icon: "🔄",
-//       position: "right"
-//     },
-//     {
-//       id: 5,
-//       title: "Hacking Ends",
-//       date: new Date("2025-04-28T09:00:00"),
-//       icon: "🏁",
-//       position: "left"
-//     },
-//     {
-//       id: 6,
-//       title: "Judging & Presentations",
-//       date: new Date("2025-04-28T10:00:00"),
-//       icon: "🏆",
-//       position: "right"
-//     },
-//     {
-//       id: 7,
-//       title: "Awards Ceremony",
-//       date: new Date("2025-04-28T16:00:00"),
-//       icon: "🎉",
-//       position: "left"
-//     }
-//   ];
-
-//   // Format date for display
-//   const formatDate = (date) => {
-//     return date.toLocaleString('en-US', {
-//       weekday: 'short',
-//       month: 'short',
-//       day: 'numeric',
-//       hour: '2-digit',
-//       minute: '2-digit'
-//     });
-//   };
-
-//   // Shorter date format similar to the image example
-//   const shortFormatDate = (date) => {
-//     return `${date.toLocaleString('en-US', {
-//       weekday: 'short'
-//     })}, ${date.toLocaleString('en-US', {
-//       month: 'short'
-//     })} ${date.getDate()}, ${date.toLocaleString('en-US', {
-//       hour: '2-digit',
-//       minute: '2-digit'
-//     })}`;
-//   };
-
-//   // Determine if event is in the past, current, or future
-//   const getEventStatus = (eventDate) => {
-//     if (eventDate < currentTime) return "past";
-
-//     // Find next event
-//     const upcomingEvents = events.filter(e => e.date > currentTime);
-//     if (upcomingEvents.length > 0 && eventDate.getTime() === upcomingEvents[0].date.getTime()) {
-//       return "current";
-//     }
-
-//     return "future";
-//   };
-
-//   return (
-//     <div 
-//       className={`max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-lg transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
-//     >
-//       <h2 
-//         className={`text-2xl font-bold mb-8 text-center transition-all duration-1000 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}
-//         style={{ color: "#331316" }}
-//       >
-//         Hackathon Timeline
-//       </h2>
-
-//       {/* Current time indicator */}
-//       <div 
-//         className={`mb-10 text-center p-3 rounded-lg transition-all duration-700 delay-300 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}
-//         style={{ backgroundColor: "#AB7B43", color: "white" }}
-//       >
-//         <p className="font-medium">Current Time: {formatDate(currentTime)}</p>
-//       </div>
-
-//       {/* Timeline container */}
-//       <div className="relative flex justify-center">
-//         <div className="w-full max-w-3xl relative">
-//           {/* Vertical line with animation */}
-//           <div 
-//             className={`absolute left-1/2 top-0 bottom-0 w-1 bg-gray-300 transition-all duration-1500 origin-top ${isVisible ? 'scale-y-100' : 'scale-y-0'}`}
-//             style={{ backgroundColor: "#D1D5DB" }}
-//           ></div>
-
-//           {/* Events */}
-//           <div className="space-y-16">
-//             {events.map((event) => {
-//               const status = getEventStatus(event.date);
-//               const isActive = activeEvent === event.id;
-//               const isAnimated = animatedEvents.includes(event.id);
-//               const isLeft = event.position === "left";
-
-//               // Define colors based on status
-//               let dotColor, bgColor, textColor, borderColor, statusText;
-
-//               switch(status) {
-//                 case "past":
-//                   dotColor = "#331316";
-//                   bgColor = "#F3F4F6";
-//                   textColor = "#582422";
-//                   borderColor = "#582422";
-//                   statusText = "Completed";
-//                   break;
-//                 case "current":
-//                   dotColor = "#AB7B43";
-//                   bgColor = "#FEFCE8";
-//                   textColor = "#89432A";
-//                   borderColor = "#AB7B43";
-//                   statusText = "In Progress";
-//                   break;
-//                 case "future":
-//                   dotColor = "#89432A";
-//                   bgColor = "#FFFFFF";
-//                   textColor = "#331316";
-//                   borderColor = "#89432A";
-//                   statusText = "Upcoming";
-//                   break;
-//               }
-
-//               // Animation properties based on position
-//               const animationDirection = isLeft ? '-translate-x-10' : 'translate-x-10';
-
-//               return (
-//                 <div 
-//                   key={event.id} 
-//                   className={`relative flex transition-all duration-500 ${isAnimated ? 'opacity-100 translate-x-0' : `opacity-0 ${animationDirection}`}`}
-//                 >
-//                   {isLeft ? (
-//                     // Left side event
-//                     <div className="w-1/2 flex justify-end pr-8">
-//                       <div 
-//                         className={`max-w-md p-5 rounded-lg transition-all duration-300 ${isActive ? 'scale-105' : 'scale-100'}`}
-//                         style={{ 
-//                           backgroundColor: bgColor,
-//                           borderRight: `4px solid ${borderColor}`,
-//                           borderTopRightRadius: '0',
-//                           borderBottomRightRadius: '0',
-//                           boxShadow: isActive ? '0 4px 6px -1px rgba(0, 0, 0, 0.1)' : 'none'
-//                         }}
-//                         onMouseEnter={() => setActiveEvent(event.id)}
-//                         onMouseLeave={() => setActiveEvent(null)}
-//                       >
-//                         <div className="flex items-center mb-2">
-//                           <span 
-//                             className={`text-2xl mr-3 transition-transform duration-300 ${isActive ? 'scale-125 rotate-12' : ''}`}
-//                             style={{ color: textColor }}
-//                           >
-//                             {event.icon}
-//                           </span>
-//                           <h3 
-//                             className="font-bold text-xl"
-//                             style={{ color: textColor }}
-//                           >
-//                             {event.title}
-//                           </h3>
-//                         </div>
-
-//                         <div className="text-sm font-medium mb-2" style={{ color: textColor }}>
-//                           {shortFormatDate(event.date)}
-//                         </div>
-
-//                         <div className="text-sm" style={{ color: status === "past" ? "#6B7280" : textColor }}>
-//                           {statusText}
-//                         </div>
-//                       </div>
-//                     </div>
-//                   ) : (
-//                     // Right side event
-//                     <div className="w-1/2 flex justify-start pl-8 ml-auto">
-//                       <div 
-//                         className={`max-w-md p-5 rounded-lg transition-all duration-300 ${isActive ? 'scale-105' : 'scale-100'}`}
-//                         style={{ 
-//                           backgroundColor: bgColor,
-//                           borderLeft: `4px solid ${borderColor}`,
-//                           borderTopLeftRadius: '0',
-//                           borderBottomLeftRadius: '0',
-//                           boxShadow: isActive ? '0 4px 6px -1px rgba(0, 0, 0, 0.1)' : 'none'
-//                         }}
-//                         onMouseEnter={() => setActiveEvent(event.id)}
-//                         onMouseLeave={() => setActiveEvent(null)}
-//                       >
-//                         <div className="flex items-center mb-2">
-//                           <span 
-//                             className={`text-2xl mr-3 transition-transform duration-300 ${isActive ? 'scale-125 rotate-12' : ''}`}
-//                             style={{ color: textColor }}
-//                           >
-//                             {event.icon}
-//                           </span>
-//                           <h3 
-//                             className="font-bold text-xl"
-//                             style={{ color: textColor }}
-//                           >
-//                             {event.title}
-//                           </h3>
-//                         </div>
-
-//                         <div className="text-sm font-medium mb-2" style={{ color: textColor }}>
-//                           {shortFormatDate(event.date)}
-//                         </div>
-
-//                         <div className="text-sm" style={{ color: status === "past" ? "#6B7280" : textColor }}>
-//                           {statusText}
-//                         </div>
-//                       </div>
-//                     </div>
-//                   )}
-
-//                   {/* Timeline dot */}
-//                   <div 
-//                     className="absolute left-1/2 transform -translate-x-1/2"
-//                     style={{ top: '20px' }}
-//                   >
-//                     <div 
-//                       className={`w-4 h-4 rounded-full transition-all duration-300 ${status === "current" ? "animate-pulse" : ""} ${isActive ? "scale-150" : "scale-100"}`}
-//                       style={{ 
-//                         backgroundColor: dotColor,
-//                         border: `2px solid ${dotColor}`
-//                       }}
-//                     ></div>
-//                   </div>
-//                 </div>
-//               );
-//             })}
-//           </div>
-//         </div>
-//       </div>
-
-//       {/* Mobile view indicator */}
-//       <div 
-//         className={`mt-12 text-center p-2 rounded-lg bg-gray-100 transition-all duration-700 delay-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}
-//       >
-//         <p className="text-sm text-gray-600">
-//           <span className="md:hidden">View in landscape for best experience</span>
-//           <span className="hidden md:inline">Viewing on larger screen</span>
-//         </p>
-//       </div>
-//     </div>
-//   );
-// }
-
-
-import { useState, useEffect } from 'react';
-
-export default function Timeline() {
-  const [currentTime, setCurrentTime] = useState(new Date());
-  const [activeEvent, setActiveEvent] = useState(null);
-  const [isVisible, setIsVisible] = useState(false);
-  const [animatedEvents, setAnimatedEvents] = useState([]);
-
-  // Update current time every minute
   useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentTime(new Date());
-    }, 60000);
+    const handleMouseMove = (e) => {
+      setMousePos({ x: e.clientX, y: e.clientY });
 
-    return () => clearInterval(timer);
-  }, []);
+      if (Math.random() > 0.7) { // Reduced frequency slightly
+        const newParticle = {
+          id: Date.now() + Math.random(), // Add random to avoid collision
+          x: e.clientX + (Math.random() - 0.5) * 10, // Slight offset
+          y: e.clientY + (Math.random() - 0.5) * 10,
+          size: Math.random() * 6 + 2, // Slightly smaller max size
+          lifetime: Math.random() * 1500 + 500, // Shorter max lifetime
+          createdAt: Date.now()
+        };
+        setParticles(prev => [...prev.slice(-50), newParticle]); // Limit particle array size
+      }
+    };
 
-  // Animation on component mount
-  useEffect(() => {
-    setIsVisible(true);
+    const cleanupInterval = setInterval(() => {
+      const now = Date.now();
+      setParticles(prev => prev.filter(p => now - p.createdAt < p.lifetime));
+    }, 1000); // Increased cleanup interval
 
-    // Staggered animation for events
-    const eventIds = events.map(event => event.id);
-    const animationTimer = setInterval(() => {
-      setAnimatedEvents(prev => {
-        if (prev.length >= eventIds.length) {
-          clearInterval(animationTimer);
-          return prev;
-        }
-        return [...prev, eventIds[prev.length]];
-      });
-    }, 200);
-
-    return () => clearInterval(animationTimer);
-  }, []);
-
-  // Sample hackathon events
-  const events = [
-    {
-      id: 1,
-      title: "Registration Opens",
-      date: new Date("2025-04-26T09:00:00"),
-      icon: "📝",
-      position: "left"
-    },
-    {
-      id: 2,
-      title: "Opening Ceremony",
-      date: new Date("2025-04-26T10:00:00"),
-      icon: "🎬",
-      position: "right"
-    },
-    {
-      id: 3,
-      title: "Hacking Begins",
-      date: new Date("2025-04-26T11:00:00"),
-      icon: "💻",
-      position: "left"
-    },
-    {
-      id: 4,
-      title: "Midpoint Check-in",
-      date: new Date("2025-04-27T14:00:00"),
-      icon: "🔄",
-      position: "right"
-    },
-    {
-      id: 5,
-      title: "Hacking Ends",
-      date: new Date("2025-04-28T09:00:00"),
-      icon: "🏁",
-      position: "left"
-    },
-    {
-      id: 6,
-      title: "Judging & Presentations",
-      date: new Date("2025-04-28T10:00:00"),
-      icon: "🏆",
-      position: "right"
-    },
-    {
-      id: 7,
-      title: "Awards Ceremony",
-      date: new Date("2025-04-28T16:00:00"),
-      icon: "🎉",
-      position: "left"
-    }
-  ];
-
-  // Format date for display
-  const formatDate = (date) => {
-    return date.toLocaleString('en-US', {
-      weekday: 'short',
-      month: 'short',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
-    });
-  };
-
-  // Shorter date format similar to the image example
-  const shortFormatDate = (date) => {
-    return `${date.toLocaleString('en-US', {
-      weekday: 'short'
-    })}, ${date.toLocaleString('en-US', {
-      month: 'short'
-    })} ${date.getDate()}, ${date.toLocaleString('en-US', {
-      hour: '2-digit',
-      minute: '2-digit'
-    })}`;
-  };
-
-  // Determine if event is in the past, current, or future
-  const getEventStatus = (eventDate) => {
-    if (eventDate < currentTime) return "past";
-
-    // Find next event
-    const upcomingEvents = events.filter(e => e.date > currentTime);
-    if (upcomingEvents.length > 0 && eventDate.getTime() === upcomingEvents[0].date.getTime()) {
-      return "current";
-    }
-
-    return "future";
-  };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      clearInterval(cleanupInterval);
+    };
+  }, []); // Empty dependency array is correct here
 
   return (
-    <div
-      className={`max-w-4xl mx-auto p-6 rounded-lg shadow-lg transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
-      style={{
-        background: 'rgba(255, 255, 255, 0.2)',
-        backdropFilter: 'blur(1px)',
-        border: '2px solid rgb(255, 255, 255)'
-      }}
-    >
-      <h2
-        className={`text-2xl font-bold mb-8 text-center transition-all duration-1000 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}
-        style={{ color: "#331316" }}
-      >
-        Hackathon Timeline
-      </h2>
-
-      {/* Current time indicator */}
-      <div
-        className={`mb-10 text-center p-3 rounded-lg transition-all duration-700 delay-300 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}
+    <div className="fixed inset-0 pointer-events-none z-30 overflow-hidden"> {/* Added overflow-hidden */}
+      {/* Main cursor glow */}
+      <motion.div
+        className="absolute rounded-full"
         style={{
-          backgroundColor: "rgba(171, 123, 67, 0.3)", // Glass effect with AB7B43
-          color: "white",
-          backdropFilter: 'blur(5px)' // Add a subtle blur to the background
+          background: `radial-gradient(circle, ${particleColor}30 0%, ${particleColor}00 70%)`, // Adjusted opacity
+          width: "80px", // Slightly smaller
+          height: "80px",
+          filter: "blur(12px)", // Slightly more blur
+          left: mousePos.x,
+          top: mousePos.y,
+          transform: "translate(-50%, -50%)"
         }}
-      >
-        <p className="font-medium">Current Time: {formatDate(currentTime)}</p>
+        animate={{ scale: [0.9, 1.1, 0.9] }}
+        transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+      />
+
+      {/* Trailing particles */}
+      <AnimatePresence>
+        {particles.map(particle => {
+           const progress = Math.min(1, (Date.now() - particle.createdAt) / particle.lifetime); // Ensure progress doesn't exceed 1
+          return (
+            <motion.div
+              key={particle.id}
+              className="absolute rounded-full"
+              style={{
+                background: particleColor,
+                width: particle.size,
+                height: particle.size,
+                left: particle.x,
+                top: particle.y,
+                transform: "translate(-50%, -50%)"
+              }}
+              initial={{ opacity: 0.8, y: 0, x: 0 }}
+              animate={{
+                y: -40 - Math.random() * 30, // Increased upward motion
+                x: (Math.random() - 0.5) * 50, // Increased sideways motion
+                opacity: 0,
+                scale: 0.5 // Shrink as they fade
+              }}
+              transition={{
+                duration: particle.lifetime / 1000,
+                ease: "easeOut"
+              }}
+              exit={{ opacity: 0 }} // Ensure exit animation completes
+            />
+          );
+        })}
+      </AnimatePresence>
+    </div>
+  );
+};
+
+
+// --- Timeline Event Item Component ---
+const TimelineEventItem = React.memo(({ event, index, theme, isActive, isHovered, setActiveEvent, setHoveredEvent }) => {
+  const { colors } = theme;
+  // On medium screens and up, use alternating layout. Otherwise, stack vertically.
+  // md corresponds to 768px by default in Tailwind
+  const isAlternatingLayout = window.innerWidth >= 768; // Check screen width for layout logic
+  const isEven = index % 2 === 0;
+
+  // Base classes
+  const containerClasses = `relative flex items-start md:items-center mb-16 md:mb-24 last:mb-8`;
+  // Responsive layout classes
+  const layoutClasses = isAlternatingLayout
+    ? (isEven ? 'md:flex-row' : 'md:flex-row-reverse')
+    : 'flex-col'; // Stack vertically on small screens
+
+  return (
+    <motion.div
+      key={event.id}
+      className={`${containerClasses} ${layoutClasses}`}
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.3 }} // Trigger animation sooner
+      transition={{ duration: 0.6, delay: index * 0.05 }} // Faster animation
+    >
+      {/* --- Content Card --- */}
+      {/* Takes full width on mobile, 5/12 on desktop */}
+      <div className={`w-full ${isAlternatingLayout ? (isEven ? 'md:w-5/12 md:pr-8' : 'md:w-5/12 md:pl-8') : 'mb-4 pl-12 pr-4'}`}> {/* Adjusted padding for mobile */}
+        <motion.div
+          className={`relative ${colors.card} backdrop-blur-sm border transition-all duration-300 rounded-lg md:rounded-xl p-4 md:p-5 shadow-lg ${isActive || isHovered ? `border-[${colors.primary}]/70` : `border-[${colors.primary}]/30`}`} // Using actual color variable
+           style={{
+            '--glow-color': colors.primary, // CSS variable for boxShadow
+            borderColor: isActive || isHovered ? `${colors.primary}99` : `${colors.primary}4D`, // Dynamic border color
+           }}
+           whileHover={isAlternatingLayout ? { // Only apply hover scale on larger screens if desired
+             scale: 1.03,
+             boxShadow: `0 0 20px 5px var(--glow-color)33` // Use CSS var, softer glow
+           } : {}}
+          onClick={() => setActiveEvent(isActive ? null : event.id)}
+          onMouseEnter={() => setHoveredEvent(event.id)}
+          onMouseLeave={() => setHoveredEvent(null)}
+        >
+          {/* Icon and title */}
+          <div className="flex items-center gap-3 mb-2 md:mb-3">
+             <div className={`w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full text-xl md:text-2xl transition-all duration-300 ${isActive || isHovered ? `bg-[${colors.primary}]/40` : `bg-[${colors.secondary}]/30`}`}
+                  style={{ backgroundColor: isActive || isHovered ? `${colors.primary}66` : `${colors.secondary}4D` }}>
+              {event.icon}
+            </div>
+            <h3 className={`text-lg md:text-2xl font-bold ${colors.text}`}>{event.title}</h3>
+          </div>
+
+          {/* Description */}
+          <p className={`${colors.text.replace('text-', 'text-opacity-')}90 text-sm md:text-base mb-2 md:mb-3`}>{event.description}</p> {/* Responsive text size */}
+
+          {/* Timestamp */}
+          <div className={`text-xs md:text-sm ${colors.text.replace('text-', 'text-opacity-')}70 italic`}> {/* Responsive text size */}
+            {event.timestamp}
+          </div>
+
+          {/* Decorative elements (subtle border) */}
+           <div className={`absolute top-1 left-1 right-1 bottom-1 border border-[${colors.primary}]/10 rounded-md md:rounded-lg pointer-events-none`}
+                 style={{ borderColor: `${colors.primary}1A` }}/>
+
+           {/* Shimmer effect */}
+          {(isActive || isHovered) && (
+            <motion.div
+              className="absolute inset-0 rounded-lg md:rounded-xl overflow-hidden pointer-events-none" // Added pointer-events-none
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-amber-700/10 to-transparent opacity-50" style={{ // Generic color, consider making dynamic
+                backgroundSize: "200% 100%",
+                animation: "shimmerEffect 2.5s infinite linear"
+              }} />
+            </motion.div>
+          )}
+        </motion.div>
       </div>
 
-      {/* Timeline container */}
-      <div className="relative flex justify-center">
-        <div className="w-full max-w-3xl relative">
-          {/* Vertical line with animation */}
-          <div
-            className={`absolute left-1/2 top-0 bottom-0 w-1 bg-gray-300 transition-all duration-1500 origin-top ${isVisible ? 'scale-y-100' : 'scale-y-0'}`}
-            style={{ backgroundColor: "#D1D5DB" }}
-          ></div>
+       {/* --- Center Node & Connecting Line --- */}
+       {/* Positioned absolutely on mobile, relatively on desktop */}
+      <div className={`flex justify-center ${isAlternatingLayout ? 'w-2/12 relative' : 'absolute left-4 top-2 h-full w-10'}`}> {/* Positioning changes */}
+        <motion.div
+          className={`w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center z-10 cursor-pointer transition-all duration-300 ${isActive || isHovered ? `bg-[${colors.primary}]` : `bg-[${colors.secondary}]`}`}
+           style={{ backgroundColor: isActive || isHovered ? colors.primary : colors.secondary }}
+          whileHover={{ scale: 1.1 }}
+          onClick={() => setActiveEvent(isActive ? null : event.id)}
+          onMouseEnter={() => setHoveredEvent(event.id)}
+          onMouseLeave={() => setHoveredEvent(null)}
+        >
+           <span className={`text-sm md:text-lg font-bold ${isActive || isHovered ? 'text-black/80' : colors.text.replace('text-', 'text-opacity-') + '90'}`}> {/* Contrast for active */}
+            {index + 1}
+          </span>
+        </motion.div>
 
-          {/* Events */}
-          <div className="space-y-16">
-            {events.map((event) => {
-              const status = getEventStatus(event.date);
-              const isActive = activeEvent === event.id;
-              const isAnimated = animatedEvents.includes(event.id);
-              const isLeft = event.position === "left";
+         {/* Connection line to center (Desktop) */}
+         {isAlternatingLayout && (
+            <div
+                className={`absolute top-1/2 ${isEven ? 'left-0 right-1/2' : 'left-1/2 right-0'} h-0.5 bg-[${colors.primary}]/50 transform -translate-y-1/2`}
+                style={{ backgroundColor: `${colors.primary}80` }}
+            />
+        )}
+         {/* Connection line to card (Mobile) */}
+         {!isAlternatingLayout && (
+            <div
+                className={`absolute top-5 left-1/2 w-6 h-0.5 bg-[${colors.primary}]/50 transform -translate-x-1/2`} // Horizontal line from node to card area
+                style={{ backgroundColor: `${colors.primary}80` }}
+            />
+        )}
+      </div>
 
-              // Define colors based on status
-              let dotColor, bgColor, textColor, borderColor, statusText;
+      {/* Empty space for alternating layout (Desktop only) */}
+      {isAlternatingLayout && <div className="w-5/12" />}
 
-              switch(status) {
-                case "past":
-                  dotColor = "#331316";
-                  bgColor = "rgba(243, 244, 246, 0.8)"; // Glass effect
-                  textColor = "#582422";
-                  borderColor = "#582422";
-                  statusText = "Completed";
-                  break;
-                case "current":
-                  dotColor = "#AB7B43";
-                  bgColor = "rgba(254, 252, 232, 0.8)"; // Glass effect
-                  textColor = "#89432A";
-                  borderColor = "#AB7B43";
-                  statusText = "In Progress";
-                  break;
-                case "future":
-                  dotColor = "#89432A";
-                  bgColor = "rgba(255, 255, 255, 0.8)"; // Glass effect
-                  textColor = "#331316";
-                  borderColor = "#89432A";
-                  statusText = "Upcoming";
-                  break;
-              }
+    </motion.div>
+  );
+});
+TimelineEventItem.displayName = 'TimelineEventItem'; // Add display name for React DevTools
 
-              // Animation properties based on position
-              const animationDirection = isLeft ? '-translate-x-10' : 'translate-x-10';
 
-              return (
-                <div
-                  key={event.id}
-                  className={`relative flex transition-all duration-500 ${isAnimated ? 'opacity-100 translate-x-0' : `opacity-0 ${animationDirection}`}`}
-                >
-                  {isLeft ? (
-                    // Left side event
-                    <div className="w-1/2 flex justify-end pr-8">
-                      <div
-                        className={`max-w-md p-5 rounded-lg transition-all duration-300 ${isActive ? 'scale-105' : 'scale-100'}`}
-                        style={{
-                          backgroundColor: bgColor,
-                          borderRight: `4px solid ${borderColor}`,
-                          borderTopRightRadius: '0',
-                          borderBottomRightRadius: '0',
-                          boxShadow: isActive ? '0 4px 6px -1px rgba(0, 0, 0, 0.1)' : 'none',
-                          backdropFilter: 'blur(5px)' // Glass effect
-                        }}
-                        onMouseEnter={() => setActiveEvent(event.id)}
-                        onMouseLeave={() => setActiveEvent(null)}
-                      >
-                        <div className="flex items-center mb-2">
-                          <span
-                            className={`text-2xl mr-3 transition-transform duration-300 ${isActive ? 'scale-125 rotate-12' : ''}`}
-                            style={{ color: textColor }}
-                          >
-                            {event.icon}
-                          </span>
-                          <h3
-                            className="font-bold text-xl"
-                            style={{ color: textColor }}
-                          >
-                            {event.title}
-                          </h3>
-                        </div>
+// --- Main Timeline Component ---
+const Timeline = () => {
+  const canvasRef = useRef(null);
+  const sceneRef = useRef(null); // Ref to hold scene objects
+  const rendererRef = useRef(null);
+  const cameraRef = useRef(null);
+  const treeGroupRef = useRef(null);
+  const particleSystemRef = useRef(null);
 
-                        <div className="text-sm font-medium mb-2" style={{ color: textColor }}>
-                          {shortFormatDate(event.date)}
-                        </div>
+  const [activeEvent, setActiveEvent] = useState(null);
+  const [hoveredEvent, setHoveredEvent] = useState(null);
+  const [currentTheme, setCurrentTheme] = useState("customTheme"); // Default theme
+  const theme = themeVariants[currentTheme];
 
-                        <div className="text-sm" style={{ color: status === "past" ? "#6B7280" : textColor }}>
-                          {statusText}
-                        </div>
-                      </div>
-                    </div>
-                  ) : (
-                    // Right side event
-                    <div className="w-1/2 flex justify-start pl-8 ml-auto">
-                      <div
-                        className={`max-w-md p-5 rounded-lg transition-all duration-300 ${isActive ? 'scale-105' : 'scale-100'}`}
-                        style={{
-                          backgroundColor: bgColor,
-                          borderLeft: `4px solid ${borderColor}`,
-                          borderTopLeftRadius: '0',
-                          borderBottomLeftRadius: '0',
-                          boxShadow: isActive ? '0 4px 6px -1px rgba(0, 0, 0, 0.1)' : 'none',
-                          backdropFilter: 'blur(5px)' // Glass effect
-                        }}
-                        onMouseEnter={() => setActiveEvent(event.id)}
-                        onMouseLeave={() => setActiveEvent(null)}
-                      >
-                        <div className="flex items-center mb-2">
-                          <span
-                            className={`text-2xl mr-3 transition-transform duration-300 ${isActive ? 'scale-125 rotate-12' : ''}`}
-                            style={{ color: textColor }}
-                          >
-                            {event.icon}
-                          </span>
-                          <h3
-                            className="font-bold text-xl"
-                            style={{ color: textColor }}
-                          >
-                            {event.title}
-                          </h3>
-                        </div>
+  // Debounced resize handler
+  const debounce = (func, wait) => {
+    let timeout;
+    return function executedFunction(...args) {
+      const later = () => {
+        clearTimeout(timeout);
+        func(...args);
+      };
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+    };
+  };
 
-                        <div className="text-sm font-medium mb-2" style={{ color: textColor }}>
-                          {shortFormatDate(event.date)}
-                        </div>
 
-                        <div className="text-sm" style={{ color: status === "past" ? "#6B7280" : textColor }}>
-                          {statusText}
-                        </div>
-                      </div>
-                    </div>
-                  )}
+  // Setup Three.js Scene
+  useEffect(() => {
+    if (!canvasRef.current) return;
 
-                  {/* Timeline dot */}
-                  <div
-                    className="absolute left-1/2 transform -translate-x-1/2"
-                    style={{ top: '20px' }}
-                  >
-                    <div
-                      className={`w-4 h-4 rounded-full transition-all duration-300 ${status === "current" ? "animate-pulse" : ""} ${isActive ? "scale-150" : "scale-100"}`}
-                      style={{
-                        backgroundColor: dotColor,
-                        border: `2px solid ${dotColor}`
-                      }}
-                    ></div>
-                  </div>
+    // Initialize scene, camera, renderer if they don't exist
+    if (!sceneRef.current) {
+        sceneRef.current = new THREE.Scene();
+        cameraRef.current = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        cameraRef.current.position.set(0, 5, 18); // Adjusted initial camera position
+        rendererRef.current = new THREE.WebGLRenderer({ canvas: canvasRef.current, alpha: true, antialias: true }); // Added antialias
+        rendererRef.current.setSize(window.innerWidth, window.innerHeight);
+        rendererRef.current.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // Pixel ratio optimization
+
+        // Lights (create only once)
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.2); // Base ambient light
+        sceneRef.current.add(ambientLight);
+        sceneRef.current.ambientLight = ambientLight; // Store reference
+
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 0.6); // Base directional light
+        directionalLight.position.set(5, 15, 10);
+        sceneRef.current.add(directionalLight);
+        sceneRef.current.directionalLight = directionalLight; // Store reference
+    }
+
+    const scene = sceneRef.current;
+    const camera = cameraRef.current;
+    const renderer = rendererRef.current;
+
+
+    // --- Theme-dependent updates ---
+    scene.fog = new THREE.FogExp2(theme.fogColor, 0.02); // Adjusted fog density
+
+    // Update light colors based on theme
+    scene.ambientLight.color.setHex(theme.fogColor); // Ambient light matches fog base
+    scene.ambientLight.intensity = 0.4;
+    scene.directionalLight.color.setHex(theme.particleColor); // Directional light matches particle highlights
+    scene.directionalLight.intensity = 0.8;
+
+     // --- Ground ---
+     if (!scene.ground) {
+        const groundGeometry = new THREE.PlaneGeometry(200, 200); // Larger ground
+        const groundMaterial = new THREE.MeshStandardMaterial({ color: theme.fogColor, roughness: 0.9 });
+        const ground = new THREE.Mesh(groundGeometry, groundMaterial);
+        ground.rotation.x = -Math.PI / 2;
+        ground.position.y = -2.5;
+        scene.add(ground);
+        scene.ground = ground;
+     } else {
+         scene.ground.material.color.setHex(theme.fogColor); // Update ground color
+         scene.ground.material.needsUpdate = true;
+     }
+
+    // --- Trees ---
+    if (treeGroupRef.current) {
+      scene.remove(treeGroupRef.current); // Remove old trees before adding new ones
+    }
+    treeGroupRef.current = new THREE.Group();
+    scene.add(treeGroupRef.current);
+
+    // Cached geometries and materials for trees
+    const trunkGeometry = new THREE.CylinderGeometry(0.4, 0.6, 5, 6); // Simplified geometry
+    const foliageGeometry = new THREE.ConeGeometry(1.8, 3.5, 6); // Simplified geometry
+    const trunkMaterial = new THREE.MeshStandardMaterial({ color: theme.trunkColor });
+    const foliageMaterial = new THREE.MeshStandardMaterial({ color: theme.treeColor, flatShading: true });
+
+    const createTree = (x, z) => {
+      const trunk = new THREE.Mesh(trunkGeometry, trunkMaterial);
+      trunk.position.set(x, 0, z); // Y position adjusted later by ground level
+
+      const foliage1 = new THREE.Mesh(foliageGeometry, foliageMaterial);
+      foliage1.position.y = 3;
+      trunk.add(foliage1);
+
+      const foliage2 = new THREE.Mesh(foliageGeometry, foliageMaterial);
+      foliage2.position.y = 4.8; // Adjusted position
+      foliage2.scale.set(0.7, 0.7, 0.7); // Adjusted scale
+      trunk.add(foliage2);
+
+      trunk.position.y = -2.5; // Place base on ground level
+      return trunk;
+    };
+
+     // Dynamic tree count based on screen size (example)
+     const isMobile = window.innerWidth < 768;
+     const treeCount = isMobile ? 60 : 120; // Reduced count significantly
+     const maxRadius = isMobile ? 30 : 45;
+
+     // Create trees in rings + random scatter
+     for (let i = 0; i < treeCount; i++) {
+        const angle = Math.random() * Math.PI * 2;
+        const radius = 8 + Math.random() * (maxRadius - 8); // Spread from center outwards
+        const x = Math.cos(angle) * radius;
+        const z = Math.sin(angle) * radius - 10; // Move forest slightly back
+
+        const tree = createTree(x, z);
+        tree.scale.set(
+          0.6 + Math.random() * 1.0,
+          0.8 + Math.random() * 0.8,
+          0.6 + Math.random() * 1.0
+        );
+        tree.rotation.y = Math.random() * Math.PI * 2;
+        treeGroupRef.current.add(tree);
+     }
+
+     // --- Particles ---
+     if (particleSystemRef.current) {
+        scene.remove(particleSystemRef.current); // Remove old particles
+        particleSystemRef.current.geometry.dispose();
+        particleSystemRef.current.material.dispose();
+     }
+
+     const particleCount = isMobile ? 300 : 600; // Reduced particle count
+     const particleGeometry = new THREE.BufferGeometry();
+     const positions = new Float32Array(particleCount * 3);
+     const particleMaxRadius = isMobile ? 35 : 50;
+
+     for (let i = 0; i < particleCount; i++) {
+        const i3 = i * 3;
+        const radius = 5 + Math.random() * particleMaxRadius;
+        const angle = Math.random() * Math.PI * 2;
+        positions[i3] = Math.cos(angle) * radius;
+        positions[i3 + 1] = Math.random() * 12 - 1; // Height range
+        positions[i3 + 2] = Math.sin(angle) * radius - 15; // Z offset
+     }
+     particleGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+     const particleMaterial = new THREE.PointsMaterial({
+        color: theme.particleColor,
+        size: isMobile ? 0.3 : 0.4, // Smaller particles on mobile
+        sizeAttenuation: true,
+        transparent: true,
+        opacity: 0.7,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false // Important for blending
+     });
+
+     particleSystemRef.current = new THREE.Points(particleGeometry, particleMaterial);
+     scene.add(particleSystemRef.current);
+
+
+     // --- Animation Loop ---
+     let animationFrameId;
+     const animate = () => {
+       animationFrameId = requestAnimationFrame(animate);
+       const elapsedTime = Date.now() * 0.0001; // Slower base speed
+
+       // Tree sway
+       treeGroupRef.current?.children.forEach((tree, i) => {
+         tree.rotation.x = Math.sin(elapsedTime * 3 + i * 0.5) * 0.015;
+         tree.rotation.z = Math.cos(elapsedTime * 5 + i * 0.3) * 0.015;
+       });
+
+       // Particle movement
+       if (particleSystemRef.current) {
+         const posAttribute = particleSystemRef.current.geometry.attributes.position;
+         for (let i = 0; i < particleCount; i++) {
+           const i3 = i * 3;
+           // Gentle floating based on index and time
+           posAttribute.array[i3 + 1] += Math.sin(elapsedTime * 5 + i) * 0.005; // Y movement
+           // Keep particles within a vertical range
+           if (posAttribute.array[i3+1] > 12) posAttribute.array[i3+1] = -1;
+           if (posAttribute.array[i3+1] < -1) posAttribute.array[i3+1] = 12;
+         }
+         posAttribute.needsUpdate = true;
+       }
+
+        // Smooth camera movement towards center (optional)
+        // camera.position.x += (-camera.position.x) * 0.01;
+        // camera.lookAt(scene.position);
+
+       renderer.render(scene, camera);
+     };
+     animate();
+
+     // --- Resize Handling ---
+     const handleResize = () => {
+        if (camera && renderer) {
+           camera.aspect = window.innerWidth / window.innerHeight;
+           camera.updateProjectionMatrix();
+           renderer.setSize(window.innerWidth, window.innerHeight);
+           renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // Update pixel ratio on resize
+
+           // Adjustments for mobile aspect ratio (optional)
+           if (window.innerWidth / window.innerHeight < 1) { // Portrait
+               camera.fov = 85; // Wider FOV
+               // camera.position.z = 20; // Move slightly further back
+           } else { // Landscape
+               camera.fov = 75;
+               // camera.position.z = 18;
+           }
+           camera.updateProjectionMatrix(); // Apply FOV changes
+        }
+     };
+
+     const debouncedResize = debounce(handleResize, 100); // Debounce resize events
+     window.addEventListener('resize', debouncedResize);
+     handleResize(); // Initial call
+
+
+     // --- Cleanup ---
+     return () => {
+       window.removeEventListener('resize', debouncedResize);
+       cancelAnimationFrame(animationFrameId);
+        // Consider disposing geometries/materials if component unmounts frequently,
+        // but for a main page component, it might not be necessary.
+        // If needed: scene.traverse(obj => { /* dispose logic */ });
+     };
+  }, [currentTheme, theme]); // Rerun effect when theme changes
+
+  return (
+    <div className={`relative min-h-screen bg-gradient-to-b ${theme.colors.background} font-serif overflow-hidden`}>
+      {/* Theme Selector */}
+      <div className="absolute top-4 right-4 z-20">
+        <select
+          className="bg-black/40 text-white text-sm border border-white/20 rounded px-2 py-1 backdrop-blur-sm appearance-none cursor-pointer" // Style adjustments
+          value={currentTheme}
+          onChange={(e) => {
+              setCurrentTheme(e.target.value);
+              setActiveEvent(null); // Reset active event on theme change
+              setHoveredEvent(null);
+          }}
+        >
+          {Object.entries(themeVariants).map(([key, themeMeta]) => ( // Use Object.entries for key and value
+            <option key={key} value={key}>
+              {themeMeta.name}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      {/* Three.js Background Canvas */}
+      <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
+
+       {/* Gradient Overlay for Depth (Optional) */}
+      <div className="absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-black/30 to-transparent z-5 pointer-events-none"></div>
+
+
+      {/* Content Container */}
+      <div className="relative z-10 pt-20 md:pt-24 pb-24 px-4"> {/* Increased top padding */}
+        <motion.h1
+          className={`text-3xl sm:text-4xl md:text-5xl text-center font-bold ${theme.colors.text} mb-16 md:mb-20`} // Responsive font size and margin
+          initial={{ opacity: 0, y: -30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+        >
+          <span className="inline-block mr-2 md:mr-3 text-2xl md:text-3xl">🌿</span> {/* Responsive icon size */}
+          The Enchanted Hackathon
+          <span className="inline-block ml-2 md:ml-3 text-2xl md:text-3xl">🌿</span>
+        </motion.h1>
+
+        {/* Timeline Area */}
+         {/* Use max-w-md for mobile, max-w-5xl for desktop */}
+        <div className="max-w-md md:max-w-5xl mx-auto">
+          {/* Central path - adjusted for responsiveness */}
+          <div className="relative">
+              {/* Vertical line: positioned left on mobile, center on desktop */}
+             <div className={`absolute top-0 bottom-0 w-1 ${theme.colors.timeline} rounded-full left-4 md:left-1/2 md:-translate-x-1/2`} />
+
+             {/* Background glows - positioned relative to the container */}
+             {/* Use relative positioning for glows so they adapt to the container's width */}
+            <div className="absolute w-full h-full top-0 left-0 pointer-events-none">
+                 {/* Example positioning - adjust top/left percentages */}
+                <div className="absolute left-1/4 top-1/4 -translate-x-1/2 -translate-y-1/2 md:left-1/2">
+                    <MagicalGlow size={12} color={theme.colors.secondary} delay={0.5} />
                 </div>
-              );
-            })}
+                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+                    <MagicalGlow size={18} color={theme.colors.primary} delay={1.5} />
+                </div>
+                 <div className="absolute left-3/4 top-3/4 -translate-x-1/2 -translate-y-1/2 md:left-1/2">
+                    <MagicalGlow size={12} color={theme.colors.primary} delay={1} />
+                </div>
+            </div>
+
+            {/* Event items */}
+            <div> {/* Added a container div for events */}
+                {hackathonEvents.map((event, index) => (
+                <TimelineEventItem
+                    key={event.id}
+                    event={event}
+                    index={index}
+                    theme={theme}
+                    isActive={activeEvent === event.id}
+                    isHovered={hoveredEvent === event.id}
+                    setActiveEvent={setActiveEvent}
+                    setHoveredEvent={setHoveredEvent}
+                />
+                ))}
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Mobile view indicator */}
-      <div
-        className={`mt-12 text-center p-2 rounded-lg bg-gray-100 transition-all duration-700 delay-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}
-      >
-        <p className="text-sm text-gray-600">
-          <span className="md:hidden">View in landscape for best experience</span>
-          <span className="hidden md:inline">Viewing on larger screen</span>
-        </p>
-      </div>
+      {/* Custom cursor effect */}
+      <MagicalParticles color={theme.colors.primary} />
+
+      {/* Global styles for animations */}
+      <style jsx global>{`
+        @keyframes shimmerEffect {
+          0% { background-position: -100% 0; } /* Start further left */
+          100% { background-position: 200% 0; }
+        }
+        /* Style scrollbar for a more thematic feel (optional) */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #00000030; /* Dark transparent track */
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: ${theme.colors.primary}80; /* Use primary color with alpha */
+            border-radius: 10px;
+            border: 2px solid transparent;
+            background-clip: content-box;
+        }
+         ::-webkit-scrollbar-thumb:hover {
+            background-color: ${theme.colors.primary}B3; /* Darken on hover */
+        }
+
+        /* Fallback for Firefox */
+        * {
+           scrollbar-width: thin;
+           scrollbar-color: ${theme.colors.primary}80 #00000030;
+        }
+
+        body {
+           /* Improve font rendering */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+      `}</style>
     </div>
   );
-}
+};
+
+export default Timeline;
