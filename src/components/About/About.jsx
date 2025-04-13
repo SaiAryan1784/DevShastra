@@ -21,7 +21,7 @@ export default function About() {
     {
       icon: <Sparkles className="h-10 w-10 text-amber-200" />,
       title: "Expert Mentorship",
-      description: "Get guidance from industry experts throughout your 36-hour innovation journey.",
+      description: "Get guidance from industry experts throughout your 24-hour innovation journey.",
     },
   ]
 
