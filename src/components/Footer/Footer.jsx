@@ -4,12 +4,12 @@ import { motion } from "framer-motion";
 
 function Footer() {
   return (
-    <footer className="bg-black/40 backdrop-blur-md text-white py-6 px-6 rounded-t-3xl border-t border-white/10 shadow-lg" id="contactUs">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-6 p-2">
+    <footer className="bg-black/40 backdrop-blur-md text-white py-6 px-4 sm:px-6 rounded-t-3xl border-t border-white/10 shadow-lg" id="contactUs">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-6 p-2">
         {/* DevShastra */}
-        <div className="col-span-1">
+        <div className="col-span-1 sm:col-span-2 lg:col-span-1">
           <motion.h3
-            className="font-audiowide text-4xl mb-2 bg-[#F5CC96] bg-clip-text text-transparent font-bold tracking-wider"
+            className="font-audiowide text-3xl sm:text-4xl mb-4 sm:mb-2 bg-[#F5CC96] bg-clip-text text-transparent font-bold tracking-wider"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -54,7 +54,7 @@ function Footer() {
             />
           </motion.button>
         </div>
-        <div className="w-full col-span-1 justify-items-center m-l-10">
+        <div className="w-full col-span-1 sm:col-span-1">
           <motion.h3
             className="font-audiowide text-lg mb-2 text-white/90"
             initial={{ opacity: 0, x: -20 }}
@@ -86,7 +86,7 @@ function Footer() {
         </div>
 
         {/* Contact Info */}
-        <div className="col-span-1 justify-items-start">
+        <div className="col-span-1 sm:col-span-1">
           <motion.h3
             className="font-audiowide text-lg mb-2 text-white/90"
             initial={{ opacity: 0, x: -20 }}
@@ -136,7 +136,7 @@ function Footer() {
         </div>
 
         {/* Connect With Us */}
-        <div className="col-span-1 justify-items-start">
+        <div className="col-span-1 sm:col-span-1">
           <motion.h3
             className="font-audiowide text-lg mb-2 text-white/90"
             initial={{ opacity: 0, x: -20 }}
@@ -186,16 +186,16 @@ function Footer() {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5, delay: 0.6 }}
       >
-        <div className="flex flex-col md:flex-row justify-between items-center">
+        <div className="flex flex-col sm:flex-row justify-between items-center space-y-2 sm:space-y-0">
           <motion.p
-            className="text-gray-400 text-sm"
+            className="text-gray-400 text-xs sm:text-sm text-center sm:text-left"
             whileHover={{ color: "rgba(255,255,255,0.8)" }}
             transition={{ duration: 0.3 }}
           >
             © 2025 DevShastra. All rights reserved.
           </motion.p>
           <motion.p
-            className="text-gray-400 text-sm"
+            className="text-gray-400 text-xs sm:text-sm text-center sm:text-left"
             whileHover={{ color: "rgba(255,255,255,0.8)" }}
             transition={{ duration: 0.3 }}
           >
