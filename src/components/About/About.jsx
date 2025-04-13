@@ -21,7 +21,7 @@ export default function About() {
     {
       icon: <Sparkles className="h-10 w-10 text-amber-200" />,
       title: "Expert Mentorship",
-      description: "Get guidance from industry experts throughout your 36-hour innovation journey.",
+      description: "Get guidance from industry experts throughout your 24-hour innovation journey.",
     },
   ]
 
@@ -73,7 +73,7 @@ export default function About() {
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
         >
-          DevShastra is ABES Engineering College's premier hackathon, bringing together the brightest minds for an exhilarating 36-hour journey of innovation. Transform your ideas into impactful solutions while collaborating with fellow innovators.
+          DevShastra is ABES Engineering College's premier hackathon, bringing together the brightest minds for an exhilarating 24-hour journey of innovation. Transform your ideas into impactful solutions while collaborating with fellow innovators.
         </motion.p>
 
         {/* Cards grid */}
