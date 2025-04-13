@@ -73,7 +73,7 @@ export default function About() {
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
         >
-          DevShastra is ABES Engineering College's premier hackathon, bringing together the brightest minds for an exhilarating 36-hour journey of innovation. Transform your ideas into impactful solutions while collaborating with fellow innovators.
+          DevShastra is ABES Engineering College's premier hackathon, bringing together the brightest minds for an exhilarating 24-hour journey of innovation. Transform your ideas into impactful solutions while collaborating with fellow innovators.
         </motion.p>
 
         {/* Cards grid */}

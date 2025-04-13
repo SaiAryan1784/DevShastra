@@ -43,7 +43,8 @@ function Home() {
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
       const windowHeight = window.innerHeight;
-      setShowScroll(scrollPosition < windowHeight * 0.5);
+      // Only show scroll indicator if not mobile and in the first half of the viewport
+      setShowScroll(scrollPosition < windowHeight * 0.5 && !isMobile);
 
       // Check if we're still on the home section
       setIsHomePage(scrollPosition < windowHeight);
@@ -51,7 +52,7 @@ function Home() {
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [isMobile]);
 
   useEffect(() => {
     // Simulate loading
@@ -245,7 +246,7 @@ function Home() {
   // }
 
   return (
-    <div className="hero-container">
+    <div className="hero-container home">
       {/* Animated Logo */}
       <motion.img
         src="../../public/logo.png"
