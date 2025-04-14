@@ -195,7 +195,7 @@
     height: auto;
     position: fixed;
     top: 1%;
-    left: 25%;
+    left: 22%;
     transform: translateX(-50%);
     z-index: 50;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -217,30 +217,103 @@
     z-index: 50;
 }
 
-/* Mobile styles - always small in top-left */
-@media (max-width: 768px) {
+/* Large Desktop (1440px and above) */
+@media (min-width: 1440px) {
     .main-logo {
-        width: 280px;
-        height: auto;
-        position: fixed;
-        top: 20px;
-        left: 20px;
-        transform: none;
-        z-index: 50;
-        transition: opacity 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+        width: 800px;
+        top: 0%;
+        left: 22%;
+        transform: translateX(-50%);
     }
 }
 
-@media (max-width: 480px) {
+/* Standard Desktop (1200px to 1439px) */
+@media (min-width: 1200px) and (max-width: 1439px) {
+    .main-logo {
+        width: 700px;
+        top: 1%;
+        left: 22%;
+        transform: translateX(-50%);
+    }
+}
+
+/* Small Desktop / Large Laptop (1024px to 1199px) */
+@media (min-width: 1024px) and (max-width: 1199px) {
+    .main-logo {
+        width: 600px;
+        top: 1%;
+        left: 22%;
+        transform: translateX(-50%);
+    }
+}
+
+/* 11-inch Laptop (900px to 1023px) */
+@media (min-width: 900px) and (max-width: 1023px) {
+    .main-logo {
+        width: 500px;
+        top: 1%;
+        left: 22%;
+        transform: translateX(-50%);
+    }
+}
+
+/* Tablet Landscape (768px to 899px) */
+@media (min-width: 768px) and (max-width: 899px) {
+    .main-logo {
+        width: 400px;
+        top: 1%;
+        left: 22%;
+        transform: translateX(-50%);
+    }
+}
+
+/* Tablet Portrait (600px to 767px) */
+@media (min-width: 600px) and (max-width: 767px) {
+    .main-logo {
+        width: 350px;
+        top: 1%;
+        left: 22%;
+        transform: translateX(-50%);
+    }
+}
+
+/* Large Mobile (480px to 599px) */
+@media (min-width: 480px) and (max-width: 599px) {
+    .main-logo {
+        width: 300px;
+        top: 1%;
+        left: 22%;
+        transform: translateX(-50%);
+    }
+}
+
+/* Medium Mobile (400px to 479px) */
+@media (min-width: 400px) and (max-width: 479px) {
+    .main-logo {
+        width: 280px;
+        top: 1%;
+        left: 18%;
+        transform: translateX(-50%);
+    }
+}
+
+/* Small Mobile (320px to 399px) */
+@media (min-width: 320px) and (max-width: 399px) {
     .main-logo {
         width: 250px;
-        height: auto;
-        position: fixed;
-        top: 10%;
-        left: 50%;
+        top: 1%;
+        left: 18%;
         transform: translateX(-50%);
-        z-index: 50;
-        transition: opacity 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+}
+
+/* Extra Small Mobile (below 320px) */
+@media (max-width: 319px) {
+    .main-logo {
+        width: 220px;
+        top: 1%;
+        left: 15%;
+        transform: translateX(-50%);
     }
 }
 
@@ -254,13 +327,77 @@
     z-index: 10;
     text-align: center;
     position: relative;
-    margin-top: 270px;
+    margin-top: 320px;
     /* Add space for the logo */
 }
 
-@media (max-width: 768px) {
+/* Large Desktop (1440px and above) */
+@media (min-width: 1440px) {
     .content-wrapper {
-        margin-top: 200px;
+        margin-top: 350px;
+    }
+}
+
+/* Standard Desktop (1200px to 1439px) */
+@media (min-width: 1200px) and (max-width: 1439px) {
+    .content-wrapper {
+        margin-top: 300px;
+    }
+}
+
+/* Small Desktop / Large Laptop (1024px to 1199px) */
+@media (min-width: 1024px) and (max-width: 1199px) {
+    .content-wrapper {
+        margin-top: 280px;
+    }
+}
+
+/* 11-inch Laptop (900px to 1023px) */
+@media (min-width: 900px) and (max-width: 1023px) {
+    .content-wrapper {
+        margin-top: 180px;
+    }
+}
+
+/* Tablet Landscape (768px to 899px) */
+@media (min-width: 768px) and (max-width: 899px) {
+    .content-wrapper {
+        margin-top: 100px;
+    }
+}
+
+/* Tablet Portrait (600px to 767px) */
+@media (min-width: 600px) and (max-width: 767px) {
+    .content-wrapper {
+        margin-top: 20px;
+    }
+}
+
+/* Large Mobile (480px to 599px) */
+@media (min-width: 480px) and (max-width: 599px) {
+    .content-wrapper {
+        margin-top: 10px;
+    }
+}
+
+/* Medium Mobile (400px to 479px) */
+@media (min-width: 400px) and (max-width: 479px) {
+    .content-wrapper {
+        margin-top: 5px;
+    }
+}
+
+/* Small Mobile (320px to 399px) */
+@media (min-width: 320px) and (max-width: 399px) {
+    .content-wrapper {
+        margin-top: 160px;
+    }
+}
+
+/* Extra Small Mobile (below 320px) */
+@media (max-width: 319px) {
+    .content-wrapper {
+        margin-top: 140px;
     }
 }
 
@@ -319,7 +456,7 @@
 .date-glow::before {
     content: '';
     position: absolute;
-    width: 120%;
+    width: 122%;
     height: 5px;
     background: linear-gradient(90deg, transparent, var(--primary-light), transparent);
     bottom: -10px;
