@@ -386,7 +386,7 @@ function Home() {
             className="btn-content"
             whileHover={{ color: "#ffffff" }}
           >
-            <img src="https://devfolio.co/logo-light.svg" alt="Devfolio" className="h-6" />
+            <img src="/Devfolio_Logo-White.svg" alt="Devfolio" className="h-6" />
             <span>Go to projects</span>
           </motion.div>
           <motion.div

@@ -301,7 +301,7 @@
 .event-date {
     font-size: 1.25rem;
     line-height: 1.75rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     font-weight: 600;
     position: relative;
     display: inline-block;
@@ -340,7 +340,7 @@
     display: flex;
     justify-content: center;
     gap: 0.3rem;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     line-height: 1.75rem;
     margin-bottom: 3rem;
     flex-wrap: wrap;
@@ -417,8 +417,8 @@
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
-    min-width: 120px;
-    min-height: 120px;
+    min-width: 100px;
+    min-height: 100px;
     transition: all 0.3s ease;
 }
 

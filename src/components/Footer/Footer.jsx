@@ -103,11 +103,11 @@ function Footer() {
               transition={{ duration: 0.3, delay: 0.3 }}
             >
               <a
-                href="mailto:business.codegeeks@gmail.com"
+                href="mailto:codechef@abes.ac.in"
                 className="hover:text-white transition-colors duration-300 flex items-center group"
               >
                 <span className="w-1 h-1 bg-[#2e1f26] rounded-full mr-2 opacity-0 group-hover:opacity-100 transition-all duration-300"></span>
-                business.codegeeks@gmail.com
+                codechef@abes.ac.in
               </a>
             </motion.li>
             <motion.li
@@ -118,7 +118,7 @@ function Footer() {
             >
               <span className="flex items-center group">
                 <span className="w-1 h-1 bg-[#2e1f26] rounded-full mr-2 opacity-0 group-hover:opacity-100 transition-all duration-300"></span>
-                +91 8279437447
+                +91 88106 66903
               </span>
             </motion.li>
             <motion.li
@@ -129,7 +129,7 @@ function Footer() {
             >
               <span className="flex items-center group">
                 <span className="w-1 h-1 bg-[#2e1f26] rounded-full mr-2 opacity-0 group-hover:opacity-100 transition-all duration-300"></span>
-                Delhi, India
+                Ghaziabad - 201009, Uttar Pradesh, India
               </span>
             </motion.li>
           </ul>
@@ -152,7 +152,8 @@ function Footer() {
             transition={{ duration: 0.5, delay: 0.4 }}
           >
             <motion.a
-              href="#"
+              href="https://www.instagram.com/abesec.codechef/"
+              target="_blank"
               className="text-gray-400 hover:text-pink-500 transition-colors duration-300"
               whileHover={{ scale: 1.2, rotate: 5 }}
               whileTap={{ scale: 0.9 }}
@@ -160,7 +161,8 @@ function Footer() {
               <FaInstagram size={20} />
             </motion.a>
             <motion.a
-              href="#"
+              href="https://www.linkedin.com/company/abesec-codechef/"
+              target="_blank"
               className="text-gray-400 hover:text-blue-500 transition-colors duration-300"
               whileHover={{ scale: 1.2, rotate: 5 }}
               whileTap={{ scale: 0.9 }}
