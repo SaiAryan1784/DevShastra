@@ -22,7 +22,7 @@ function Home() {
 
   // Remove the scroll-based transforms for the logo
   const logoY = useTransform(scrollY, [0, 500], ['0%', '-35%']);
-  const logoX = useTransform(scrollY, [0, 500], ['0%', '-85%']);
+  const logoX = useTransform(scrollY, [0, 500], ['0%', '-80%']);
   const logoScale = useTransform(scrollY, [0, 300], [1, 0.25]);
   const contentOpacity = useTransform(scrollY, [0, 200], [1, 0]);
   const mobileLogoOpacity = useTransform(scrollY, [0, 150], [1, 0]);
