@@ -18,8 +18,8 @@ const sponsors = {
   ],
   bronze: [
     {
-      name: "Bronze Sponsor",
-      image: "/images/bronze-sponsor.png",
+      name: "Polygon",
+      image: "/polygon.png",
       level: "bronze"
     }
   ]
@@ -64,9 +64,15 @@ const SponsorSection = ({ title, sponsors }) => (
           transition={{ duration: 0.2 }}
           className="relative w-full md:w-[400px]"
         >
-          <div className="relative bg-stone-800/70 backdrop-blur-sm rounded-xl p-4 border border-amber-700/30 shadow-lg transition-all duration-200 hover:border-amber-600/50 hover:shadow-amber-900/20 h-24">
+          <div className={`relative bg-stone-800/70 backdrop-blur-sm rounded-xl p-4 border border-amber-700/30 shadow-lg transition-all duration-200 hover:border-amber-600/50 hover:shadow-amber-900/20 ${sponsor.name === "Devfolio" || sponsor.name === "ETHIndia"
+            ? "h-32"
+            : "h-24"
+            }`}>
             <div className="flex items-center gap-4">
-              <div className="w-16 h-16 relative flex-shrink-0">
+              <div className={`${sponsor.name === "Devfolio" || sponsor.name === "ETHIndia"
+                ? "w-24 h-24"
+                : "w-16 h-16"
+                } relative flex-shrink-0`}>
                 <img
                   src={sponsor.image}
                   alt={sponsor.name}
