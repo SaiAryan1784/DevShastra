@@ -249,7 +249,7 @@ function Home() {
     <div className="hero-container home">
       {/* Animated Logo */}
       <motion.img
-        src="../../public/logo.png"
+        src="/logo.png"
         alt="DevShastra Logo"
         className="main-logo"
         style={{
