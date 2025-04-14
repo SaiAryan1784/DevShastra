@@ -194,14 +194,16 @@
     width: 700px;
     height: auto;
     position: fixed;
-    top: 0.1%;
+    top: 1%;
     left: 25%;
-    transform: translate(-50%, -50%);
+    transform: translateX(-50%);
     z-index: 50;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     will-change: transform, width, opacity;
     backface-visibility: hidden;
     -webkit-font-smoothing: subpixel-antialiased;
+    margin: 0;
+    padding: 0;
 }
 
 /* Scrolled state for desktop */
@@ -235,8 +237,8 @@
         height: auto;
         position: fixed;
         top: 10%;
-        left: 18%;
-        transform: none;
+        left: 50%;
+        transform: translateX(-50%);
         z-index: 50;
         transition: opacity 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     }
