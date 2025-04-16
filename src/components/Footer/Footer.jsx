@@ -30,7 +30,8 @@ function Footer() {
             creativity. Where innovation meets code and dreams become reality.
           </motion.p>
           <motion.button
-            className="group relative px-6 py-2 bg-gradient-to-r from-[#2e1f26] to-[#0f1a15] text-white font-semibold rounded-full overflow-hidden transition-all duration-500 ease-out hover:shadow-[0_0_15px_rgba(46,31,38,0.5)] hover:translate-y-[-2px]"
+            onClick={() => window.open("https://devshastracodechef.devfolio.co", "_blank")}
+            className="group relative px-6 py-2 bg-gradient-to-r from-[#2e1f26] cursor-pointer to-[#0f1a15] text-white font-semibold rounded-full overflow-hidden transition-all duration-500 ease-out hover:shadow-[0_0_15px_rgba(46,31,38,0.5)] hover:translate-y-[-2px]"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: 0.4 }}

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion, useAnimation, AnimatePresence, useScroll, useTransform } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
 import Squares from '../Squares/Squares';
 import '../../styles/Home.css';
 
@@ -30,16 +31,16 @@ function Home() {
   // Add window width state
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
-  useEffect(() => {
-    const script = document.createElement('script');
-    script.src = 'https://apply.devfolio.co/v2/sdk.js';
-    script.async = true;
-    script.defer = true;
-    document.body.appendChild(script);
-    return () => {
-      document.body.removeChild(script);
-    }
-  }, []);
+  // useEffect(() => {
+  //   const script = document.createElement('script');
+  //   script.src = 'https://apply.devfolio.co/v2/sdk.js';
+  //   script.async = true;
+  //   script.defer = true;
+  //   document.body.appendChild(script);
+  //   return () => {
+  //     document.body.removeChild(script);
+  //   }
+  // }, []);
 
   useEffect(() => {
     const handleResize = () => {
@@ -383,6 +384,7 @@ function Home() {
         {/* CTA Button */}
         <motion.a
           href="https://devshastracodechef.devfolio.co"
+          target="_blank"
           className="cta-button"
           whileHover={{
             scale: 1.05,
@@ -397,14 +399,16 @@ function Home() {
             className="btn-content"
             whileHover={{ color: "#ffffff" }}
           >
-            {/* <img src="/Devfolio_Logo-White.svg" alt="Devfolio" className="h-6" />
-            <span>Go to projects</span> */}
-            <div
+            <img src="/Devfolio_Logo-White.svg" alt="Devfolio" className="h-6" />
+            <span className="flex items-center gap-1">
+              Apply Now <ArrowUpRight className="h-4 w-4 text-white" />
+            </span>
+            {/* <div
               class="apply-button"
               data-hackathon-slug="devshastracodechef"
               data-button-theme="light"
               style={{ height: '44px', width: '312px' }}
-            ></div>
+            ></div> */}
           </motion.div>
           <motion.div
             className="btn-shine"
