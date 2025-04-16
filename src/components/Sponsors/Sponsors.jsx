@@ -137,7 +137,7 @@ const sponsors = {
   gold: [
     {
       name: "DEVFOLIO LOGO",
-      image: "/Devfoio_Logo-White.svg",
+      image: "/Devfolio_Logo-White.svg",
       level: "gold"
     },
     {
@@ -149,7 +149,7 @@ const sponsors = {
   silver: [
     {
       name: "ETHINDIA LOGO",
-      image: "/ethinia-light.svg",
+      image: "/ethindia-light.svg",
       level: "silver"
     },
     {
