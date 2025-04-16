@@ -136,30 +136,35 @@ import { motion } from "framer-motion";
 const sponsors = {
   gold: [
     {
-      name: "DEVFOLIO LOGO",
+      alt: "DEVFOLIO LOGO",
+      name: "Devfolio",
       image: "/Devfolio_Logo-White.svg",
       level: "gold"
     },
     {
-      name: "GENERO LOGO",
+      alt: "GENERO LOGO",
+      name: "Genero",
       image: "/genero.svg",
       level: "gold"
     }
   ],
   silver: [
     {
-      name: "ETHINDIA LOGO",
+      alt: "ETHINDIA LOGO",
+      name: "ETHIndia",
       image: "/ethindia-light.svg",
       level: "silver"
     },
     {
-      name: "POLYGON LOGO",
+      alt: "POLYGON LOGO",
+      name: "Polygon",
       image: "/polygon.png",
       level: "silver"
     }
   ],
   bronze: [
     {
+      alt: "COMING SOON",
       name: "COMING SOON",
       image: "/coming_soon.png",
       level: "bronze"
@@ -251,7 +256,7 @@ const SponsorCard = ({ sponsor, index }) => {
           <div className="w-24 h-24 relative flex-shrink-0 flex items-center justify-center">
             <img
               src={sponsor.image}
-              alt={sponsor.name}
+              alt={sponsor.alt}
               className="w-full h-full object-contain drop-shadow-lg"
             />
           </div>
