@@ -371,7 +371,7 @@ function Home() {
 
         {/* CTA Button */}
         <motion.a
-          href="#projects"
+          href="https://devshastracodechef.devfolio.co"
           className="cta-button"
           whileHover={{
             scale: 1.05,

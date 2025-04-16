@@ -136,31 +136,31 @@ import { motion } from "framer-motion";
 const sponsors = {
   gold: [
     {
-      name: "Devfolio",
-      image: "/Devfolio_Logo-White.svg",
+      name: "DEVFOLIO LOGO",
+      image: "/Devfoio_Logo-White.svg",
       level: "gold"
     },
     {
-      name: "Genero",
+      name: "GENERO LOGO",
       image: "/genero.svg",
       level: "gold"
     }
   ],
   silver: [
     {
-      name: "ETHIndia",
-      image: "/ethindia-light.svg",
+      name: "ETHINDIA LOGO",
+      image: "/ethinia-light.svg",
       level: "silver"
     },
     {
-      name: "Polygon",
+      name: "POLYGON LOGO",
       image: "/polygon.png",
       level: "silver"
     }
   ],
   bronze: [
     {
-      name: "Coming Soon",
+      name: "COMING SOON",
       image: "/coming_soon.png",
       level: "bronze"
     }
