@@ -31,6 +31,17 @@ function Home() {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
   useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://apply.devfolio.co/v2/sdk.js';
+    script.async = true;
+    script.defer = true;
+    document.body.appendChild(script);
+    return () => {
+      document.body.removeChild(script);
+    }
+  }, []);
+
+  useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
     };
@@ -386,8 +397,14 @@ function Home() {
             className="btn-content"
             whileHover={{ color: "#ffffff" }}
           >
-            <img src="/Devfolio_Logo-White.svg" alt="Devfolio" className="h-6" />
-            <span>Go to projects</span>
+            {/* <img src="/Devfolio_Logo-White.svg" alt="Devfolio" className="h-6" />
+            <span>Go to projects</span> */}
+            <div
+              class="apply-button"
+              data-hackathon-slug="devshastracodechef"
+              data-button-theme="light"
+              style={{ height: '44px', width: '312px' }}
+            ></div>
           </motion.div>
           <motion.div
             className="btn-shine"

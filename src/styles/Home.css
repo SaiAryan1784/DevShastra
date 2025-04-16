@@ -639,7 +639,7 @@
     border-radius: 9999px;
     font-weight: 600;
     color: white;
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    /* background: linear-gradient(135deg, var(--primary), var(--secondary)); */
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
