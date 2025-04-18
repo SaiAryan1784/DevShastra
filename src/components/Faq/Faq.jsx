@@ -19,11 +19,7 @@ const faqs = [
     answer: "Not a single rupee! This adventure is completely free. Save your money for energy drinks and midnight snacks instead!"
   },
   {
-    question: "Can my team be half in the matrix, half in reality? 🌐",
-    answer: "Absolutely! We support hybrid teams. Some can be in-person while others code from their secret lairs. Just make sure you're all in the same time zone (or close enough)!"
-  },
-  {
-    question: "What weapons (er, tools) should I bring to battle? 🛠️",
+    question: "What weapons (tools) should I bring to battle? 🛠️",
     answer: "Your trusty laptop, charger (very important!), and your brain loaded with creativity. We'll provide the wifi, snacks, and good vibes!"
   },
   {
