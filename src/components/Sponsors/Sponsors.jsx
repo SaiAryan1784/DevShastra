@@ -132,17 +132,20 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { link } from "framer-motion/client";
 
 const sponsors = {
   gold: [
     {
       alt: "DEVFOLIO LOGO",
+      link: "https://devfolio.co/", 
       name: "Devfolio",
       image: "/Devfolio_Logo-White.svg",
       level: "gold"
     },
     {
       alt: "GENERO LOGO",
+      link: "https://devshastra.tech/", 
       name: "Genero",
       image: "/genero.svg",
       level: "gold"
@@ -151,22 +154,25 @@ const sponsors = {
   silver: [
     {
       alt: "ETHINDIA LOGO",
+      link: "https://ethindia2024.devfolio.co/",
       name: "ETHIndia",
       image: "/ethindia-light.svg",
       level: "silver"
     },
     {
-      alt: "POLYGON LOGO",
-      name: "Polygon",
-      image: "/polygon.png",
+      alt: "CODECRAFTERS LOGO",
+      link: "https://codecrafters.io/",
+      name: "CodeCrafters",
+      image: "/codecrafters.png",
       level: "silver"
     }
   ],
   bronze: [
     {
       alt: "COMING SOON",
+      link: "https://devshastra.tech/",
       name: "COMING SOON",
-      image: "/coming_soon.png",
+      image: "/megaphone.png",
       level: "bronze"
     }
   ]
@@ -242,14 +248,17 @@ const SponsorCard = ({ sponsor, index }) => {
   const styles = getTierStyles(sponsor.level);
   
   return (
-    <motion.div
+    <motion.a
+      href={sponsor.link}
+      target="_blank"
+      rel="noopener noreferrer"
       variants={cardVariants}
       whileHover={{ 
         y: -8, 
         scale: 1.02,
         transition: { duration: 0.2 } 
       }}
-      className={`relative w-full ${styles.size}`}
+      className={`relative w-full ${styles.size} block`} 
     >
       <div className={`relative ${styles.cardBg} backdrop-blur-md rounded-xl p-6 border ${styles.borderColor} shadow-lg transition-all duration-300 ${styles.hoverBorder} hover:shadow-xl ${styles.shadow} h-full`}>
         <div className="flex items-center gap-6 h-full">
@@ -271,7 +280,7 @@ const SponsorCard = ({ sponsor, index }) => {
         <div className="absolute top-1 left-1 right-1 bottom-1 border border-white/5 rounded-lg pointer-events-none"></div>
         <div className="absolute -top-1 -right-1 w-16 h-16 bg-gradient-to-br from-white/5 to-transparent rounded-full blur-xl"></div>
       </div>
-    </motion.div>
+    </motion.a>
   );
 };
 
@@ -304,7 +313,7 @@ function Sponsors() {
   return (
     <div
       id="sponsors"
-      className="relative py-28 px-6 text-white overflow-hidden bg-gradient-to-b from-stone-900 to-black"
+      className="relative py-28 px-6 text-white overflow-hidden"
     >
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden opacity-20">
@@ -358,3 +367,4 @@ function Sponsors() {
 }
 
 export default Sponsors;
+
