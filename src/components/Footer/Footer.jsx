@@ -104,11 +104,11 @@ function Footer() {
               transition={{ duration: 0.3, delay: 0.3 }}
             >
               <a
-                href="mailto:codechef@abes.ac.in"
+                href="mailto:devshastra.cc@gmail.com"
                 className="hover:text-white transition-colors duration-300 flex items-center group"
               >
                 <span className="w-1 h-1 bg-[#2e1f26] rounded-full mr-2 opacity-0 group-hover:opacity-100 transition-all duration-300"></span>
-                codechef@abes.ac.in
+                devshastra.cc@gmail.com
               </a>
             </motion.li>
             <motion.li
