@@ -1,10 +1,13 @@
 import { FaInstagram, FaLinkedin, FaDiscord } from "react-icons/fa";
-import { Link } from 'react-scroll';
+import { Link } from "react-scroll";
 import { motion } from "framer-motion";
 
 function Footer() {
   return (
-    <footer className="bg-black/40 backdrop-blur-md text-white py-6 px-4 sm:px-6 rounded-t-3xl border-t border-white/10 shadow-lg" id="contactUs">
+    <footer
+      className="bg-black/40 backdrop-blur-md text-white py-6 px-4 sm:px-6 rounded-t-3xl border-t border-white/10 shadow-lg"
+      id="contactUs"
+    >
       <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-6 p-2">
         {/* DevShastra */}
         <div className="col-span-1 sm:col-span-2 lg:col-span-1">
@@ -15,7 +18,7 @@ function Footer() {
             transition={{ duration: 0.5 }}
             whileHover={{
               scale: 1.05,
-              textShadow: "0 0 15px rgba(255,255,255,0.5)"
+              textShadow: "0 0 15px rgba(255,255,255,0.5)",
             }}
           >
             DevShastra
@@ -30,7 +33,9 @@ function Footer() {
             creativity. Where innovation meets code and dreams become reality.
           </motion.p>
           <motion.button
-            onClick={() => window.open("https://devshastracodechef.devfolio.co", "_blank")}
+            onClick={() =>
+              window.open("https://devshastracodechef.devfolio.co", "_blank")
+            }
             className="group relative px-6 py-2 bg-gradient-to-r from-[#2e1f26] cursor-pointer to-[#0f1a15] text-white font-semibold rounded-full overflow-hidden transition-all duration-500 ease-out hover:shadow-[0_0_15px_rgba(46,31,38,0.5)] hover:translate-y-[-2px]"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -65,24 +70,26 @@ function Footer() {
             QUICK LINKS
           </motion.h3>
           <ul className="space-y-1 justify-items-start">
-            {["About", "Timeline", "Tracks", "Sponsors", "Prizes", "FAQ"].map((item, index) => (
-              <motion.li
-                key={item}
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.3, delay: 0.2 + index * 0.05 }}
-              >
-                <Link
-                  to={item.toLowerCase()}
-                  smooth={true}
-                  duration={500}
-                  className="text-gray-400 hover:text-white cursor-pointer text-sm transition-colors duration-300 flex items-center group"
+            {["About", "Timeline", "Tracks", "Sponsors", "Prizes", "FAQ"].map(
+              (item, index) => (
+                <motion.li
+                  key={item}
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.3, delay: 0.2 + index * 0.05 }}
                 >
-                  <span className="w-1 h-1 bg-[#2e1f26] rounded-full mr-2 opacity-0 group-hover:opacity-100 transition-all duration-300"></span>
-                  {item}
-                </Link>
-              </motion.li>
-            ))}
+                  <Link
+                    to={item.toLowerCase()}
+                    smooth={true}
+                    duration={500}
+                    className="text-gray-400 hover:text-white cursor-pointer text-sm transition-colors duration-300 flex items-center group"
+                  >
+                    <span className="w-1 h-1 bg-[#2e1f26] rounded-full mr-2 opacity-0 group-hover:opacity-100 transition-all duration-300"></span>
+                    {item}
+                  </Link>
+                </motion.li>
+              )
+            )}
           </ul>
         </div>
 
@@ -171,7 +178,7 @@ function Footer() {
               <FaLinkedin size={20} />
             </motion.a>
             <motion.a
-              href="#"
+              href="https://discord.gg/aGpX9aG2"
               className="text-gray-400 hover:text-green-500 transition-colors duration-300"
               whileHover={{ scale: 1.2, rotate: 5 }}
               whileTap={{ scale: 0.9 }}
@@ -202,11 +209,19 @@ function Footer() {
             whileHover={{ color: "rgba(255,255,255,0.8)" }}
             transition={{ duration: 0.3 }}
           >
-            Made with <motion.span
+            Made with{" "}
+            <motion.span
               className="text-red-500 inline-block"
               animate={{ scale: [1, 1.2, 1] }}
-              transition={{ duration: 1.5, repeat: Infinity, repeatType: "loop" }}
-            >❤</motion.span> by Awesome People
+              transition={{
+                duration: 1.5,
+                repeat: Infinity,
+                repeatType: "loop",
+              }}
+            >
+              ❤
+            </motion.span>{" "}
+            by Awesome People
           </motion.p>
         </div>
       </motion.div>
