@@ -129,6 +129,7 @@
 
 import React, { useState } from 'react';
 import { Code, Brain, Wallet, Heart, Lightbulb, BookOpen, Cpu, Cog, Zap } from 'lucide-react';
+import { Car, Leaf, Cloud, Shield } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 function Tracks() {
@@ -175,12 +176,6 @@ function Tracks() {
 
   const hardwareTracks = [
     {
-      id: 7,
-      name: "IoT",
-      icon: <Cpu size={80} />,
-      description: "Create connected devices and systems for smart homes, cities, and industries."
-    },
-    {
       id: 8,
       name: "Robotics",
       icon: <Cog size={80} />,
@@ -191,6 +186,30 @@ function Tracks() {
       name: "Renewable Energy",
       icon: <Zap size={80} />,
       description: "Develop sustainable energy solutions and technologies for a greener future."
+    },
+    {
+      id: 10,
+      name: "Mobility",
+      icon: <Car size={80} />,
+      description: "Design innovations for transportation, autonomous vehicles, and smart mobility solutions."
+    },
+    {
+      id: 11,
+      name: "AgroTech",
+      icon: <Leaf size={80} />,
+      description: "Create hardware solutions for sustainable farming, precision agriculture, and food technology."
+    },
+    {
+      id: 12,
+      name: "Climate & Environment",
+      icon: <Cloud size={80} />,
+      description: "Develop hardware to monitor, analyze, and address environmental and climate challenges."
+    },
+    {
+      id: 13,
+      name: "Hardware Security",
+      icon: <Shield size={80} />,
+      description: "Build secure hardware systems and devices with robust protection against digital threats."
     }
   ];
 
