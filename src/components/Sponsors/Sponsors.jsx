@@ -66,6 +66,13 @@ const sponsors = {
       name: "GitHub",
       image: "/github-mark-white.svg",
       level: "bronze"
+    },
+    {
+      alt:"XYZ LOGO",
+      link:"",
+      name:"XYZ",
+      image:"/xyz-logo-white.svg",
+      level: "bronze"
     }
   ]
 };
