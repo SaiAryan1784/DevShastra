@@ -69,7 +69,7 @@ const sponsors = {
     },
     {
       alt:"XYZ LOGO",
-      link:"",
+      link:"https://gen.xyz/",
       name:"XYZ",
       image:"/xyz-logo-white.svg",
       level: "bronze"
