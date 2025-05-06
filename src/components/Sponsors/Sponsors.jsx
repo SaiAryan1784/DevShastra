@@ -61,10 +61,17 @@ const sponsors = {
   ],
   bronze: [
     {
-      alt: "COMING SOON",
-      link: "https://devshastra.tech/",
-      name: "COMING SOON",
-      image: "/megaphone.png",
+      alt: "GITHUB LOGO",
+      link: "https://github.com/", 
+      name: "GitHub",
+      image: "/github-mark-white.svg",
+      level: "bronze"
+    },
+    {
+      alt:"XYZ LOGO",
+      link:"https://gen.xyz/",
+      name:"XYZ",
+      image:"/xyz-logo-white.svg",
       level: "bronze"
     }
   ]
