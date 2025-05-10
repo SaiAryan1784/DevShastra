@@ -1,151 +1,43 @@
-// import React from "react";
-// import { motion } from "framer-motion";
-
-// const sponsors = {
-//   gold: [
-//     {
-//       name: "Devfolio",
-//       image: "/Devfolio_Logo-White.svg",
-//       level: "gold"
-//     }
-//   ],
-//   silver: [
-//     {
-//       name: "ETHIndia",
-//       image: "/ethindia-light.svg",
-//       level: "silver"
-//     },
-//     {
-//       name: "Polygon",
-//       image: "/polygon.png",
-//       level: "silver"
-//     }
-//   ],
-//   bronze: [
-//     {
-//       name: "Coming Soon",
-//       image: "/coming_soon.png",
-//       level: "bronze"
-//     }
-//   ]
-// };
-
-// const cardVariants = {
-//   hidden: { opacity: 0, y: 50 },
-//   visible: (i) => ({
-//     opacity: 1,
-//     y: 0,
-//     transition: {
-//       delay: i * 0.2,
-//       duration: 0.6,
-//       ease: "easeOut",
-//       type: "spring",
-//       stiffness: 70,
-//     },
-//   }),
-// };
-
-// const SponsorSection = ({ title, sponsors }) => (
-//   <div className="mb-16 last:mb-0">
-//     <motion.h3
-//       initial={{ opacity: 0, y: -20 }}
-//       whileInView={{ opacity: 1, y: 0 }}
-//       transition={{ duration: 0.6 }}
-//       viewport={{ once: true }}
-//       className="text-center text-2xl font-bold mb-8 tracking-wider text-amber-200"
-//     >
-//       {title}
-//     </motion.h3>
-//     <div className="flex justify-center flex-wrap gap-6">
-//       {sponsors.map((sponsor, index) => (
-//         <motion.div
-//           key={index}
-//           variants={cardVariants}
-//           initial="hidden"
-//           whileInView="visible"
-//           viewport={{ once: true }}
-//           custom={index}
-//           whileHover={{ y: -5 }}
-//           transition={{ duration: 0.2 }}
-//           className="relative w-full md:w-[400px]"
-//         >
-//           <div className="relative bg-stone-800/70 backdrop-blur-sm rounded-xl p-4 border border-amber-700/30 shadow-lg transition-all duration-200 hover:border-amber-600/50 hover:shadow-amber-900/20 h-32">
-//             <div className="flex items-center gap-4">
-//               <div className="w-24 h-24 relative flex-shrink-0">
-//                 <img
-//                   src={sponsor.image}
-//                   alt={sponsor.name}
-//                   className="w-full h-full object-contain"
-//                 />
-//               </div>
-//               <div className="flex-grow">
-//                 <h4 className="text-lg font-semibold text-amber-200">
-//                   {sponsor.name}
-//                 </h4>
-//               </div>
-//             </div>
-//             {/* Decorative border */}
-//             <div className="absolute top-1 left-1 right-1 bottom-1 border border-amber-700/10 rounded-lg pointer-events-none"></div>
-//           </div>
-//         </motion.div>
-//       ))}
-//     </div>
-//   </div>
-// );
-
-// function Sponsors() {
-//   return (
-//     <div
-//       id="sponsors"
-//       className="relative py-20 px-6 text-white overflow-hidden"
-//     >
-//       <motion.h2
-//         initial={{ opacity: 0, y: -40 }}
-//         whileInView={{ opacity: 1, y: 0 }}
-//         transition={{ duration: 0.8 }}
-//         viewport={{ once: true }}
-//         className="text-center text-4xl font-bold mb-16 tracking-wider text-amber-200"
-//       >
-//         POWERED BY GIANTS
-//       </motion.h2>
-
-//       <div className="max-w-7xl mx-auto">
-//         <SponsorSection
-//           title="GOLD SPONSORS"
-//           sponsors={sponsors.gold}
-//         />
-//         <SponsorSection
-//           title="SILVER SPONSORS"
-//           sponsors={sponsors.silver}
-//         />
-//         <SponsorSection
-//           title="BRONZE SPONSORS"
-//           sponsors={sponsors.bronze}
-//         />
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default Sponsors;
-
-
 import React from "react";
 import { motion } from "framer-motion";
-import { link } from "framer-motion/client";
 
 const sponsors = {
+  organisers: [
+    {
+      alt: "CodeChef ABES Chapter",
+      link: "https://codechefabesec.netlify.app",
+      name: "CodeChef ABESEC Chapter",
+      image: "/logo_ccnew.png",
+      level: "organiser"
+    },
+    {
+      alt: "GENERO logo",
+      link: "#",
+      name: "Genero'25",
+      image: "/genero.svg",
+      level: "organiser"
+    }
+  ],
+  // venuePartner: [
+  //   {
+  //     alt: "Abes logo",
+  //     link: "https://abes.ac.in/",
+  //     name: "ABES Engineering College",
+  //     image: "/logoabes.png",
+  //     level: "venue"
+  //   }
+  // ],
   gold: [
     {
       alt: "DEVFOLIO LOGO",
-      link: "https://devfolio.co/", 
+      link: "https://devfolio.co/",
       name: "Devfolio",
       image: "/Devfolio_Logo-White.svg",
       level: "gold"
     },
     {
       alt: "GENERO LOGO",
-      link: "https://devshastra.tech/", 
+      link: "https://devshastra.tech/",
       name: "Genero",
       image: "/genero.svg",
       level: "gold"
@@ -169,10 +61,17 @@ const sponsors = {
   ],
   bronze: [
     {
-      alt: "COMING SOON",
-      link: "https://devshastra.tech/",
-      name: "COMING SOON",
-      image: "/megaphone.png",
+      alt: "GITHUB LOGO",
+      link: "https://github.com/", 
+      name: "GitHub",
+      image: "/github-mark-white.svg",
+      level: "bronze"
+    },
+    {
+      alt:"XYZ LOGO",
+      link:"https://gen.xyz/",
+      name:"XYZ",
+      image:"/xyz-logo-white.svg",
       level: "bronze"
     }
   ]
@@ -204,7 +103,25 @@ const cardVariants = {
 
 // Get tier specific styles
 const getTierStyles = (level) => {
-  switch(level) {
+  switch (level) {
+    case 'venue':
+      return {
+        cardBg: "bg-gradient-to-br from-purple-900/30 to-stone-900/90",
+        borderColor: "border-purple-500/50",
+        hoverBorder: "hover:border-purple-400",
+        shadow: "shadow-purple-700/30 hover:shadow-purple-500/30",
+        nameColor: "text-purple-300",
+        size: "md:w-[450px] h-36"
+      };
+    case 'organiser':
+      return {
+        cardBg: "bg-gradient-to-br from-blue-900/30 to-stone-900/90",
+        borderColor: "border-blue-500/50",
+        hoverBorder: "hover:border-blue-400",
+        shadow: "shadow-blue-700/30 hover:shadow-blue-500/30",
+        nameColor: "text-blue-300",
+        size: "md:w-[460px] h-36"
+      };
     case 'gold':
       return {
         cardBg: "bg-gradient-to-br from-amber-900/30 to-stone-900/90",
@@ -246,19 +163,19 @@ const getTierStyles = (level) => {
 
 const SponsorCard = ({ sponsor, index }) => {
   const styles = getTierStyles(sponsor.level);
-  
+
   return (
     <motion.a
       href={sponsor.link}
       target="_blank"
       rel="noopener noreferrer"
       variants={cardVariants}
-      whileHover={{ 
-        y: -8, 
+      whileHover={{
+        y: -8,
         scale: 1.02,
-        transition: { duration: 0.2 } 
+        transition: { duration: 0.2 }
       }}
-      className={`relative w-full ${styles.size} block`} 
+      className={`relative w-full ${styles.size} block`}
     >
       <div className={`relative ${styles.cardBg} backdrop-blur-md rounded-xl p-6 border ${styles.borderColor} shadow-lg transition-all duration-300 ${styles.hoverBorder} hover:shadow-xl ${styles.shadow} h-full`}>
         <div className="flex items-center gap-6 h-full">
@@ -275,7 +192,7 @@ const SponsorCard = ({ sponsor, index }) => {
             </h4>
           </div>
         </div>
-        
+
         {/* Decorative elements */}
         <div className="absolute top-1 left-1 right-1 bottom-1 border border-white/5 rounded-lg pointer-events-none"></div>
         <div className="absolute -top-1 -right-1 w-16 h-16 bg-gradient-to-br from-white/5 to-transparent rounded-full blur-xl"></div>
@@ -284,30 +201,47 @@ const SponsorCard = ({ sponsor, index }) => {
   );
 };
 
-const SponsorSection = ({ title, sponsors, level }) => (
-  <div className="mb-20 last:mb-0">
-    <motion.h3
-      initial={{ opacity: 0, y: -20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
-      viewport={{ once: true }}
-      className={`text-center text-3xl font-bold mb-12 tracking-wider ${level === 'gold' ? 'text-amber-300' : level === 'silver' ? 'text-slate-200' : 'text-orange-200'}`}
-    >
-      {title}
-    </motion.h3>
-    <motion.div 
-      className="flex flex-wrap justify-center gap-8"
-      variants={containerVariants}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true }}
-    >
-      {sponsors.map((sponsor, index) => (
-        <SponsorCard key={index} sponsor={sponsor} index={index} />
-      ))}
-    </motion.div>
-  </div>
-);
+const SponsorSection = ({ title, sponsors, level }) => {
+  // Set text color based on level
+  let titleColor = "text-amber-300"; // default
+
+  if (level === 'venue') {
+    titleColor = "text-purple-300";
+  } else if (level === 'organiser') {
+    titleColor = "text-blue-300";
+  } else if (level === 'gold') {
+    titleColor = "text-amber-300";
+  } else if (level === 'silver') {
+    titleColor = "text-slate-200";
+  } else if (level === 'bronze') {
+    titleColor = "text-orange-200";
+  }
+
+  return (
+    <div className="mb-20 last:mb-0">
+      <motion.h3
+        initial={{ opacity: 0, y: -20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true }}
+        className={`text-center text-3xl font-bold mb-12 tracking-wider ${titleColor}`}
+      >
+        {title}
+      </motion.h3>
+      <motion.div
+        className="flex flex-wrap justify-center gap-8"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
+        {sponsors.map((sponsor, index) => (
+          <SponsorCard key={index} sponsor={sponsor} index={index} />
+        ))}
+      </motion.div>
+    </div>
+  );
+};
 
 function Sponsors() {
   return (
@@ -320,8 +254,10 @@ function Sponsors() {
         <div className="absolute -top-24 -right-24 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl"></div>
         <div className="absolute top-1/2 -left-24 w-80 h-80 bg-amber-700/10 rounded-full blur-3xl"></div>
         <div className="absolute -bottom-40 right-1/3 w-64 h-64 bg-orange-700/10 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/4 left-1/3 w-72 h-72 bg-purple-700/10 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-1/3 -left-12 w-64 h-64 bg-blue-700/10 rounded-full blur-3xl"></div>
       </div>
-    
+
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -340,11 +276,21 @@ function Sponsors() {
             POWERED BY GIANTS
           </h2>
           <p className="text-lg text-amber-100/60 max-w-2xl mx-auto">
-            Our incredible sponsors make this event possible, bringing innovation and opportunities to our community.
+            Our incredible Partners make this event possible, bringing innovation and opportunities to our community.
           </p>
         </motion.div>
 
         <div className="space-y-24">
+          <SponsorSection
+            title="ORGANISERS"
+            sponsors={sponsors.organisers}
+            level="organiser"
+          />
+          {/* <SponsorSection
+            title="VENUE PARTNER"
+            sponsors={sponsors.venuePartner}
+            level="venue"
+          /> */}
           <SponsorSection
             title="GOLD SPONSORS"
             sponsors={sponsors.gold}
@@ -367,4 +313,3 @@ function Sponsors() {
 }
 
 export default Sponsors;
-
