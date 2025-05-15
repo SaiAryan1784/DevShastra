@@ -36,28 +36,59 @@ const faqs = [
 
 import PropTypes from "prop-types";
 
-const FAQItem = ({ faq, isOpen, onClick }) => (
-  <div className="mb-4 border-b border-[#89432A] pb-4">
-    <button
-      onClick={onClick}
-      className="w-full text-left text-lg md:text-xl font-semibold text-[#AB7B43] hover:text-white transition duration-200"
-    >
-      {faq.question}
-    </button>
+
+const FAQItem = ({ faq, isOpen, onClick, custom }) => (
+  <motion.div
+    className="mb-4 border-b border-[#89432A] pb-4 relative"
+    initial={{ opacity: 0, y: 30 }}
+    animate={{ opacity: 1, y: 0 }}
+    exit={{ opacity: 0, y: 30 }}
+    transition={{ duration: 0.5, delay: custom * 0.08 }}
+    layout
+    whileHover={{ y: -3, boxShadow: "0 4px 24px 0 rgba(171,123,67,0.13)" }}
+  >
+    {/* Glowing highlight for open question */}
     <AnimatePresence>
       {isOpen && (
-        <motion.p
-          className="mt-2 text-[#e2ddd8] leading-relaxed"
-          initial={{ opacity: 0, y: -5 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -5 }}
-          transition={{ duration: 0.25 }}
-        >
-          {faq.answer}
-        </motion.p>
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 0.23, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.93 }}
+          transition={{ duration: 0.35 }}
+          className="absolute left-0 top-0 w-full h-full rounded-lg pointer-events-none"
+          style={{
+            background:
+              "radial-gradient(circle at 50% 0%, #ab7b43 0%, transparent 80%)",
+            zIndex: 0,
+          }}
+        />
       )}
     </AnimatePresence>
+    <motion.button
+      onClick={onClick}
+      className="w-full text-left text-lg md:text-xl font-semibold text-[#AB7B43] flex items-center relative z-10"
+      whileTap={{ scale: 0.97 }}
+      transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+      aria-expanded={isOpen}
+    >
+      {faq.question}
+    </motion.button>
+    {/* Animated divider */}
+    <motion.div
+      className="h-1 w-full rounded-full bg-gradient-to-r from-[#ab7b43]/60 to-transparent mt-2 mb-1"
+      initial={{ scaleX: 0 }}
+      animate={{ scaleX: isOpen ? 1 : 0.6 }}
+      transition={{ duration: 0.5, type: "spring" }}
+      style={{ originX: 0 }}
+    />
+    {isOpen && (
+  <div style={{ overflow: 'hidden' }}>
+    <p className="mt-2 text-[#e2ddd8] leading-relaxed">
+      {faq.answer}
+    </p>
   </div>
+) }
+  </motion.div>
 );
 
 FAQItem.propTypes = {
@@ -77,30 +108,47 @@ function Faq() {
   };
 
   return (
-    <div
+    <motion.div
       id="faq"
       className="relative pt-20 pb-16 px-4 text-white"
-      style={
-        {
-          // background: "linear-gradient(to bottom, #331316, #582422)",
-        }
-      }
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.7 }}
     >
-      <h2 className="text-center text-3xl md:text-4xl font-bold text-[#d69040] mb-12">
+      <motion.h2
+        className="text-center text-3xl md:text-4xl font-bold text-[#d69040] mb-12"
+        initial={{ opacity: 0, y: -30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.1 }}
+      >
         Curious Coder's Guide 🤔
-      </h2>
+      </motion.h2>
 
-      <div className="max-w-3xl mx-auto backdrop-blur-md bg-white/5 border border-[#AB7B43]/30 rounded-xl p-6 md:p-10 shadow-xl">
+      <motion.div
+        className="max-w-3xl mx-auto backdrop-blur-md bg-white/5 border border-[#AB7B43]/30 rounded-xl p-6 md:p-10 shadow-xl"
+        initial="hidden"
+        animate="visible"
+        variants={{
+          hidden: {},
+          visible: {
+            transition: {
+              staggerChildren: 0.08,
+              delayChildren: 0.15,
+            },
+          },
+        }}
+      >
         {faqs.map((faq, index) => (
           <FAQItem
             key={index}
             faq={faq}
             isOpen={openIndex === index}
             onClick={() => toggleFAQ(index)}
+            custom={index}
           />
         ))}
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }
 
