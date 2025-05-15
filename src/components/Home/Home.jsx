@@ -308,7 +308,7 @@ function Home() {
           transition={{ delay: 1.2 }}
           whileHover={{ scale: 1.05, color: "#a78bfa" }}
         >
-          <span className="date-glow">15-16th May, 2025</span>
+          <span className="date-glow">Coming Very soon ...</span>
         </motion.div>
 
         {/* New Tagline */}
@@ -435,12 +435,7 @@ function Home() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
           >
-            <motion.span
-              animate={{ y: [0, 10, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-            >
-              Scroll Down
-            </motion.span>
+
             <motion.div
               className="scroll-arrow"
               animate={{ y: [0, 10, 0] }}
